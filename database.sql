@@ -4,7 +4,7 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(255) NOT NULL,
 	"password" varchar(255) NOT NULL,
-	CONSTRAINT "users_pk" PRIMARY KEY ("id")
+	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -126,19 +126,19 @@ CREATE TABLE "lunchStatus" (
 
 
 
-ALTER TABLE "scores" ADD CONSTRAINT "scores_fk0" FOREIGN KEY ("userId") REFERENCES "users"("id");
+ALTER TABLE "scores" ADD CONSTRAINT "scores_fk0" FOREIGN KEY ("userId") REFERENCES "user"("id");
 ALTER TABLE "scores" ADD CONSTRAINT "scores_fk1" FOREIGN KEY ("assessmentBatchId") REFERENCES "assessmentBatches"("id");
 ALTER TABLE "scores" ADD CONSTRAINT "scores_fk2" FOREIGN KEY ("questionId") REFERENCES "questions"("id");
 
 ALTER TABLE "assessmentBatches" ADD CONSTRAINT "assessmentBatches_fk0" FOREIGN KEY ("schoolId") REFERENCES "schools"("id");
 
-ALTER TABLE "students" ADD CONSTRAINT "students_fk0" FOREIGN KEY ("userId") REFERENCES "users"("id");
+ALTER TABLE "students" ADD CONSTRAINT "students_fk0" FOREIGN KEY ("userId") REFERENCES "user"("id");
 ALTER TABLE "students" ADD CONSTRAINT "students_fk1" FOREIGN KEY ("race") REFERENCES "race"("id");
 ALTER TABLE "students" ADD CONSTRAINT "students_fk2" FOREIGN KEY ("gender") REFERENCES "genders"("id");
 ALTER TABLE "students" ADD CONSTRAINT "students_fk3" FOREIGN KEY ("lunchStatus") REFERENCES "lunchStatus"("id");
 ALTER TABLE "students" ADD CONSTRAINT "students_fk4" FOREIGN KEY ("schoolId") REFERENCES "schools"("id");
 
-ALTER TABLE "admin" ADD CONSTRAINT "admin_fk0" FOREIGN KEY ("userId") REFERENCES "users"("id");
+ALTER TABLE "admin" ADD CONSTRAINT "admin_fk0" FOREIGN KEY ("userId") REFERENCES "user"("id");
 ALTER TABLE "admin" ADD CONSTRAINT "admin_fk1" FOREIGN KEY ("schoolId") REFERENCES "schools"("id");
 ALTER TABLE "admin" ADD CONSTRAINT "admin_fk2" FOREIGN KEY ("permissionLevel") REFERENCES "schools"("id");
 
@@ -147,7 +147,7 @@ ALTER TABLE "admin" ADD CONSTRAINT "admin_fk2" FOREIGN KEY ("permissionLevel") R
 --DROP TABLE "admin";
 --DROP TABLE "scores";
 --DROP TABLE "students";
---DROP TABLE "users";
+--DROP TABLE "user";
 --DROP TABLE "assessmentBatches";
 --DROP TABLE "genders";
 --DROP TABLE "race";
