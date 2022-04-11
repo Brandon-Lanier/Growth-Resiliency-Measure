@@ -6,7 +6,8 @@ router.get('/', (req, res) => {
     const sqlTxt = `SELECT "name" FROM "questions" ORDER BY random();`; //Randomly order the rows upon calling
     pool.query(sqlTxt)
     .then(result => {
-        console.log(result);
+        console.log(result.rows);
+        res.send(result.rows)
     }).catch(err => {
         console.log('Error getting all questions', err);
         res.sendStatus(500);
