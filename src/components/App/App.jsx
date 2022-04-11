@@ -22,6 +22,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import StudentList from '../StudentList/StudentList';
+import CsvUpload from '../CsvUpload/CsvUpload';
 
 import './App.css';
 
