@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const sqlTxt = `SELECT * FROM "questions" ORDER BY random();`; //Randomly order the rows upon calling
+    const sqlTxt = `SELECT * FROM "questions" ORDER BY "measureName" ASC;`; //Randomly order the rows upon calling
     pool.query(sqlTxt)
     .then(result => {
         console.log(result.rows);
@@ -14,6 +14,8 @@ router.get('/', (req, res) => {
     })
 });
 
+
+// this post is under development // Awaiting info on how the client side will send data.
 let currentDate = new Date();
 
 router.post('/', (req, res) => {
