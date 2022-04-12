@@ -1,15 +1,12 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 
 function Assessment() {
     
+    const dispatch = useDispatch();
 
-
-    useEffect(() => {
-        dispatch
-    })
-
-
+    
     return (
         <div>
 
