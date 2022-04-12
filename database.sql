@@ -143,7 +143,6 @@ ALTER TABLE "admin" ADD CONSTRAINT "admin_fk1" FOREIGN KEY ("schoolId") REFERENC
 ALTER TABLE "admin" ADD CONSTRAINT "admin_fk2" FOREIGN KEY ("permissionLevel") REFERENCES "schools"("id");
 
 
-
 --DROP TABLE "admin";
 --DROP TABLE "scores";
 --DROP TABLE "students";
@@ -156,32 +155,32 @@ ALTER TABLE "admin" ADD CONSTRAINT "admin_fk2" FOREIGN KEY ("permissionLevel") R
 --DROP TABLE "lunchStatus";
 
 INSERT INTO questions ("name","measureName")
-VALUES ('There is a purpose to my life','Balanced'),
-('I understand why I do things','Balanced'),
-('I can recognize my emotions and feelings ','Balanced'),
+VALUES ('There is a purpose to my life.','Balanced'),
+('I understand why I do things.','Balanced'),
+('I can recognize my emotions and feelings.','Balanced'),
 ('I feel confident I can handle hard times.','Self-Confidence '),
-('I am aware of my strengths','Self-Confidence '),
-('I can solve my problems ','Understanding adaptability '),
-('I come up with new ways to solve problems','Understanding adaptability '),
-('I know how to handle problems ','Understanding adaptability '),
-('I have many friends','Connection '),
-('I know people I can speak to about my challenges','Connection '),
-('I have family members I can talk to','Connection '),
-('I have a friend I can trust ','Connection '),
-('I have teachers I can talk to ','Connection '),
-('The world is better with me in it','Contribution '),
-('The things I do make a difference','Contribution '),
-('I feel bad when others get hurt','Empathy'),
-('I understand what others go through','Empathy'),
-('I appreciate how others feel and think','Empathy'),
-(E'I am patient with people who don\'t understand me','Empathy'),
-('I can express myself around my friends','Self-Expression'),
-('I can express myself around my family ','Self-Expression'),
-('I can express myself around my adults ','Self-Expression'),
-('I finish what I start','Self-Control'),
-('I can change my surroundings','Self-Control'),
-('I can change my behavior to match the situation','Self-Control'), 
-('I try to find the good in every situation','Self-Control'),
+('I am aware of my strengths.','Self-Confidence '),
+('I can solve my problems.','Understanding adaptability '),
+('I come up with new ways to solve problems.','Understanding adaptability '),
+('I know how to handle problems.','Understanding adaptability '),
+('I have many friends.','Connection '),
+('I know people I can speak to about my challenges.','Connection '),
+('I have family members I can talk to.','Connection '),
+('I have a friend I can trust.','Connection '),
+('I have teachers I can talk to.','Connection '),
+('The world is better with me in it.','Contribution '),
+('The things I do make a difference.','Contribution '),
+('I feel bad when others get hurt.','Empathy'),
+('I understand what others go through.','Empathy'),
+('I appreciate how others feel and think.','Empathy'),
+(E'I am patient with people who don\'t understand me.','Empathy'),
+('I can express myself around my friends.','Self-Expression'),
+('I can express myself around my family.','Self-Expression'),
+('I can express myself around my adults.','Self-Expression'),
+('I finish what I start.','Self-Control'),
+('I can change my surroundings.','Self-Control'),
+('I can change my behavior to match the situation.','Self-Control'), 
+('I try to find the good in every situation.','Self-Control'),
 ('What would help build your resilience?','Qualitative');
 
 
