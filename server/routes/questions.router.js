@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const sqlTxt = `SELECT * FROM "questions" ORDER BY "measureName" ASC;`; //Randomly order the rows upon calling
+    const sqlTxt = `SELECT * FROM "questions" ORDER BY id ASC;`; //Randomly order the rows upon calling
     pool.query(sqlTxt)
     .then(result => {
         console.log(result.rows);

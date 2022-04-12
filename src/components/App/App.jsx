@@ -22,8 +22,11 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Assessment from '../Assessment/Assessment';
 
 import './App.css';
+import Assessment2 from '../Assessment/Assessment2';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -36,11 +39,9 @@ function App() {
 
   return (
     <Router>
-      <div>
-      <Container sx={{display: 'flex'}}>
-      <NavBar />
-      </Container>
-        {/* <Nav /> */}
+      <div id="app-container">
+      {/* <NavBar /> */}
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -115,7 +116,12 @@ function App() {
               <LandingPage />
             }
           </Route>
-
+          <Route path="/assessment">
+            <Assessment />
+          </Route>
+          <Route path="/assessment2">
+            <Assessment2 />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
