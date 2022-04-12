@@ -27,6 +27,13 @@ import StudentHomepage from '../StudentHomepage/StudentHomepage';
 
 import './App.css';
 import Assessment2 from '../Assessment/Assessment2';
+import Assessment3 from '../Assessment/Assessment3';
+import Assessment4 from '../Assessment/Assessment4';
+import Assessment5 from '../Assessment/Assessment5';
+import Assessment6 from '../Assessment/Assessment6';
+import Assessment7 from '../Assessment/Assessment7';
+import Assessment8 from '../Assessment/Assessment8';
+import Assessment9 from '../Assessment/Assessment9';
 
 
 function App() {
@@ -127,13 +134,35 @@ function App() {
           <Route path="/assessment2">
             <Assessment2 />
           </Route>
+          <Route path="/assessment3">
+            <Assessment3 />
+          </Route>
+          <Route path="/assessment4">
+            <Assessment4 />
+          </Route>
+          <Route path="/assessment5">
+            <Assessment5 />
+          </Route>
+          <Route path="/assessment6">
+            <Assessment6 />
+          </Route>
+          <Route path="/assessment7">
+            <Assessment7 />
+          </Route>
+          <Route path="/assessment8">
+            <Assessment8 />
+          </Route>
+          <Route path="/assessment9">
+            <Assessment9 />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+       
       </div>
+      {/* <Footer /> */}
     </Router>
   );
 }
