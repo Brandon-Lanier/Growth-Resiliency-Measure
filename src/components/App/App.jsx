@@ -23,7 +23,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import StudentList from '../StudentList/StudentList';
-import CsvUpload from '../CsvUpload/CsvUpload';
+
 
 import './App.css';
 
@@ -33,7 +33,8 @@ function App() {
   const user = useSelector(store => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'FETCH_USER' }),
+    dispatch({ type: 'GET_STUDENTS' });
   }, [dispatch]);
 
   return (

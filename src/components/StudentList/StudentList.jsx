@@ -8,7 +8,6 @@ function StudentList() {
   const store = useSelector((store) => store);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
     {
         field: 'fullName',
         headerName: 'Full name',
