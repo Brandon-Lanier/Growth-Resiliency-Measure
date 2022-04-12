@@ -15,6 +15,10 @@ const adminCsvRouter = require('./routes/adminCsv.router');
 
 const questionRouter = require('./routes/questions.router');
 
+// Router that add new data cohorts, semesters, etc. 
+const cohortRouter = require('./routes/cohort.router');
+const scoresRouter = require('./routes/scores.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +38,9 @@ app.use('/api/studentCsv', studentCsvRouter);
 app.use('/api/adminCsv', adminCsvRouter);
 
 app.use('/questions', questionRouter);
+
+app.use('/api/admin/cohort', cohortRouter)
+app.use('/scores', questionRouter);
 
 
 // Serve static files
