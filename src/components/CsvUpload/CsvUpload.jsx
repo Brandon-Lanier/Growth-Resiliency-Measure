@@ -47,8 +47,13 @@ function CsvUpload() {
         fileReader.readAsText(file);
       }
     };
-  
     const headerKeys = Object.keys(Object.assign({}, ...array));
+
+    function closeModal(){
+        
+        handleClose();
+    }
+
 console.log(array)
 console.log(file)
     return (
@@ -83,6 +88,7 @@ console.log(file)
             ))}
           </tbody>
         </table>
+        <button onClick={closeModal}>Submit and Close</button>
         </Box>
       </Modal>
 
