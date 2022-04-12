@@ -16,8 +16,8 @@ CREATE TABLE "scores" (
 	"userId" integer NOT NULL,
 	"assessmentBatchId" integer NOT NULL,
 	"questionId" integer NOT NULL,
-	"score" integer NOT NULL,
-	"scoreQualitative" TEXT NOT NULL,
+	"score" integer,
+	"scoreQualitative" TEXT,
 	"date" DATE NOT NULL,
 	CONSTRAINT "scores_pk" PRIMARY KEY ("id")
 ) WITH (
