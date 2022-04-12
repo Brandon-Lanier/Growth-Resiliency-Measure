@@ -46,6 +46,8 @@ const assessmentReducer = (state = answers, action) => {
             return [...state, selfExpression = action.payload];
         case 'ADD_ADAPTABILITY':
             return [...state, adaptability = action.payload];
+        default:
+            return state;
     }  
 }
 
