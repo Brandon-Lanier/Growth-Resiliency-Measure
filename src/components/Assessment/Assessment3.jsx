@@ -38,8 +38,8 @@ function Assessment3() {
 
   const handleNext = () => {
     if (value6 && value7 && value8) {
-      dispatch({ type: "SET_ADAPTABILITY", payload: {6: value6, 7: value7, 8: value8}});
-      history.push('/assessment3')
+      dispatch({ type: "SET_ADAPTABILITY", payload: {6: Number(value6), 7: Number(value7), 8: Number(value8)}});
+      history.push('/assessment4')
     } else {
       alert("Please fill out all answers");
     }
@@ -211,8 +211,8 @@ const handleBack = () => {
         </FormControl>
       </div>
       <div className="assess-buttons-container">
-        <Button variant="outlined" className="assess-buttons" onClick={handleBack}>Back</Button>
-        <Button variant="contained" className="assess-buttons" onClick={handleNext}>Next</Button>
+        <Button variant="outlined" sx={{m: 2}} className="assess-buttons" onClick={handleBack}>Back</Button>
+        <Button variant="contained" sx={{m: 2}} className="assess-buttons" onClick={handleNext}>Next</Button>
         </div>
     </Container>
   );
