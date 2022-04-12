@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Container, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
+import Review from "./Review";
 import "./Assessment.css";
 
 function Assessment9() {
