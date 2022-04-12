@@ -12,6 +12,8 @@ import FormLabel from "@mui/material/FormLabel";
 import "./Assessment.css";
 
 function Assessment2() {
+
+  const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
 
@@ -32,15 +34,16 @@ function Assessment2() {
 
   const handleNext = () => {
     if (value4 && value5) {
-      dispatch({ type: "SET_CONFIDENCE", payload: {4: value4, 5: value5}});
+      dispatch({ type: "SET_CONFIDENCE", payload: {4: Number(value4), 5: Number(value5)}});
+      history.push('/assessment3')
     } else {
       alert("Please fill out all answers");
     }
   };
 
-  const handleSet = () => {
-    
-  }
+const handleBack = () => {
+    history.goBack();
+}
 
   return (
     <Container
@@ -152,10 +155,10 @@ function Assessment2() {
           </RadioGroup>
         </FormControl>
       </div>
-        <Button variant="outlined">Back</Button>
-        <Button variant="contained" onClick={handleNext}>
-          Next
-        </Button>
+      <div className="assess-buttons-container">
+        <Button variant="outlined" sx={{m: 2}} className="assess-buttons" onClick={handleBack}>Back</Button>
+        <Button variant="contained" sx={{m: 2}} className="assess-buttons" onClick={handleNext}>Next</Button>
+        </div>
     </Container>
   );
 }

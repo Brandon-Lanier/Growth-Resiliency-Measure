@@ -17,3 +17,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.assess-buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.assess-buttons {
+    margin: 10px;
+}
