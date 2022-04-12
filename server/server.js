@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 
 const studentCsvRouter = require('./routes/studentCsv.router');
+const adminCsvRouter = require('./routes/adminCsv.router');
 
 const questionRouter = require('./routes/questions.router');
 
@@ -30,6 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 
 app.use('/api/studentCsv', studentCsvRouter);
+app.use('/api/adminCsv', adminCsvRouter);
 
 app.use('/questions', questionRouter);
 

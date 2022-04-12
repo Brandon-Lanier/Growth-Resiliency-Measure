@@ -18,7 +18,8 @@ router.post('/', (req, res) => {
     req.body.eip,
     req.body.gender,
     req.body.lunchStatus,
-    req.body.schoolId
+    req.body.schoolId,
+    req.body.student_pk,
   ];
   if (req.isAuthenticated()) {
     pool.query(queryText, queryInserts)
