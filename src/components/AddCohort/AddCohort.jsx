@@ -14,12 +14,19 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import axios from "axios";
 
 function AddCohort(props) {
   //   const store = useSelector((store) => store);
   const [heading, setHeading] = useState("Add Assessment Cohort");
 
+  const [term, setTerm] = useState(1);
   const [value1, setValue1] = useState(new Date());
   const [value2, setValue2] = useState(new Date());
   const [valueYear, setValueYear] = useState(new Date());
@@ -29,6 +36,7 @@ function AddCohort(props) {
       startDate: value1.toISOString().split("T")[0],
       endDate: value2.toISOString().split("T")[0],
       fiscalYear: valueYear.toISOString().substring(0, 4),
+      term: term
     };
     console.log("New batch is", newBatch);
     try {
@@ -52,8 +60,24 @@ function AddCohort(props) {
         >
           <Stack spacing={3}>
             <h2>{heading}</h2>
+            <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Term / Semester</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={term}
+          label="Term / Semester "
+          onChange={(event) => setTerm((event.target.value))}
+        >
+          <MenuItem value={1}>First Term</MenuItem>
+          <MenuItem value={2}>Second Term</MenuItem>
+          <MenuItem value={3}>Third Term</MenuItem>
+          <MenuItem value={4}>Fourth Term</MenuItem>
+
+        </Select>
+      </FormControl>
             <DatePicker
-              label="Semester Start"
+              label="Start"
               value={value1}
               margin={2}
               onChange={(newValue) => {
@@ -62,7 +86,7 @@ function AddCohort(props) {
               renderInput={(params) => <TextField {...params} />}
             />
             <DatePicker
-              label="Semester End"
+              label="End"
               value={value2}
               onChange={(newValue) => {
                 setValue2(newValue);

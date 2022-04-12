@@ -76,7 +76,7 @@ CREATE TABLE "admin" (
 	"id" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"firstName" varchar(255) NOT NULL,
-	"lastName" serial NOT NULL,
+	"lastName" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"schoolId" integer NOT NULL,
 	"permissionLevel" integer NOT NULL,
