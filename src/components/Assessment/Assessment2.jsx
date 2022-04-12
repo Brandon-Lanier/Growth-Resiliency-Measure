@@ -11,35 +11,28 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import "./Assessment.css";
 
-function Assessment() {
+function Assessment2() {
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_QUESTIONS" });
-  }, []);
+
+  const [value4, setValue4] = useState(0);
+  const [value5, setValue5] = useState(0);
 
 
-  const [value1, setValue1] = useState('');
-  const [value2, setValue2] = useState('');
-  const [value3, setValue3] = useState('');
-
-
-  const handleChange1 = (e) => {
-    setValue1(e.target.value);
+  const handleChange4 = (e) => {
+    setValue4(e.target.value);
   };
 
-  const handleChange2 = (e) => {
-    setValue2(e.target.value);
+  const handleChange5 = (e) => {
+    setValue5(e.target.value);
   };
 
-  const handleChange3 = (e) => {
-    setValue3(e.target.value);
-  };
+
 
   const handleNext = () => {
-    if (value1 && value2 && value3) {
-      dispatch({ type: "SET_BALANCE", payload: {1: Number(value1), 2: Number(value2), 3: Number(value3)}});
+    if (value4 && value5) {
+      dispatch({ type: "SET_CONFIDENCE", payload: {4: value4, 5: value5}});
     } else {
       alert("Please fill out all answers");
     }
@@ -59,15 +52,15 @@ function Assessment() {
     >
       <div className="question-container">
         <Typography variant="b1" className="question-text">
-          {questions[0]?.name}
+          {questions[3]?.name}
         </Typography>
         <FormControl>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            value={value1}
-            onChange={handleChange1}
+            value={value4}
+            onChange={handleChange4}
           >
             <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
               Disagree
@@ -110,15 +103,15 @@ function Assessment() {
       </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
-          {questions[1]?.name}
+          {questions[4]?.name}
         </Typography>
         <FormControl>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            value={value2}
-            onChange={handleChange2}
+            value={value5}
+            onChange={handleChange5}
           >
             <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
               Disagree
@@ -159,58 +152,7 @@ function Assessment() {
           </RadioGroup>
         </FormControl>
       </div>
-      <div className="question-container">
-        <Typography variant="b1" className="question-text">
-          {questions[2]?.name}
-        </Typography>
-        <FormControl>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            value={value3}
-            onChange={handleChange3}
-          >
-            <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
-              Disagree
-            </Typography>
-            <FormControlLabel
-              value="1"
-              control={<Radio />}
-              label="1"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="2"
-              control={<Radio />}
-              label="2"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="3"
-              control={<Radio />}
-              label="3"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="4"
-              control={<Radio />}
-              label="4"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="5"
-              control={<Radio />}
-              label="5"
-              labelPlacement="bottom"
-            />
-            <Typography variant="b2" sx={{ ml: 1, alignSelf: "center" }}>
-              Agree
-            </Typography>
-          </RadioGroup>
-        </FormControl>
-      </div>
-      <Button variant="outlined">Back</Button>
+        <Button variant="outlined">Back</Button>
         <Button variant="contained" onClick={handleNext}>
           Next
         </Button>
@@ -218,4 +160,5 @@ function Assessment() {
   );
 }
 
-export default Assessment;
+export default Assessment2;
+

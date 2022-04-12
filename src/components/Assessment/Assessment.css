@@ -1,0 +1,19 @@
+.assessment-container {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+}
+
+.question-text {
+    align-self: center;
+}
+
+.question-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
