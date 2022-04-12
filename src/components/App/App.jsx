@@ -23,6 +23,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Assessment from '../Assessment/Assessment';
+import StudentHomepage from '../StudentHomepage/StudentHomepage';
 
 import './App.css';
 import Assessment2 from '../Assessment/Assessment2';
@@ -66,6 +67,10 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+
+          <Route path="/student">
+            <StudentHomepage />
+          </Route>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
