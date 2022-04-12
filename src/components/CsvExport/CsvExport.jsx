@@ -1,12 +1,17 @@
 import * as React from 'react';
+import {useState} from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+
+import Grid from '@mui/material/Grid';
 
 function CsvExport() {
-  const [year, setYear] = useState('');
+  const [year, setYear] = useState(2022);
   const [term, setTerm] = useState('');
   const [grade, setGrade] = useState('');
   const [ethnicity, setEthnicity] = useState('');
@@ -35,7 +40,8 @@ function CsvExport() {
 
 
   return(
-    <div>
+    <Box sx={{width: "50%", display: "flex", flexDirection: "column", justifyContent: "center"}} >
+      <Stack direction="column" >
       <FormControl >
         <InputLabel id="select-helper-label">Year</InputLabel>
         <Select
@@ -123,14 +129,14 @@ function CsvExport() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={Female}>Female</MenuItem>
-          <MenuItem value={Male}>Male</MenuItem>
-          <MenuItem value={None}>None</MenuItem>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>None</MenuItem>
         </Select>
         <FormHelperText>Gender</FormHelperText>
       </FormControl>
-    
-    </div>
+      </Stack>
+    </Box>
 
   )
  

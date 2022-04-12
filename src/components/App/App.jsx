@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import CsvExport from '../CsvExport/CsvExport';
 
 import './App.css';
 
@@ -72,6 +73,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Csv export else shows LoginPage
+            exact
+            path="/csvExport"
+          >
+            <CsvExport />
           </ProtectedRoute>
 
           <Route
