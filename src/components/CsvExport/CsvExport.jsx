@@ -24,6 +24,12 @@ function CsvExport() {
     setGrade(event.target.value);
   }
 
+  const handleEthnicity = (event) => {
+    setEthnicity(event.target.value);
+  }
+
+  
+
 
 
   return(
@@ -81,6 +87,27 @@ function CsvExport() {
           <MenuItem value={12}>12</MenuItem>
         </Select>
         <FormHelperText>Grade</FormHelperText>
+      </FormControl>
+      <FormControl >
+        <InputLabel id="select-helper-label">Ethnicity</InputLabel>
+        <Select
+        labelId="select-helper-label"
+        id="select-helper-label"
+        value={ethnicity}
+        label="ethnicity"
+        onChange={handleEthnicity}>
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={7}>7</MenuItem>
+          <MenuItem value={8}>8</MenuItem>
+          <MenuItem value={9}>9</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={11}>11</MenuItem>
+          <MenuItem value={12}>12</MenuItem>
+        </Select>
+        <FormHelperText>Ethnicity</FormHelperText>
       </FormControl>
     </div>
 
