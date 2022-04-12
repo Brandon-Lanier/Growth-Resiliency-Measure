@@ -6,7 +6,10 @@ function Assessment() {
     
     const dispatch = useDispatch();
 
-    
+    useEffect(() => {
+        dispatch('FETCH_QUESTIONS')
+    })
+
     return (
         <div>
 
