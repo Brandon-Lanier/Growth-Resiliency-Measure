@@ -15,9 +15,20 @@ router.post('/', (req, res) => {
     req.body.schoolId,
     req.body.permissionLevel,
     req.body.admin_pk,
-  ]
-
-});
+  ];
+  if(req.isAuthenticated()) {
+    pool.query(queryText, queryInserts)
+    .then((results) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('error in admin post', error);
+      res.sendStatus(500);
+    });
+  } else {
+    res.sendStatus(403);
+  }
+});// end post route
 
 
 module.exports = router;
