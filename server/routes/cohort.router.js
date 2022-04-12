@@ -36,6 +36,5 @@ pool.query(sqlText,[req.body.term, req.body.fiscalYear, schoolId.rows[0].schoolI
 })
 
 
-
 module.exports = router;
 
