@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Schools from '../Schools/Schools';
 import Assessment from '../Assessment/Assessment';
 
 import './App.css';
@@ -81,6 +82,15 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/schools"
+          >
+            <Schools />
+          </ProtectedRoute>
+
 
           <Route
             exact
