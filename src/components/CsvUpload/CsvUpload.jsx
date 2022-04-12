@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { useHistory } from 'react-router-dom';
 
 
@@ -6,7 +10,9 @@ import { useHistory } from 'react-router-dom';
 function CsvUpload() {
     const [file, setFile] = useState();
     const [array, setArray] = useState([]);
-  
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const fileReader = new FileReader();
   
     const handleOnChange = (e) => {
@@ -35,6 +41,7 @@ function CsvUpload() {
         fileReader.onload = function (event) {
           const text = event.target.result;
           csvFileToArray(text);
+          handleOpen();
         };
   
         fileReader.readAsText(file);
@@ -45,6 +52,40 @@ function CsvUpload() {
 console.log(array)
 console.log(file)
     return (
+        <>
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={{
+        // width: 800,
+        // height: 900,
+        backgroundColor: 'White',
+   
+      }}>
+        <table>
+          <thead>
+            <tr key={"header"}>
+              {headerKeys.map((key) => (
+                <th>{key}</th>
+              ))}
+            </tr>
+          </thead>
+  
+          <tbody>
+            {array.map((item) => (
+              <tr key={item.id}>
+                {Object.values(item).map((val) => (
+                  <td>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        </Box>
+      </Modal>
+
       <div style={{ textAlign: "center" }}>
         <form>
           <input
@@ -65,26 +106,9 @@ console.log(file)
   
         <br />
   
-        <table>
-          <thead>
-            <tr key={"header"}>
-              {headerKeys.map((key) => (
-                <th>{key}</th>
-              ))}
-            </tr>
-          </thead>
-  
-          <tbody>
-            {array.map((item) => (
-              <tr key={item.id}>
-                {Object.values(item).map((val) => (
-                  <td>{val}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+       
       </div>
+      </>
     );
   }
 

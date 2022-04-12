@@ -38,10 +38,11 @@ function App() {
 
   return (
     <Router>
-      <div>
-      <Container sx={{display: 'flex'}}>
+      <div id="appContainer">
+  
       <NavBar />
-      </Container>
+
+      <Route path="/students"><StudentList /></Route>
         {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -120,10 +121,10 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            {/* <h1>404</h1> */}
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
