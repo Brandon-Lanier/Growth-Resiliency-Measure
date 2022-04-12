@@ -50,7 +50,10 @@ function CsvUpload() {
     const headerKeys = Object.keys(Object.assign({}, ...array));
 
     function closeModal(){
-        
+        handleClose();
+    }
+    function submitAndClose(){
+
         handleClose();
     }
 
@@ -58,6 +61,7 @@ console.log(array)
 console.log(file)
     return (
         <>
+
         <Modal
         open={open}
         onClose={handleClose}
@@ -77,7 +81,6 @@ console.log(file)
               ))}
             </tr>
           </thead>
-  
           <tbody>
             {array.map((item) => (
               <tr key={item.id}>
@@ -88,12 +91,14 @@ console.log(file)
             ))}
           </tbody>
         </table>
-        <button onClick={closeModal}>Submit and Close</button>
+        <button onClick={closeModal}>Close without submitting</button>
+        <button onClick={submitAndClose}>Submit and Close</button>
         </Box>
       </Modal>
 
-      <div style={{ textAlign: "center" }}>
+      <div style={{}}>
         <form>
+            <h5>Upload Student CSV List</h5>
           <input
             type={"file"}
             id={"csvFileInput"}
@@ -106,7 +111,7 @@ console.log(file)
               handleOnSubmit(e);
             }}
           >
-            IMPORT CSV
+            Import CSV
           </button>
         </form>
   

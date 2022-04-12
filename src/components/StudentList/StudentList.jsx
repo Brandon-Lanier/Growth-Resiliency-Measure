@@ -20,13 +20,13 @@ function StudentList() {
       },
     {
       field: 'gradDate',
-      headerName: 'gradDate',
+      headerName: 'Grad Date',
       width: 110,
       editable: true,
     },
     {
         field: 'school',
-        headerName: 'school',
+        headerName: 'School',
         width: 110,
         editable: true,
       },
@@ -42,7 +42,7 @@ function StudentList() {
     { id: 6, lastName: 'Melisandre', firstName: 'Meliassa',school: 'Hopkins', gradDate: 2025 },
     { id: 7, lastName: 'Clifford', firstName: 'Ferrara',school: 'Minneapolis', gradDate: 2022 },
     { id: 8, lastName: 'Frances', firstName: 'Rossini',school: 'South', gradDate: 2027 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey',school: 'Eden Prairie', gradDatee: 2028 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey',school: 'Eden Prairie', gradDate: 2028 },
   ];
 
   return (
