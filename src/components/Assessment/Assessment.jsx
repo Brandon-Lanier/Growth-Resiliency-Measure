@@ -12,6 +12,8 @@ import FormLabel from "@mui/material/FormLabel";
 import "./Assessment.css";
 
 function Assessment() {
+
+  const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
 
@@ -40,14 +42,12 @@ function Assessment() {
   const handleNext = () => {
     if (value1 && value2 && value3) {
       dispatch({ type: "SET_BALANCE", payload: {1: Number(value1), 2: Number(value2), 3: Number(value3)}});
+      history.push('/assessment2')
     } else {
       alert("Please fill out all answers");
     }
   };
 
-  const handleSet = () => {
-    
-  }
 
   return (
     <Container
