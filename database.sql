@@ -187,6 +187,14 @@ VALUES ('There is a purpose to my life.','Balanced'),
 -- Execute following three Insert statements to fill in a semesters worth of dummy
 -- data along with proper assessment batch and high school id. 
 
+INSERT INTO "schools" ("name")
+VALUES ('Adams High School');
+
+
+INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
+VALUES (1,1,2022,1,'2022-01-01','2022-01-07'),(2,1,2022,1,'2022-04-01','2022-04-13');
+
+
 INSERT INTO scores ("userId","assessmentBatchId","questionId","score","scoreQualitative","date")
 VALUES 
 (1,1,1,5,NULL,'2022-01-03'),
@@ -405,14 +413,6 @@ VALUES
 (4,2,25,3,NULL,'2022-04-12'),
 (4,2,26,5,NULL,'2022-04-12'),
 (4,2,27,0,'Second Test','2022-04-12');
-
-INSERT INTO "schools" ("name")
-VALUES ('Adams High School');
-
-
-INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
-VALUES (1,1,2022,1,'2022-01-01','2022-01-07'),(2,1,2022,1,'2022-04-01','2022-04-13');
-
 
 
 
