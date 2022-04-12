@@ -73,6 +73,8 @@ console.log(file)
         backgroundColor: 'White',
    
       }}>
+        <button onClick={closeModal}>Close without submitting</button>
+        <button onClick={submitAndClose}>Submit and Close</button>
         <table>
           <thead>
             <tr key={"header"}>
@@ -91,8 +93,6 @@ console.log(file)
             ))}
           </tbody>
         </table>
-        <button onClick={closeModal}>Close without submitting</button>
-        <button onClick={submitAndClose}>Submit and Close</button>
         </Box>
       </Modal>
 

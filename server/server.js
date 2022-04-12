@@ -12,7 +12,7 @@ const userRouter = require('./routes/user.router');
 
 const studentCsvRouter = require('./routes/studentCsv.router');
 const adminCsvRouter = require('./routes/adminCsv.router');
-
+const studentRouter = require('./routes/student.router')
 const questionRouter = require('./routes/questions.router');
 
 
@@ -32,7 +32,7 @@ app.use('/api/user', userRouter);
 
 app.use('/api/studentCsv', studentCsvRouter);
 app.use('/api/adminCsv', adminCsvRouter);
-
+app.use('/api/student', studentRouter);
 app.use('/questions', questionRouter);
 
 
