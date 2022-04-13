@@ -86,21 +86,6 @@ function NavBar() {
         onClick: () => history.push('/assessments')
       },
       {
-        text: 'Data Export',
-        icon: <DownloadIcon />,
-        onClick: () => history.push('/csvExport')
-      },
-      {
-        text: 'Teachers',
-        icon: <SupervisorAccountIcon />,
-        onClick: () => history.push('/teachers')
-      },
-      {
-        text: 'Schools',
-        icon: <LocationCityIcon />,
-        onClick: () => history.push('/schools')
-      },
-      {
         text: 'Logout',
         icon: <LogoutIcon />,
         onClick: () => history.push('/logout')

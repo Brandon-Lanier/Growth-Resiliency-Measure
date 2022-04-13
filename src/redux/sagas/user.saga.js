@@ -30,7 +30,7 @@ function* fetchUser() {
         id: response.data.id,
         username: response.data.username,
         permission: permission.data.permission,
-      }
+      },
     });
   } catch (error) {
     console.log("User get request failed", error);
