@@ -16,7 +16,7 @@ function LoginForm() {
         type: 'LOGIN',
         payload: {
           username: username,
-          password: password,
+          password: password
         },
       });
     } else {
