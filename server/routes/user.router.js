@@ -25,6 +25,7 @@ router.get("/permission", async (req, res) => {
   WHERE "user".id = ${req.user.id} ;`);
 
   let permission = 0;
+  
 
   if (permissionLevel.rows[0] === undefined){
     permission = 0;
