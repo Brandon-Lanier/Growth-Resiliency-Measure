@@ -26,7 +26,7 @@ const assessmentReducer = (state = [], action) => {
 }
 
 // Reducer will hold the batch id for students if active assessment is available
-const batchReducer = (state = null, action) => {
+const batch = (state = null, action) => {
     switch(action.type) {
         case 'SET_BATCH': 
             return action.payload;
@@ -39,5 +39,5 @@ const batchReducer = (state = null, action) => {
 
 export default combineReducers({
     assessmentReducer,
-    batchReducer
+    batch
   });

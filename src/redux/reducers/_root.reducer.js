@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   assessmentReducer,
-  batchReducer, // holds batch id if active assessment is available for student
+  batch, // holds batch id if active assessment is available for student
   questions
 });
 
