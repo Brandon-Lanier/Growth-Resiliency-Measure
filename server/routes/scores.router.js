@@ -10,13 +10,13 @@ router.get("/", (req, res) => {
 let currentDate = new Date();
 // POST scores
 router.post("/", async (req, res) => {
-  const answers = req.body;
-  const qualitative = answers[8].qualitative;
+  const batch = req.body[0]; //Batch id from user
+  const answers = req.body[1]; //All answers in an array
+  const qualitative = answers[8].qualitative; //pulling the qualitative answer out of the array
   answers.pop();
-  const scores = Object.assign({}, ...answers);
+  const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
   const user = req.user.id;
-  const date = currentDate;
-  const batch = 2;
+  const date = currentDate; //grab todays date
   const connection = await pool.connect();
   try {
     await connection.query("BEGIN");
@@ -44,36 +44,5 @@ router.post("/", async (req, res) => {
     connection.release();
   }
 });
-
-//     for (let key in scores) {
-//         pool.query(qryTxt, [user, batch, key, scores[key], qualitative, date])
-//     }
-//     .then(result => {
-//         res.sendStatus(200);
-//     }).catch(err => {
-//         res.sendStatus(500);
-//     })
-// })
-
-//     for (let key in scores) {
-//         pool.query(qryTxt, [user, batch, key, scores[key], qualitative, date])
-//     }
-//     .then(result => {
-//         res.sendStatus(200);
-//     }).catch(err => {
-//         res.sendStatus(500);
-//     })
-// })
-// const qryTxt = `
-// INSERT INTO "scores" ("userId", "assessmentBatchId", "questionId", "score", "scoreQualitative", "date")
-// VALUES ($1, $2, $3, $4, $5, $6, $7)
-// ;`
-// pool.query(qryTxt, [user, answers.batch, answers.id, scores, answers.qualitative, date])
-//     .then(result => {
-//         res.sendStatus(201)
-//     }).catch(err => {
-//         console.log('Error in question post route', err);
-//         res.sendStatus(500);
-//     })
 
 module.exports = router;

@@ -8,11 +8,11 @@ function Review() {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const answers = useSelector((store) => store.assessment);
+  const answers = useSelector(store => store.assessment);
+  const batch = useSelector(store => store.batch)
 
   const handleSubmit = () => {
-    console.log(answers);
-    dispatch({ type: "POST_SCORES", payload: answers });
+    dispatch({ type: "POST_SCORES", payload: [batch, answers]});
   };
 
   const handleBack = () => {
