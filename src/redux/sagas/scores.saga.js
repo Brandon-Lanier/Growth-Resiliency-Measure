@@ -9,7 +9,7 @@ function* postScores(action) {
         yield axios.post(`/scores`, answers);
         // update batch reducer to null
         // this will make the homepage conditionally render correctly for the student
-        // yield put({type: 'EMPTY_BATCH'})
+        yield put({type: 'EMPTY_BATCH'})
     } catch(error) {
         console.log('Saga failed to post scores', error);
     }

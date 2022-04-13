@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -18,7 +18,7 @@ function Assessment() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
-    dispatch({ type: "FETCH_BATCH"}); // get batch number form DB.
+    dispatch({ type: "FETCH_BATCH" }); // get batch number form DB.
   }, []);
 
   const [value1, setValue1] = useState("");
@@ -45,10 +45,9 @@ function Assessment() {
       });
       history.push("/assessment2");
     } else {
-      alert("Please fill out all answers");
+      alert('Please enter a value for each statement.')
     }
   };
-
 
   return (
     <Container
@@ -62,17 +61,17 @@ function Assessment() {
         <Typography variant="b1" className="question-text">
           {questions[0]?.name}
         </Typography>
-        <FormControl>
+        <FormControl className="form-control">
           <RadioGroup
             row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
+            aria-labelledby="radio-buttons"
+            name="assessment-radio-buttons"
             value={value1}
             onChange={handleChange1}
           >
-            <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
+            {/* <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
               Disagree
-            </Typography>
+            </Typography> */}
             <FormControlLabel
               value={1}
               control={<Radio />}
@@ -103,11 +102,13 @@ function Assessment() {
               label="5"
               labelPlacement="bottom"
             />
-            <Typography variant="b2" sx={{ ml: 1, alignSelf: "center" }}>
-              Agree
-            </Typography>
           </RadioGroup>
+          <div className="agree-cont">
+          <Typography variant="b2">Disagree</Typography>
+          <Typography variant="b2">Agree</Typography>
+        </div>
         </FormControl>
+       
       </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
@@ -212,7 +213,13 @@ function Assessment() {
         </FormControl>
       </div>
       <div className="assess-buttons-container">
-        <Button variant="contained" className="assess-buttons" onClick={handleNext}>Next</Button>
+        <Button
+          variant="contained"
+          className="assess-buttons"
+          onClick={handleNext}
+        >
+          Next
+        </Button>
       </div>
     </Container>
   );
