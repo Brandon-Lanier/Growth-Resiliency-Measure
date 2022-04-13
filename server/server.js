@@ -40,7 +40,7 @@ app.use('/api/adminCsv', adminCsvRouter);
 app.use('/questions', questionRouter);
 
 app.use('/api/admin/cohort', cohortRouter)
-app.use('/scores', questionRouter);
+app.use('/scores', scoresRouter);
 
 
 // Serve static files

@@ -26,6 +26,7 @@ import CsvExport from '../CsvExport/CsvExport';
 
 import Schools from '../Schools/Schools';
 import Assessment from '../Assessment/Assessment';
+import StudentHomepage from '../StudentHomepage/StudentHomepage';
 
 
 import './App.css';
@@ -37,6 +38,7 @@ import Assessment6 from '../Assessment/Assessment6';
 import Assessment7 from '../Assessment/Assessment7';
 import Assessment8 from '../Assessment/Assessment8';
 import Assessment9 from '../Assessment/Assessment9';
+import Review from '../Assessment/Review';
 
 
 function App() {
@@ -77,6 +79,10 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+
+          <Route path="/student">
+            <StudentHomepage />
+          </Route>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -172,6 +178,9 @@ function App() {
           </Route>
           <Route path="/assessment9">
             <Assessment9 />
+          </Route>
+          <Route path="/review">
+            <Review />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

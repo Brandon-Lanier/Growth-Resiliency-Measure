@@ -17,7 +17,8 @@ function Assessment() {
   const questions = useSelector((store) => store.questions);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_QUESTIONS" });
+    dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
+    dispatch({ type: "FETCH_BATCH"}); // get batch number form DB.
   }, []);
 
   const [value1, setValue1] = useState("");
@@ -47,6 +48,7 @@ function Assessment() {
       alert("Please fill out all answers");
     }
   };
+
 
   return (
     <Container
