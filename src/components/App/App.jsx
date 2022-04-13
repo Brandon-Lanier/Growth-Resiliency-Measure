@@ -26,6 +26,7 @@ import CsvExport from '../CsvExport/CsvExport';
 
 import Schools from '../Schools/Schools';
 import Assessment from '../Assessment/Assessment';
+import StudentHomepage from '../StudentHomepage/StudentHomepage';
 
 
 import './App.css';
@@ -77,6 +78,10 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+
+          <Route path="/student">
+            <StudentHomepage />
+          </Route>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
