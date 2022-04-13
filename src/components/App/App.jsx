@@ -39,6 +39,8 @@ import Assessment8 from "../Assessment/Assessment8";
 import Assessment9 from "../Assessment/Assessment9";
 import Review from "../Assessment/Review";
 
+import Box from "@mui/material/Box";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -73,15 +75,16 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/user"
+            path="/dashboard"
           >
-            <UserPage />
+
+              {user.permission < 1 ? <StudentHomepage /> : <UserPage />}
           </ProtectedRoute>
 
-          <ProtectedRoute path="/student"
-          //Goes straight to an assessment if one is available
+          <ProtectedRoute
+            path="/student"
+            //Goes straight to an assessment if one is available
           >
-            
             <StudentHomepage />
           </ProtectedRoute>
           {/* 
@@ -100,7 +103,7 @@ function App() {
           >
             <CsvExport />
           </ProtectedRoute>
-          
+
           <ProtectedRoute
             //logged in shows schools page - this is current has option to add a semester
             exact
