@@ -47,7 +47,7 @@ function Assessment6() {
 
   const handleNext = () => {
     if (value16 && value17 && value18 && value19) {
-      dispatch({ type: "SET_EMPATHY", payload: {16: Number(value16), 17: Number(value17), 18: Number(value18), 189: Number(value19)}});
+      dispatch({ type: "SET_EMPATHY", payload: {16: Number(value16), 17: Number(value17), 18: Number(value18), 19: Number(value19)}});
       history.push('/assessment7')
     } else {
       alert("Please fill out all answers");
