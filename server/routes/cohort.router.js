@@ -45,11 +45,11 @@ router.get('/studentbatch', async (req, res) => {
     // This sql text grabs the school id of the student logged in
     const schoolIdquery = `SELECT "schoolId" FROM students
     JOIN "user" ON "user".id = students."userId"
-    WHERE "user".id = 1;`;
+    WHERE "user".id = $1;`;
     // WHERE "user".id = $1;`;
     
     // const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
-    const schoolIdObject = await pool.query(schoolIdquery);
+    const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     const schoolId = schoolIdObject.rows[0].schoolId;
     console.log('schoolId is', schoolId);
     
