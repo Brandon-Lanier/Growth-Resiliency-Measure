@@ -24,7 +24,7 @@ function Assessment9() {
   };
 
   const handleNext = () => {
-      dispatch({ type: "SET_QUALITATIVE", payload: value27});
+      dispatch({ type: "SET_QUALITATIVE", payload: {qualitative: value27}});
       history.push('/review');
   };
 
