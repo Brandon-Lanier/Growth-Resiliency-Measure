@@ -12,59 +12,91 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useHistory } from "react-router-dom";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import QuizIcon from '@mui/icons-material/Quiz';
-import DownloadIcon from '@mui/icons-material/Download';
-import logo from './grmlogo.png'
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import LogoutIcon from '@mui/icons-material/Logout';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import SchoolIcon from '@mui/icons-material/School';
-import './NavBar.css'
-
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleIcon from "@mui/icons-material/People";
+import QuizIcon from "@mui/icons-material/Quiz";
+import DownloadIcon from "@mui/icons-material/Download";
+import logo from "./grmlogo.png";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import SchoolIcon from "@mui/icons-material/School";
+import "./NavBar.css";
+import UserPage from "../UserPage/UserPage";
+import { useDispatch, useSelector } from "react-redux";
 
 function NavBar() {
   const drawerWidth = 230;
-  const history = useHistory()
+  const history = useHistory();
 
-  const navLinks = [
+  const dispatch = useDispatch();
+
+  const user = useSelector((store) => store.user);
+  let navLinks = [];
+
+  if (user.permission === 1) {
+    navLinks = [
       {
-          text: 'Dashboard',
-          icon: <DashboardIcon />,
-          onClick: () => history.push('/dashboard')
+        text: "Dashboard",
+        icon: <DashboardIcon />,
+        onClick: () => history.push("/dashboard"),
       },
       {
-        text: 'Students',
+        text: "Students",
         icon: <SchoolIcon />,
-        onClick: () => history.push('/students')
+        onClick: () => history.push("/students"),
       },
       {
-        text: 'Assessments',
+        text: "Assessments",
         icon: <QuizIcon />,
-        onClick: () => history.push('/assessments')
+        onClick: () => history.push("/assessmentoverview"),
       },
       {
-        text: 'Data Export',
+        text: "Data Export",
         icon: <DownloadIcon />,
-        onClick: () => history.push('/csvExport')
+        onClick: () => history.push("/csvExport"),
       },
+      // {
+      //   text: 'Teachers',
+      //   icon: <SupervisorAccountIcon />,
+      //   onClick: () => history.push('/teachers')
+      // },
       {
-        text: 'Teachers',
-        icon: <SupervisorAccountIcon />,
-        onClick: () => history.push('/teachers')
-      },
-      {
-        text: 'Schools',
+        text: "Schools",
         icon: <LocationCityIcon />,
-        onClick: () => history.push('/schools')
+        onClick: () => history.push("/schools"),
       },
       {
-        text: 'Logout',
+        text: "Logout",
         icon: <LogoutIcon />,
-        onClick: () => history.push('/logout')
-      }
-  ]
+        onClick: () => {
+          history.push("/login");
+          dispatch({ type: "LOGOUT" });
+        },
+      },
+    ];
+  } else {
+    navLinks = [
+      {
+        text: "Dashboard",
+        icon: <DashboardIcon />,
+        onClick: () => history.push("/dashboard"),
+      },
+      {
+        text: "Assessment",
+        icon: <QuizIcon />,
+        onClick: () => history.push("/student"),
+      },
+      {
+        text: "Logout",
+        icon: <LogoutIcon />,
+        onClick: () => {
+          history.push("/login");
+          dispatch({ type: "LOGOUT" });
+        },
+      },
+    ];
+  }
 
   return (
     <Drawer
@@ -74,28 +106,22 @@ function NavBar() {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-    
         },
       }}
       variant="permanent"
       anchor="left"
       PaperProps={{ elevation: 9 }}
     >
-      <img src={logo} id="logo-bar"/>
+      <img src={logo} id="logo-bar" />
       <List>
-        {navLinks.map((item, index) => { 
-        return (  
-          <ListItem 
-          button 
-          key={index}
-          onClick={item.onClick}
-          >
-            <ListItemIcon sx={{color: '#fff'}}>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        )})}
+        {navLinks.map((item, index) => {
+          return (
+            <ListItem button key={index} onClick={item.onClick}>
+              <ListItemIcon sx={{ color: "#fff" }}>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          );
+        })}
       </List>
       <Divider />
     </Drawer>
