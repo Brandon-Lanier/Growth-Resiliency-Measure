@@ -26,6 +26,7 @@ import UserPage from "../UserPage/UserPage";
 import { useDispatch, useSelector } from 'react-redux';
 
 
+
 function NavBar() {
   const drawerWidth = 230;
   const history = useHistory()
@@ -82,7 +83,22 @@ function NavBar() {
       {
         text: 'Assessment',
         icon: <QuizIcon />,
-        onClick: () => history.push('/assessment')
+        onClick: () => history.push('/assessments')
+      },
+      {
+        text: 'Data Export',
+        icon: <DownloadIcon />,
+        onClick: () => history.push('/csvExport')
+      },
+      {
+        text: 'Teachers',
+        icon: <SupervisorAccountIcon />,
+        onClick: () => history.push('/teachers')
+      },
+      {
+        text: 'Schools',
+        icon: <LocationCityIcon />,
+        onClick: () => history.push('/schools')
       },
       {
         text: 'Logout',
