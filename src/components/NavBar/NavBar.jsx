@@ -22,41 +22,67 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SchoolIcon from '@mui/icons-material/School';
 import './NavBar.css'
+import UserPage from "../UserPage/UserPage";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function NavBar() {
   const drawerWidth = 230;
   const history = useHistory()
 
-  const navLinks = [
+  const user = useSelector(store => store.user);
+  let navLinks = [];
+
+  if (user.permission === 1){
+     navLinks = [
+        {
+            text: 'Dashboard',
+            icon: <DashboardIcon />,
+            onClick: () => history.push('/dashboard')
+        },
+        {
+          text: 'Students',
+          icon: <SchoolIcon />,
+          onClick: () => history.push('/students')
+        },
+        {
+          text: 'Assessments',
+          icon: <QuizIcon />,
+          onClick: () => history.push('/assessmentoverview')
+        },
+        {
+          text: 'Data Export',
+          icon: <DownloadIcon />,
+          onClick: () => history.push('/download')
+        },
+        {
+          text: 'Teachers',
+          icon: <SupervisorAccountIcon />,
+          onClick: () => history.push('/teachers')
+        },
+        {
+          text: 'Schools',
+          icon: <LocationCityIcon />,
+          onClick: () => history.push('/schools')
+        },
+        {
+          text: 'Logout',
+          icon: <LogoutIcon />,
+          onClick: () => history.push('/logout')
+        }
+    ]
+
+  } else {
+     navLinks = [
       {
           text: 'Dashboard',
           icon: <DashboardIcon />,
           onClick: () => history.push('/dashboard')
       },
       {
-        text: 'Students',
-        icon: <SchoolIcon />,
-        onClick: () => history.push('/students')
-      },
-      {
-        text: 'Assessments',
+        text: 'Assessment',
         icon: <QuizIcon />,
-        onClick: () => history.push('/assessments')
-      },
-      {
-        text: 'Data Export',
-        icon: <DownloadIcon />,
-        onClick: () => history.push('/download')
-      },
-      {
-        text: 'Teachers',
-        icon: <SupervisorAccountIcon />,
-        onClick: () => history.push('/teachers')
-      },
-      {
-        text: 'Schools',
-        icon: <LocationCityIcon />,
-        onClick: () => history.push('/schools')
+        onClick: () => history.push('/assessment')
       },
       {
         text: 'Logout',
@@ -64,6 +90,7 @@ function NavBar() {
         onClick: () => history.push('/logout')
       }
   ]
+  }
 
   return (
     <Drawer

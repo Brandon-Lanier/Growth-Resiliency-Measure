@@ -48,7 +48,7 @@ function App() {
   return (
     <Router>
       <div id="app-container">
-      {/* <NavBar /> */}
+      <NavBar />
 
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
