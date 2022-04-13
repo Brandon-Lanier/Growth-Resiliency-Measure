@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 
-// GET scores
+// GET average score for each measure sorted by assessment batch id
 router.get("/", (req, res) => {
   if (req.isAuthenticated()) {
     const qryTxt = `
@@ -13,7 +13,9 @@ router.get("/", (req, res) => {
     pool
       .query(qryTxt, [req.user.id])
       .then((result) => {
-        res.send(result.rows); //
+        res.send(result.rows); 
+        console.log('result', result.rows);
+        
       })
       .catch((err) => {
         res.sendStatus(500);
