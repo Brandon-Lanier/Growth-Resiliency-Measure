@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import assessmentReducer from './assessment.reducer';
 import questions from './questions.reducer'
-import batch from './assessment.reducer'
+import batch from './batch.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

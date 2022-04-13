@@ -22,7 +22,7 @@ export default function StudentHomepage() {
 
     return(
         <>
-            {!batch && 'no assessments available'}
+            {/* {!batch && 'no assessments available'} */}
         </>
     )
 }

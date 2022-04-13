@@ -58,15 +58,12 @@ router.get('/studentbatch', async (req, res) => {
     
     const batchesObject = await pool.query(batchesQuery, [schoolId]);
     const batches = batchesObject.rows;
-    console.log('batches', batches);
     
     // see if current date falls in the batches timeframe
     // if it is, return batch number
     let currentDate = new Date();
-    console.log('currentDate is', currentDate)
     for(let batch of batches) {
         if(batch.startDate <= currentDate && batch.endDate >= currentDate){
-            ('today is mid-batch for batch #', batch.id)
             activeBatch = batch.id;
         }
     }
