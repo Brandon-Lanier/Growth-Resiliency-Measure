@@ -3,7 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import fetchQuestionsSaga from './questions.saga';
-import postScoresSaga from './questions.saga';
+import postScoresSaga from './scores.saga';
 import fetchBatchSaga from './fetchBatch.saga';
 
 // rootSaga is the primary saga.

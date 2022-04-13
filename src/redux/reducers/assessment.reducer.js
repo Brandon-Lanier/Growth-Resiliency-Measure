@@ -19,7 +19,7 @@ const assessmentReducer = (state = [], action) => {
         case 'SET_CONTROL':
             return [...state, action.payload];
         case 'SET_QUALITATIVE':
-            return [...state, action.payload];
+           return [...state, action.payload];
         default:
             return state;
     }  

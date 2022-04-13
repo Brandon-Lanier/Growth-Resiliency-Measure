@@ -1,4 +1,3 @@
-const { SquareOutlined } = require('@mui/icons-material');
 const express = require('express');
 const { batch } = require('react-redux');
 const pool = require('../modules/pool');
