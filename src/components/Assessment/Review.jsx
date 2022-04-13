@@ -13,6 +13,7 @@ function Review() {
 
   const handleSubmit = () => {
     dispatch({ type: "POST_SCORES", payload: [batch, answers]});
+    history.push('/confirmation')
   };
 
   const handleBack = () => {

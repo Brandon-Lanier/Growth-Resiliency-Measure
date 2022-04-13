@@ -38,6 +38,8 @@ import Assessment7 from "../Assessment/Assessment7";
 import Assessment8 from "../Assessment/Assessment8";
 import Assessment9 from "../Assessment/Assessment9";
 import Review from "../Assessment/Review";
+import Confirmation from "../Assessment/Confirmation";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -170,6 +172,9 @@ function App() {
           </Route>
           <Route path="/review">
             <Review />
+          </Route>
+          <Route path="/confirmation">
+            <Confirmation />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

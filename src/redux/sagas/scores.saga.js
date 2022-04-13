@@ -15,8 +15,18 @@ function* postScores(action) {
     }
 }
 
+function* fetchStudentScores() {
+    try {
+        const scores = yield axios.get('/scores')
+        yield put({type: 'SET_STUDENT_SCORES', payload: scores.data})
+    } catch(error) {
+        console.log('Error getting a single student scores in postScoresSaga', error);  
+    }
+}
+
 function* postScoresSaga() {
-    yield takeLatest('POST_SCORES', postScores)
+    yield takeLatest('POST_SCORES', postScores);
+    yield takeLatest('FETCH_STUDENT_SCORES', fetchStudentScores);
 };
 
 export default postScoresSaga;
