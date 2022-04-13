@@ -14,6 +14,7 @@ function CsvExport() {
   const [grade, setGrade] = useState('');
   const [ethnicity, setEthnicity] = useState('');
   const [gender, setGender] = useState(``);
+  const [lunch, setLunch] = useState('');
 
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -33,6 +34,10 @@ function CsvExport() {
 
   const handleGender = (event) => {
     setGender(event.target.value);
+  }
+
+  const handleLunch = (event) => {
+    setLunch(event.target.value);
   }
 
 
@@ -120,6 +125,19 @@ function CsvExport() {
             <MenuItem value={3}>Non-Binary</MenuItem>
             <MenuItem value={4}>Not Listed</MenuItem>
             <MenuItem value={5}>Prefer Not To Say</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="select-helper-label">Lunch Status</InputLabel>
+          <Select labelId="select-helper-label" id="select-helper-label"
+            value={lunch}
+            label="lunch status"
+            onChange={handleLunch}>
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>Yes</MenuItem>
+            <MenuItem value={2}>No</MenuItem>
           </Select>
         </FormControl>
       </Stack>
