@@ -4,8 +4,10 @@ const router = express.Router();
 
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post('/', (req, res) => {
-  let queryText = `INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender"
-  , "lunchStatus", "schoolId", "students_pk") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);`;
+  console.log("post route hit server side")
+  console.log(req.body)
+  let queryText = `INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`
 
   let queryInserts = [
     req.body.userId,
@@ -19,7 +21,6 @@ router.post('/', (req, res) => {
     req.body.gender,
     req.body.lunchStatus,
     req.body.schoolId,
-    req.body.student_pk,
   ];
   if (req.isAuthenticated()) {
     pool.query(queryText, queryInserts)

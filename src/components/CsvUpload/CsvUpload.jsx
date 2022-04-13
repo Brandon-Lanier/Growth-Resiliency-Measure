@@ -4,10 +4,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useHistory } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux'
 
 
 function CsvUpload() {
+    const dispatch = useDispatch();
     const [file, setFile] = useState();
     const [array, setArray] = useState([]);
     const [open, setOpen] = useState(false);
@@ -53,9 +54,27 @@ function CsvUpload() {
         handleClose();
     }
     function submitAndClose(){
+        event.preventDefault();
+  dispatch({
+    type: 'CSV_STUDENTS',
+    payload: {
+        // userId: userId,
+        // studentId: studentId,
+        // lastName: lastName,
+        // graduationYear: graduationYear,
+        // email: email,
+        // race: race,
+        // eip: eip,
+        // gender: gender,
+        // lunchStatus: lunchStatus,
+        // schoolId: schoolId,
 
+        array
+    }});
+    dispatch({ type: 'GET_STUDENTS' });
         handleClose();
-    }
+}
+    
 
 console.log(array)
 console.log(file)

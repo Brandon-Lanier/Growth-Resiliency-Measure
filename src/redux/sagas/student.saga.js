@@ -14,10 +14,22 @@ function* getStudents() {
   
     }
   }
+  function* csvStudents(action) {
+    try {
+      console.log(action.payload)
+      yield axios.post('/api/studentCsv', action.payload);
+      yield put({ type: 'GET_STUDENTS' });
+    } catch (error) {
+      alert('Error sending students:', error);
+  
+    }
+  }
 
-  function* jobSaga() {
+
+  function* studentSaga() {
     yield takeLatest('GET_STUDENTS', getStudents)
+    yield takeLatest('CSV_STUDENTS', csvStudents)
   }
   
-  export default jobSaga;
+  export default studentSaga;
   
