@@ -23,6 +23,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SchoolIcon from '@mui/icons-material/School';
 import './NavBar.css'
 
+
 function NavBar() {
   const drawerWidth = 230;
   const history = useHistory()
@@ -46,7 +47,7 @@ function NavBar() {
       {
         text: 'Data Export',
         icon: <DownloadIcon />,
-        onClick: () => history.push('/download')
+        onClick: () => history.push('/csvExport')
       },
       {
         text: 'Teachers',

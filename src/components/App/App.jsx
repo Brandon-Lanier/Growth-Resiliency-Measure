@@ -22,9 +22,12 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import CsvExport from '../CsvExport/CsvExport';
+
 import Schools from '../Schools/Schools';
 import Assessment from '../Assessment/Assessment';
 import StudentHomepage from '../StudentHomepage/StudentHomepage';
+
 
 import './App.css';
 import Assessment2 from '../Assessment/Assessment2';
@@ -89,12 +92,22 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+
+            // logged in shows Csv export else shows LoginPage
+            exact
+            path="/csvExport"
+          >
+            <CsvExport />
+          </ProtectedRoute>
+            <ProtectedRoute
+           
+            //logged in shows InfoPage else shows LoginPage
             exact
             path="/schools"
-          >
-            <Schools />
+            >
+            <Schools/>
           </ProtectedRoute>
+
 
 
           <Route
