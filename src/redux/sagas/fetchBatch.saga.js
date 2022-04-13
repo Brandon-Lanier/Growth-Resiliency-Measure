@@ -2,17 +2,16 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-// Posting assessment answers to the database
+// pull active batch id for student if assessment is available
 function* fetchBatch() {
     try {
         const batch = yield axios.get(`/cohort`);
-        // update batch reducer to null
-        // this will make the homepage conditionally render correctly for the student
+        // if assessment is available, send batch id to reducer
         if(batch !== 'none') {
             yield put({type: 'SET_BATCH', payload: Number(batch)})
         }
     } catch(error) {
-        console.log('Saga failed to post scores', error);
+        console.log('Saga failed to grab assessment batch id', error);
     }
 }
 
