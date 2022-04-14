@@ -1,0 +1,37 @@
+.assessment-container {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+}
+
+.question-text {
+    align-self: center;
+}
+
+.question-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+
+
+.assess-buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.assess-buttons {
+    margin: 10px;
+}
+
+.agree-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+

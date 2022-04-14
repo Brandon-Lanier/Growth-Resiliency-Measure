@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -11,43 +11,40 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import "./Assessment.css";
 
-function Assessment() {
+function Assessment5() {
+
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
-    dispatch({ type: "FETCH_BATCH" }); // get batch number form DB.
-  }, []);
 
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
-  const [value3, setValue3] = useState("");
 
-  const handleChange1 = (e) => {
-    setValue1(e.target.value);
+  const [value14, setValue14] = useState(0);
+  const [value15, setValue15] = useState(0);
+
+
+  const handleChange14 = (e) => {
+    setValue14(e.target.value);
   };
 
-  const handleChange2 = (e) => {
-    setValue2(e.target.value);
+  const handleChange15 = (e) => {
+    setValue15(e.target.value);
   };
 
-  const handleChange3 = (e) => {
-    setValue3(e.target.value);
-  };
+
 
   const handleNext = () => {
-    if (value1 && value2 && value3) {
-      dispatch({
-        type: "SET_BALANCE",
-        payload: { 1: Number(value1), 2: Number(value2), 3: Number(value3) },
-      });
-      history.push("/assessment2");
+    if (value14 && value15) {
+      dispatch({ type: "SET_CONTRIBUTION", payload: {14: Number(value14), 15: Number(value15)}});
+      history.push('/assessment6')
     } else {
-      alert('Please enter a value for each statement.')
+      alert("Please fill out all answers");
     }
   };
+
+const handleBack = () => {
+    history.goBack();
+}
 
   return (
     <Container
@@ -59,19 +56,19 @@ function Assessment() {
     >
       <div className="question-container">
         <Typography variant="b1" className="question-text">
-          {questions[0]?.name}
+          {questions[13]?.name}
         </Typography>
-        <FormControl className="form-control">
+        <FormControl>
           <RadioGroup
             row
-            aria-labelledby="radio-buttons"
-            name="assessment-radio-buttons"
-            value={value1}
-            onChange={handleChange1}
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            value={value14}
+            onChange={handleChange14}
           >
-            {/* <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
+            <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
               Disagree
-            </Typography> */}
+            </Typography>
             <FormControlLabel
               value={1}
               control={<Radio />}
@@ -102,59 +99,6 @@ function Assessment() {
               label="5"
               labelPlacement="bottom"
             />
-          </RadioGroup>
-          <div className="agree-cont">
-          <Typography variant="b2">Disagree</Typography>
-          <Typography variant="b2">Agree</Typography>
-        </div>
-        </FormControl>
-       
-      </div>
-      <div className="question-container">
-        <Typography variant="b1" className="question-text">
-          {questions[1]?.name}
-        </Typography>
-        <FormControl>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-            value={value2}
-            onChange={handleChange2}
-          >
-            <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
-              Disagree
-            </Typography>
-            <FormControlLabel
-              value="1"
-              control={<Radio />}
-              label="1"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="2"
-              control={<Radio />}
-              label="2"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="3"
-              control={<Radio />}
-              label="3"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="4"
-              control={<Radio />}
-              label="4"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="5"
-              control={<Radio />}
-              label="5"
-              labelPlacement="bottom"
-            />
             <Typography variant="b2" sx={{ ml: 1, alignSelf: "center" }}>
               Agree
             </Typography>
@@ -163,15 +107,15 @@ function Assessment() {
       </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
-          {questions[2]?.name}
+          {questions[14]?.name}
         </Typography>
         <FormControl>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            value={value3}
-            onChange={handleChange3}
+            value={value15}
+            onChange={handleChange15}
           >
             <Typography variant="b2" sx={{ mr: 1, alignSelf: "center" }}>
               Disagree
@@ -213,16 +157,11 @@ function Assessment() {
         </FormControl>
       </div>
       <div className="assess-buttons-container">
-        <Button
-          variant="contained"
-          className="assess-buttons"
-          onClick={handleNext}
-        >
-          Next
-        </Button>
-      </div>
+        <Button variant="outlined" sx={{m: 2}} className="assess-buttons" onClick={handleBack}>Back</Button>
+        <Button variant="contained" sx={{m: 2}} className="assess-buttons" onClick={handleNext}>Next</Button>
+        </div>
     </Container>
   );
 }
 
-export default Assessment;
+export default Assessment5;
