@@ -6,7 +6,6 @@ import fetchQuestionsSaga from './questions.saga';
 import studentSaga from './student.saga';
 import postScoresSaga from './scores.saga';
 import fetchBatchSaga from './fetchBatch.saga';
-import studentsSaga from './students.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,6 +23,5 @@ export default function* rootSaga() {
     studentSaga(),
     postScoresSaga(),
     fetchBatchSaga(),
-    studentsSaga()
   ]);
 }
