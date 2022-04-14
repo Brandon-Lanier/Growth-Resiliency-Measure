@@ -19,6 +19,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+
 function AdminDashData() {
   const dispatch = useDispatch();
 
@@ -48,7 +49,7 @@ function AdminDashData() {
     ],
     datasets: [
       {
-        label: "Test 1",
+        label: "All Students",
         data: [2, 4.3, 3, 4, 2, 3, 1, 3],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
@@ -82,6 +83,7 @@ function AdminDashData() {
               label="Year"
               onChange={(e) => setYear(e.target.value)}
             >
+              <MenuItem value="all">Select All</MenuItem>
               <MenuItem value={2022}>2022</MenuItem>
               <MenuItem value={2021}>2021</MenuItem>
               <MenuItem value={2020}>2020</MenuItem>
@@ -96,6 +98,7 @@ function AdminDashData() {
               label="Term"
               onChange={(e) => setTerm(e.target.value)}
             >
+              <MenuItem value="all">Select All</MenuItem>
               <MenuItem value="fall">Fall</MenuItem>
               <MenuItem value="spring">Spring</MenuItem>
             </Select>
@@ -109,6 +112,7 @@ function AdminDashData() {
               label="Grade"
               onChange={(e) => setGrade(e.target.value)}
             >
+              <MenuItem value="all">Select All</MenuItem>
               <MenuItem value={12}>12</MenuItem>
               <MenuItem value={11}>11</MenuItem>
               <MenuItem value={10}>10</MenuItem>
@@ -124,10 +128,12 @@ function AdminDashData() {
               label="Ethnicity"
               onChange={(e) => setEthnicity(e.target.value)}
             >
-              <MenuItem value={12}>12</MenuItem>
-              <MenuItem value={11}>11</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={9}>9</MenuItem>
+              <MenuItem value="all">Select All</MenuItem>
+              <MenuItem value="asian">Asian</MenuItem>
+              <MenuItem value="black">Black</MenuItem>
+              <MenuItem value="caucausian">Caucasian</MenuItem>
+              <MenuItem value="hispanic">Hispanic</MenuItem>
+              <MenuItem value="mixed">Mixed</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{minWidth: 100}} size="small">
@@ -139,8 +145,10 @@ function AdminDashData() {
               label="Gender"
               onChange={(e) => setGender(e.target.value)}
             >
-              <MenuItem value="male">Female</MenuItem>
-              <MenuItem value="female">Male</MenuItem>
+              <MenuItem value="all">Select All</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="non-binary">Non-Binary</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{minWidth: 100}} size="small">
