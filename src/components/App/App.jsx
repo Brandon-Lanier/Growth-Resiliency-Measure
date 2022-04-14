@@ -38,6 +38,9 @@ import Assessment7 from "../Assessment/Assessment7";
 import Assessment8 from "../Assessment/Assessment8";
 import Assessment9 from "../Assessment/Assessment9";
 import Review from "../Assessment/Review";
+import Confirmation from "../Assessment/Confirmation";
+import Dashboard from "../Dashboard/Dashboard";
+
 
 import Box from "@mui/material/Box";
 
@@ -111,6 +114,13 @@ function App() {
           >
             <Schools />
           </ProtectedRoute>
+          <ProtectedRoute
+            //logged in shows schools page - this is current has option to add a semester
+            exact
+            path="/dashboard"
+          >
+            <Dashboard />
+          </ProtectedRoute>
 
           <Route exact path="/login">
             {user.id ? (
@@ -173,6 +183,9 @@ function App() {
           </Route>
           <Route path="/review">
             <Review />
+          </Route>
+          <Route path="/confirmation">
+            <Confirmation />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
