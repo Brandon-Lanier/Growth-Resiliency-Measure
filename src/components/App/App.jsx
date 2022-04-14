@@ -23,7 +23,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import CsvExport from "../CsvExport/CsvExport";
-
+import StudentList from '../StudentList/StudentList';
 import Schools from "../Schools/Schools";
 import Assessment from "../Assessment/Assessment";
 import StudentHomepage from "../StudentHomepage/StudentHomepage";
@@ -50,14 +50,18 @@ function App() {
   const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_USER" });
+    dispatch({ type: 'FETCH_USER' }),
+    dispatch({ type: 'GET_STUDENTS' });
   }, [dispatch]);
 
   return (
     <Router>
-      <div id="app-container">
-        <NavBar />
+      <div id="appContainer">
+  
+      <NavBar />
 
+      <Route path="/students"><StudentList /></Route>
+        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -189,7 +193,7 @@ function App() {
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            {/* <h1>404</h1> */}
           </Route>
         </Switch>
       </div>

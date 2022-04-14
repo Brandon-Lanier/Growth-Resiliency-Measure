@@ -3,7 +3,9 @@ body,
 #react-root {
   height: 100%;
 }
-
+#appContainer {
+  display: flex
+}
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;

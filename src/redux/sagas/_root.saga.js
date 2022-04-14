@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import fetchQuestionsSaga from './questions.saga';
+import studentSaga from './student.saga';
 import postScoresSaga from './scores.saga';
 import fetchBatchSaga from './fetchBatch.saga';
 import studentsSaga from './students.saga';
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     fetchQuestionsSaga(),
+    studentSaga(),
     postScoresSaga(),
     fetchBatchSaga(),
     studentsSaga()
