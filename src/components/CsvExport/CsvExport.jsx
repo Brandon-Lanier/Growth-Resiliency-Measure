@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { CSVLink } from "react-csv";
+import axios from 'axios';
 
 
 function CsvExport() {
@@ -14,6 +16,8 @@ function CsvExport() {
   const [grade, setGrade] = useState('');
   const [ethnicity, setEthnicity] = useState('');
   const [gender, setGender] = useState(``);
+  const [lunch, setLunch] = useState('');
+  const [csvObj, setCsvObj] = useState([]);
 
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -35,6 +39,24 @@ function CsvExport() {
     setGender(event.target.value);
   }
 
+  const handleLunch = (event) => {
+    setLunch(event.target.value);
+  }
+
+
+  useEffect(() => {
+    fetchCsvDataObj();
+  }, []);
+
+  const fetchCsvDataObj = () => {
+    axios.get('/api/studentCsv')
+      .then((response) => {
+        console.log('GET response.data is', response.data)
+        setCsvObj(response.data)
+      }).catch((err) => {
+        console.log('GET error is', err)
+      })
+  }
 
   return (
     <Box pt={15}
@@ -122,6 +144,20 @@ function CsvExport() {
             <MenuItem value={5}>Prefer Not To Say</MenuItem>
           </Select>
         </FormControl>
+        <FormControl>
+          <InputLabel id="select-helper-label">Lunch Status</InputLabel>
+          <Select labelId="select-helper-label" id="select-helper-label"
+            value={lunch}
+            label="lunch status"
+            onChange={handleLunch}>
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>Yes</MenuItem>
+            <MenuItem value={2}>No</MenuItem>
+          </Select>
+        </FormControl>
+        <CSVLink data={csvObj}>Download Data</CSVLink>
       </Stack>
     </Box>
 
