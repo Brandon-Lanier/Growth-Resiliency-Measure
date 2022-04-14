@@ -2,6 +2,28 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+//-------------------------------Get route for student CSV export-----------------------------------
+router.get("/", (req, res) => {
+  if (req.isAuthenticated()) {
+    let queryText = `
+    
+    `;
+    pool
+      .query(queryText, [req.user.id])
+      .then((result) => {
+        res.send(result.rows);
+        console.log('student results:', result.rows);
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+
+}); // end Get student Csv export---
+
+
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post('/', (req, res) => {
   let queryText = `INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender"
