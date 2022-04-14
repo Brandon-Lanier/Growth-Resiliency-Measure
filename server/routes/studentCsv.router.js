@@ -17,44 +17,46 @@ router.post("/", async (req, res) => {
   try {
     await connection.query('BEGIN');
     console.log("post route hit server side");
+    console.log('req.body is', req.body);
     
-    // CREATE NEW USER ================== 
-    
+    // CREATE NEW USER LOOP ================== 
+    for (let student of req.body.studentArray){
+
     // Username is email
-    const username = req.body.email;
-    
-    // Password encryption
-    const password = encryptLib.encryptPassword(req.body.firstName + req.body.studentId);
-    
-    console.log("username is", username);
-    console.log("password is", password);
-    
-    const sqlAddUser = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id;`;
-    
-    const userId = await connection.query(sqlAddUser, [username, password]);
-
-
-    /// ======= INSERT INTO STUDENTS TABLE WITH RETURNED ID
-    
-    const sqlAddStudent = `INSERT INTO "students" ("userId","studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-
-    let queryInserts = [
-      userId.rows[0].id,
-      req.body.studentId,
-      req.body.firstName,
-      req.body.lastName,
-      req.body.graduationYear,
-      req.body.email,
-      req.body.race,
-      req.body.eip,
-      req.body.gender,
-      req.body.lunchStatus,
-      req.body.schoolId,
-    ];
-
-    await connection.query(sqlAddStudent, queryInserts);
+      const username = student.email;
+      
+      // Password encryption
+      const password = encryptLib.encryptPassword(student.firstName + student.studentId);
+      
+      console.log("username is", username);
+      console.log("password is", password);
+      
+      const sqlAddUser = `INSERT INTO "user" (username, password)
+      VALUES ($1, $2) RETURNING id;`;
+      
+      const userId = await connection.query(sqlAddUser, [username, password]);
+      
+      
+      /// ======= INSERT INTO STUDENTS TABLE WITH RETURNED ID
+      
+      const sqlAddStudent = `INSERT INTO "students" ("userId","studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+      
+      let queryInserts = [
+        userId.rows[0].id,
+        student.studentId,
+        student.firstName,
+        student.lastName,
+        student.graduationYear,
+        student.email,
+        student.race,
+        student.eip,
+        student.gender,
+        student.lunchStatus,
+        student.schoolId,
+      ];
+      await connection.query(sqlAddStudent, queryInserts);
+    }
     await connection.query('COMMIT');
   } catch (error) {
     await connection.query("ROLLBACK");
