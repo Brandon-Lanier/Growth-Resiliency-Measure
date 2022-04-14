@@ -10,75 +10,50 @@ import { useCSVReader } from 'react-papaparse';
 function CsvUpload() {
   const { CSVReader } = useCSVReader();
     const dispatch = useDispatch();
-    const [file, setFile] = useState();
-    const [array, setArray] = useState([]);
+    const [studentArray, setStudentArray] = useState([]);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const fileReader = new FileReader();
   
     const handleOnChange = (e) => {
-      setFile(e.target.files[0]);
+ 
     };
   
-    const csvFileToArray = string => {
-      const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
-      const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-      
-      const array = csvRows.map(i => {
-        const values = i.split(",");
-        const obj = csvHeader.reduce((object, header, index) => {
-          object[header] = values[index];
-          return object;
-        }, {});
-        return obj;
-      });
-      setArray(array);
-    };
-  
+    
     const handleOnSubmit = (e) => {
       e.preventDefault();
   
-      if (file) {
-        fileReader.onload = function (event) {
-          const text = event.target.result;
-          csvFileToArray(text);
-          handleOpen();
-        };
-  
-        fileReader.readAsText(file);
+    
       }
-    };
-    const headerKeys = Object.keys(Object.assign({}, ...array));
+
 
     function closeModal(){
         handleClose();
     }
     function submitAndClose(){
-        event.preventDefault();
   dispatch({
     type: 'CSV_STUDENTS',
     payload: {
-        // userId: userId,
-        // studentId: studentId,
-        // lastName: lastName,
-        // graduationYear: graduationYear,
-        // email: email,
-        // race: race,
-        // eip: eip,
-        // gender: gender,
-        // lunchStatus: lunchStatus,
-        // schoolId: schoolId,
-
-        array
+        // userId: studentArray[0][0],
+        // studentId: studentArray[0][1],
+        // firstName: studentArray[0][2],
+        // lastName: studentArray[0][3],
+        // graduationYear: studentArray[0][4],
+        // email: studentArray[0][5],
+        // race: studentArray[0][6],
+        // eip: studentArray[0][7],
+        // schoolId: studentArray[0][8],
+        // gender: studentArray[0][9],
+        // lunchStatus: studentArray[0][10],
+        studentArray
     }});
     dispatch({ type: 'GET_STUDENTS' });
         handleClose();
 }
     
 
-console.log(array)
-console.log(file)
+
     return (
         <>
 
@@ -91,20 +66,12 @@ console.log(file)
         // width: 800,
         // height: 900,
         backgroundColor: 'White',
-   
-      }}>
+        }}>
         <button onClick={closeModal}>Close without submitting</button>
         <button onClick={submitAndClose}>Submit and Close</button>
         <table>
-          <thead>
-            <tr key={"header"}>
-              {headerKeys.map((key) => (
-                <th>{key}</th>
-              ))}
-            </tr>
-          </thead>
           <tbody>
-            {array.map((item) => (
+            {studentArray.map((item) => (
               <tr key={item.id}>
                 {Object.values(item).map((val) => (
                   <td>{val}</td>
@@ -116,32 +83,18 @@ console.log(file)
         </Box>
       </Modal>
 
-      <div style={{}}>
-        <form>
+
+       
             <h5>Upload Student CSV List</h5>
-          <input
-            type={"file"}
-            id={"csvFileInput"}
-            accept={".csv"}
-            onChange={handleOnChange}
-          />
-  
-          <button
-            onClick={(e) => {
-              handleOnSubmit(e);
-            }}
-          >
-            Import CSV
-          </button>
-        </form>
-  
-        <br />
-        </div>
         <CSVReader
+          config={{header: true}}
       onUploadAccepted={(results: any) => {
         console.log('---------------------------');
-        console.log(results.data);
+        // results.data.shift();
+        console.log(results.data)
+        setStudentArray(results.data)
         console.log('---------------------------');
+        handleOpen();
       }}
     >
       {({
@@ -167,36 +120,5 @@ console.log(file)
   }
 export default CsvUpload
 
-// export default function CsvUpload() {
 
 
-
-
-//   return (
-    // <CSVReader
-    //   onUploadAccepted={(results: any) => {
-    //     console.log('---------------------------');
-    //     console.log(results.data);
-    //     console.log('---------------------------');
-    //   }}
-    // >
-    //   {({
-    //     getRootProps,
-    //     acceptedFile,
-    //     ProgressBar,
-    //     getRemoveFileProps,
-    //   }: any) => (
-    //     <>>
-    //         <button type='button' {...getRootProps()}>
-    //           Browse file
-    //         </button>
-    //         <button {...getRemoveFileProps()}>
-    //           Remove
-    //         </button>
-          
-    //       <ProgressBar />
-    //     </>
-    //   )}
-    // </CSVReader>
-//   );
-// }
