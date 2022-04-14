@@ -85,7 +85,7 @@ function App() {
             path="/dashboard"
           >
 
-              {user.permission < 1 ? <StudentHomepage /> : <UserPage />}
+              {user.permission < 1 ? <StudentHomepage /> : <Dashboard />}
           </ProtectedRoute>
 
           <ProtectedRoute

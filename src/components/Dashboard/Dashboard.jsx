@@ -11,6 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import AdminDashData from "../AdminDashData/AdminDashData";
 
 function Dashboard() {
 
@@ -18,12 +19,14 @@ function Dashboard() {
     const students = useSelector(store => store.students);
     const batch = useSelector(store => store.batch)
   //Need useEffect to get school data to show up on dashboard
+  
   useEffect(() => {
     dispatch({type: 'FETCH_STUDENTS'});
+    dispatch({type: 'FETCH_STUDENT_SCORES'})
   }, []);
 
   return (
-    <Container sx={{ flexGrow: 1 }}>
+    <Container sx={{ flexGrow: 1, mt: 10 }}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
         <Card sx={{ maxWidth: 345 }}>
@@ -35,24 +38,23 @@ function Dashboard() {
         elevation={10}
       />
       <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          Total Students:
+          </Typography>
         <Typography gutterBottom variant="h5" component="div">
-        {students?.length} Students In Your System!
+        {students?.length}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
         </Grid>
         <Grid item xs={6}>
-          trop left
+          Top Right
         </Grid>
         <Grid item xs={12}>
-          bottom
+          <AdminDashData />
         </Grid>
       </Grid>
     </Container>
