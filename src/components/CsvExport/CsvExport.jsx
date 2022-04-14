@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { CSVLink } from "react-csv";
+import axios from 'axios';
 
 
 function CsvExport() {
@@ -16,6 +17,7 @@ function CsvExport() {
   const [ethnicity, setEthnicity] = useState('');
   const [gender, setGender] = useState(``);
   const [lunch, setLunch] = useState('');
+  const [csvObj, setCsvObj] = useState([]);
 
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -40,9 +42,23 @@ function CsvExport() {
   const handleLunch = (event) => {
     setLunch(event.target.value);
   }
-  const csvData = [{
-    
-  }]
+
+
+  useEffect(() => {
+    fetchCsvDataObj();
+  }, []);
+
+  const fetchCsvDataObj = () => {
+    console.log('Fetching csv')
+    axios.get('/api/studentCsv')
+      .then((response) => {
+        console.log('GET response.data is', response.data)
+        setCsvObj(response.data)
+      }).catch((err) => {
+        console.log('GET error is', err)
+      })
+  }
+  console.log('fetched csv data is:', csvObj);
 
 
   return (
@@ -144,7 +160,7 @@ function CsvExport() {
             <MenuItem value={2}>No</MenuItem>
           </Select>
         </FormControl>
-        <CSVLink data={csvData}>Download Data</CSVLink>
+        <CSVLink data={csvObj}>Download Data</CSVLink>
       </Stack>
     </Box>
 
