@@ -49,7 +49,6 @@ function CsvExport() {
   }, []);
 
   const fetchCsvDataObj = () => {
-    console.log('Fetching csv')
     axios.get('/api/studentCsv')
       .then((response) => {
         console.log('GET response.data is', response.data)
