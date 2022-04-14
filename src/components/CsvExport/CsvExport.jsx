@@ -58,8 +58,6 @@ function CsvExport() {
         console.log('GET error is', err)
       })
   }
-  console.log('fetched csv data is:', csvObj);
-
 
   return (
     <Box pt={15}

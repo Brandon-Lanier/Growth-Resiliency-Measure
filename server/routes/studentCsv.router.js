@@ -4,7 +4,6 @@ const router = express.Router();
 
 //-------------------------------Get route for student CSV export-----------------------------------
 router.get('/', (req, res) => {
-  // if (req.isAuthenticated()) {
     console.log('in router.get')
     const qryTxt = `
       SELECT * From "scores";`;
@@ -17,9 +16,7 @@ router.get('/', (req, res) => {
       .catch((err) => {
         res.sendStatus(500);
       });
-  // } else {
-  //   res.sendStatus(403);
-  // }
+ 
 }); // end Get student Csv export---
 
 
