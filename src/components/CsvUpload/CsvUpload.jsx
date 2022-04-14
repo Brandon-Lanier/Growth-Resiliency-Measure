@@ -14,49 +14,23 @@ function CsvUpload() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const fileReader = new FileReader();
-  
-    const handleOnChange = (e) => {
- 
-    };
-  
-    
-    const handleOnSubmit = (e) => {
-      e.preventDefault();
-  
-    
-      }
-
 
     function closeModal(){
         handleClose();
     }
+
     function submitAndClose(){
-  dispatch({
+    dispatch({
     type: 'CSV_STUDENTS',
     payload: {
-        // userId: studentArray[0][0],
-        // studentId: studentArray[0][1],
-        // firstName: studentArray[0][2],
-        // lastName: studentArray[0][3],
-        // graduationYear: studentArray[0][4],
-        // email: studentArray[0][5],
-        // race: studentArray[0][6],
-        // eip: studentArray[0][7],
-        // schoolId: studentArray[0][8],
-        // gender: studentArray[0][9],
-        // lunchStatus: studentArray[0][10],
         studentArray
     }});
     dispatch({ type: 'GET_STUDENTS' });
         handleClose();
 }
-    
-
-
+  
     return (
         <>
-
         <Modal
         open={open}
         onClose={handleClose}
@@ -83,8 +57,6 @@ function CsvUpload() {
         </Box>
       </Modal>
 
-
-       
             <h5>Upload Student CSV List</h5>
         <CSVReader
           config={{header: true}}
@@ -110,7 +82,6 @@ function CsvUpload() {
             <button {...getRemoveFileProps()}>
               Remove
             </button>
-          
           <ProgressBar />
         </>
       )}
@@ -118,7 +89,4 @@ function CsvUpload() {
       </>
     );
   }
-export default CsvUpload
-
-
-
+export default CsvUpload;
