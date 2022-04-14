@@ -73,7 +73,7 @@ function AdminDashData() {
   return (
     <>
       <div className="dash-filter-data-container">
-        <Stack direction="row" spacing={4}>
+        {/* <Stack direction="row" spacing={4}> */}
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
@@ -167,7 +167,7 @@ function AdminDashData() {
           <Button variant="contained" onClick={generateReport}>
               Generate Report
           </Button>
-        </Stack>
+        {/* </Stack> */}
       </div>
       <div className="dash-graph-container">
         <Radar

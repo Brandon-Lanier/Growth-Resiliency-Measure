@@ -5,7 +5,6 @@ import assessment from './assessment.reducer';
 import questions from './questions.reducer'
 import batch from './batch.reducer';
 import scores from './scores.reducer';
-import students from './students.reducer';
 import studentReducer from './student.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   batch, // holds batch id if active assessment is available for student
   questions,
   scores, // Holds students average scores on an assessment
-  students,
   studentReducer
 });
 

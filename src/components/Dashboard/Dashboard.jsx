@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -16,14 +17,15 @@ import { CardActionArea } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 
 function Dashboard() {
+
   const dispatch = useDispatch();
-  const students = useSelector((store) => store.student);
+  const students = useSelector((store) => store.studentReducer);
   const batch = useSelector((store) => store.batch);
-  //Need useEffect to get school data to show up on dashboard
+  const history = useHistory();
+
 
   useEffect(() => {
     dispatch({ type: "GET_STUDENTS" });
-    dispatch({ type: "FETCH_BATCh" });
   }, []);
 
   return (
@@ -37,7 +39,7 @@ function Dashboard() {
                   Total Students:
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  {students ? students.length : 0}
+                  {students ? students?.length : 0}
                 </Typography>
               </CardContent>
             </CardActionArea>
