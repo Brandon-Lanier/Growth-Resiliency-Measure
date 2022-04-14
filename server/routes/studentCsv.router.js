@@ -8,6 +8,24 @@ const {
 const encryptLib = require("../modules/encryption");
 
 
+//-------------------------------Get route for student CSV export-----------------------------------
+router.get('/', (req, res) => {
+    console.log('in router.get')
+    const qryTxt = `
+      SELECT * From "scores";`;
+    pool.query(qryTxt)
+      .then((result) => {
+        res.send(result.rows); 
+        console.log('result', result.rows);
+        
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      });
+ 
+}); // end Get student Csv export---
+
+
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post("/", async (req, res) => {
   const connection = await pool.connect();
