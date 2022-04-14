@@ -61,35 +61,31 @@ function CsvUpload() {
         </Box>
       </Modal>
 
-      <h5>Upload Student CSV List</h5>
-      <CSVReader
-        config={{ header: true }}
-        onUploadAccepted={(results: any) => {
-          console.log("---------------------------");
-          // results.data.shift();
-          console.log(results.data);
-          setStudentArray(results.data);
-          console.log("---------------------------");
-          handleOpen();
-        }}
-      >
-        {({
-          getRootProps,
-          acceptedFile,
-          ProgressBar,
-          getRemoveFileProps,
-        }: any) => (
-          <>
-            >
-            <button type="button" {...getRootProps()}>
-              Browse file
+        <CSVReader
+          config={{header: true}}
+      onUploadAccepted={(results: any) => {
+        console.log('---------------------------');
+        console.log(results.data)
+        setStudentArray(results.data)
+        console.log('---------------------------');
+        handleOpen();
+      }}
+    >
+      {({
+        getRootProps,
+        acceptedFile,
+        ProgressBar,
+        getRemoveFileProps,
+      }: any) => (
+        <>>
+            <button type='button' {...getRootProps()}>
+              Upload CSV
             </button>
-            <button {...getRemoveFileProps()}>Remove</button>
-            <ProgressBar />
-          </>
-        )}
-      </CSVReader>
-    </>
-  );
-}
+          <ProgressBar />
+        </>
+      )}
+    </CSVReader>
+      </>
+    );
+  }
 export default CsvUpload;
