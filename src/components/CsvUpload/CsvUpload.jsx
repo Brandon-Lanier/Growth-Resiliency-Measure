@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { useCSVReader } from 'react-papaparse';
 
 function CsvUpload() {
+  const { CSVReader } = useCSVReader();
     const dispatch = useDispatch();
     const [file, setFile] = useState();
     const [array, setArray] = useState([]);
@@ -135,44 +136,67 @@ console.log(file)
         </form>
   
         <br />
-  
-       
-      </div>
+        </div>
+        <CSVReader
+      onUploadAccepted={(results: any) => {
+        console.log('---------------------------');
+        console.log(results.data);
+        console.log('---------------------------');
+      }}
+    >
+      {({
+        getRootProps,
+        acceptedFile,
+        ProgressBar,
+        getRemoveFileProps,
+      }: any) => (
+        <>>
+            <button type='button' {...getRootProps()}>
+              Browse file
+            </button>
+            <button {...getRemoveFileProps()}>
+              Remove
+            </button>
+          
+          <ProgressBar />
+        </>
+      )}
+    </CSVReader>
       </>
     );
   }
 export default CsvUpload
 
 // export default function CsvUpload() {
-//   const { CSVReader } = useCSVReader();
+
 
 
 
 //   return (
-//     <CSVReader
-//       onUploadAccepted={(results: any) => {
-//         console.log('---------------------------');
-//         console.log(results.data);
-//         console.log('---------------------------');
-//       }}
-//     >
-//       {({
-//         getRootProps,
-//         acceptedFile,
-//         ProgressBar,
-//         getRemoveFileProps,
-//       }: any) => (
-//         <>>
-//             <button type='button' {...getRootProps()}>
-//               Browse file
-//             </button>
-//             <button {...getRemoveFileProps()}>
-//               Remove
-//             </button>
+    // <CSVReader
+    //   onUploadAccepted={(results: any) => {
+    //     console.log('---------------------------');
+    //     console.log(results.data);
+    //     console.log('---------------------------');
+    //   }}
+    // >
+    //   {({
+    //     getRootProps,
+    //     acceptedFile,
+    //     ProgressBar,
+    //     getRemoveFileProps,
+    //   }: any) => (
+    //     <>>
+    //         <button type='button' {...getRootProps()}>
+    //           Browse file
+    //         </button>
+    //         <button {...getRemoveFileProps()}>
+    //           Remove
+    //         </button>
           
-//           <ProgressBar />
-//         </>
-//       )}
-//     </CSVReader>
+    //       <ProgressBar />
+    //     </>
+    //   )}
+    // </CSVReader>
 //   );
 // }
