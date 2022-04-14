@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
-
+import { useCSVReader } from 'react-papaparse';
 
 function CsvUpload() {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function CsvUpload() {
     const csvFileToArray = string => {
       const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
       const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-  
+      
       const array = csvRows.map(i => {
         const values = i.split(",");
         const obj = csvHeader.reduce((object, header, index) => {
@@ -141,5 +141,38 @@ console.log(file)
       </>
     );
   }
+export default CsvUpload
 
-export default CsvUpload;
+// export default function CsvUpload() {
+//   const { CSVReader } = useCSVReader();
+
+
+
+//   return (
+//     <CSVReader
+//       onUploadAccepted={(results: any) => {
+//         console.log('---------------------------');
+//         console.log(results.data);
+//         console.log('---------------------------');
+//       }}
+//     >
+//       {({
+//         getRootProps,
+//         acceptedFile,
+//         ProgressBar,
+//         getRemoveFileProps,
+//       }: any) => (
+//         <>>
+//             <button type='button' {...getRootProps()}>
+//               Browse file
+//             </button>
+//             <button {...getRemoveFileProps()}>
+//               Remove
+//             </button>
+          
+//           <ProgressBar />
+//         </>
+//       )}
+//     </CSVReader>
+//   );
+// }
