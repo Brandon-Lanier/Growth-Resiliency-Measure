@@ -414,11 +414,32 @@ VALUES
 (4,2,26,5,NULL,'2022-04-12'),
 (4,2,27,0,'Second Test','2022-04-12');
 
+INSERT INTO "schools" ("name")
+VALUES ('Adams High School');
+
+
+INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
+VALUES (1,1,2022,1,'2022-01-01','2022-01-07'),(2,1,2022,1,'2022-04-01','2022-04-13');
+
+INSERT INTO "genders"("gender")
+VALUES
+(E'Female'),
+(E'Male'),
+(E'Non-Binary'),
+(E'Not Listed'),
+(E'Prefer Not To Say');
+
+INSERT INTO "race"("race")
+VALUES
+(E'Hispanic'),
+(E'Asian'),
+(E'Caucasian'),
+(E'Black'),
+(E'Mixed');
 
 
 
 
 
-
-
-
+INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+VALUES ("1047", "3022", "Timmy", "Trumpet" , 2023, timmay@trumpet.org, "1", false, "1", false, "1022", "2");
