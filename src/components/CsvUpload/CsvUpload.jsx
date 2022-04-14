@@ -57,12 +57,10 @@ function CsvUpload() {
         </Box>
       </Modal>
 
-            <h5>Upload Student CSV List</h5>
         <CSVReader
           config={{header: true}}
       onUploadAccepted={(results: any) => {
         console.log('---------------------------');
-        // results.data.shift();
         console.log(results.data)
         setStudentArray(results.data)
         console.log('---------------------------');
@@ -77,10 +75,7 @@ function CsvUpload() {
       }: any) => (
         <>>
             <button type='button' {...getRootProps()}>
-              Browse file
-            </button>
-            <button {...getRemoveFileProps()}>
-              Remove
+              Upload CSV
             </button>
           <ProgressBar />
         </>
