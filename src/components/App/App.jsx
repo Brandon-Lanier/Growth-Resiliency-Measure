@@ -40,9 +40,10 @@ import Assessment9 from "../Assessment/Assessment9";
 import Review from "../Assessment/Review";
 import Confirmation from "../Assessment/Confirmation";
 import Dashboard from "../Dashboard/Dashboard";
-
+import AdminAssess from "../AdminAssess/AdminAssess";
 
 import Box from "@mui/material/Box";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -109,6 +110,15 @@ function App() {
             path="/csvExport"
           >
             <CsvExport />
+          </ProtectedRoute>
+
+         
+          <ProtectedRoute
+            // Admin Assessment Page
+            exact
+            path="/assessmentoverview"
+          >
+            <AdminAssess />
           </ProtectedRoute>
 
           <ProtectedRoute
