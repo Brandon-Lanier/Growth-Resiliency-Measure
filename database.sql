@@ -143,17 +143,6 @@ ALTER TABLE "admin" ADD CONSTRAINT "admin_fk1" FOREIGN KEY ("schoolId") REFERENC
 ALTER TABLE "admin" ADD CONSTRAINT "admin_fk2" FOREIGN KEY ("permissionLevel") REFERENCES "schools"("id");
 
 
---DROP TABLE "admin";
---DROP TABLE "scores";
---DROP TABLE "students";
---DROP TABLE "user";
---DROP TABLE "assessmentBatches";
---DROP TABLE "genders";
---DROP TABLE "race";
---DROP TABLE "schools";
---DROP TABLE "questions";
---DROP TABLE "lunchStatus";
-
 INSERT INTO questions ("name","measureName")
 VALUES ('There is a purpose to my life.','Balanced'),
 ('I understand why I do things.','Balanced'),
@@ -182,6 +171,42 @@ VALUES ('There is a purpose to my life.','Balanced'),
 ('I can change my behavior to match the situation.','Self-Control'), 
 ('I try to find the good in every situation.','Self-Control'),
 ('What would help build your resilience?','Qualitative');
+
+INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
+VALUES (1,1,2022,1,'2022-01-01','2022-01-07'),(2,1,2022,1,'2022-04-01','2022-04-13');
+
+INSERT INTO "genders"("gender")
+VALUES
+(E'Female'),
+(E'Male'),
+(E'Non-Binary'),
+(E'Not Listed'),
+(E'Prefer Not To Say');
+
+INSERT INTO "race"("race")
+VALUES
+(E'Hispanic'),
+(E'Asian'),
+(E'Caucasian'),
+(E'Black'),
+(E'Mixed');
+
+INSERT INTO "lunchStatus"("status")
+VALUES
+(E'yes'),
+(E'no');
+
+
+--DROP TABLE "admin";
+--DROP TABLE "scores";
+--DROP TABLE "students";
+--DROP TABLE "user";
+--DROP TABLE "assessmentBatches";
+--DROP TABLE "genders";
+--DROP TABLE "race";
+--DROP TABLE "schools";
+--DROP TABLE "questions";
+--DROP TABLE "lunchStatus";
 
 
 -- Execute following three Insert statements to fill in a semesters worth of dummy
@@ -413,29 +438,6 @@ VALUES
 (4,2,25,3,NULL,'2022-04-12'),
 (4,2,26,5,NULL,'2022-04-12'),
 (4,2,27,0,'Second Test','2022-04-12');
-
-INSERT INTO "schools" ("name")
-VALUES ('Adams High School');
-
-
-INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
-VALUES (1,1,2022,1,'2022-01-01','2022-01-07'),(2,1,2022,1,'2022-04-01','2022-04-13');
-
-INSERT INTO "genders"("gender")
-VALUES
-(E'Female'),
-(E'Male'),
-(E'Non-Binary'),
-(E'Not Listed'),
-(E'Prefer Not To Say');
-
-INSERT INTO "race"("race")
-VALUES
-(E'Hispanic'),
-(E'Asian'),
-(E'Caucasian'),
-(E'Black'),
-(E'Mixed');
 
 
 
