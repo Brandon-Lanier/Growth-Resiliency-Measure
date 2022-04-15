@@ -6,6 +6,7 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const encryptLib = require("../modules/encryption");
+const { batch } = require("react-redux");
 
 
 //-------------------------------Get route for student CSV export-----------------------------------
@@ -36,6 +37,12 @@ router.get('/', async (req, res) => {
   const studentsData = await pool.query(studentQryTxt);
   const students = studentsData.rows
 
+  // pulling batch ids from db
+  const batchQryTxt = `
+  SELECT "batchNumber" FROM "assessmentBatches";`;
+  const batchesData = await pool.query(batchQryTxt);
+  const batches = batchesData.rows
+
   // pulling students scores from db
   const scoreQryTxt = `
   SELECT "scores"."userId", "scores"."score", "scores"."assessmentBatchId", "questions"."measureName", "students"."firstName", "students"."lastName", "students"."graduationYear", "students"."studentId", "questions"."id" AS "questionId"
@@ -45,53 +52,110 @@ router.get('/', async (req, res) => {
   const scoresData = await pool.query(scoreQryTxt);
   const scores = scoresData.rows
 
+
+
+
+  // // creating objects for each students which contain answers for each student score
+  // for (let student of students) {
+  //   let aggScore = {
+  //     id: student.studentId,
+  //     1: '',
+  //     2: '',
+  //     3: '',
+  //     4: '',
+  //     5: '',
+  //     6: '',
+  //     7: '',
+  //     8: '',
+  //     9: '',
+  //     10: '',
+  //     11: '',
+  //     12: '',
+  //     13: '',
+  //     14: '',
+  //     15: '',
+  //     16: '',
+  //     17: '',
+  //     18: '',
+  //     19: '',
+  //     20: '',
+  //     21: '',
+  //     22: '',
+  //     23: '',
+  //     24: '',
+  //     25: '',
+  //     26: '',
+  //     27: '',
+  //   }
+  //   for (score of scores) {
+  //     if (score.studentId === student.studentId) {
+  //       aggScore[score.questionId] = score.score
+  //     }
+  //   }
+  //   allScores.push(aggScore);
+  // }
+  // console.log(allScores);
+
+
+  // write down expected result
+  // clear up student router duplicate
+
   let allScores = []
 
-  // averaging student scores
   for (let student of students) {
-    let aggScore = {
-      id: student.studentId,
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-      5: '',
-      6: '',
-      7: '',
-      8: '',
-      9: '',
-      10: '',
-      11: '',
-      12: '',
-      13: '',
-      14: '',
-      15: '',
-      16: '',
-      17: '',
-      18: '',
-      19: '',
-      20: '',
-      21: '',
-      22: '',
-      23: '',
-      24: '',
-      25: '',
-      26: '',
-      27: '',
+    let studentObj = {
+      studentId: student.studentId,
+      batches: []
     }
-    for (score of scores) {
-      if (score.studentId === student.studentId) {
-        aggScore[score.questionId] = score.score
+    // console.log('studentObj is', studentObj)
+    for (let batch of batches) {
+      let batchObj = {
+        batchId: batch.batchNumber,
+        scores: {
+          1: '',
+          2: '',
+          3: '',
+          4: '',
+          5: '',
+          6: '',
+          7: '',
+          8: '',
+          9: '',
+          10: '',
+          11: '',
+          12: '',
+          13: '',
+          14: '',
+          15: '',
+          16: '',
+          17: '',
+          18: '',
+          19: '',
+          20: '',
+          21: '',
+          22: '',
+          23: '',
+          24: '',
+          25: '',
+          26: '',
+          27: ''
+        }
       }
+      for (score of scores) {
+        if (score.studentId === student.studentId && score.assessmentBatchId === batch.batchNumber) {
+          batchObj.scores[score.questionId] = score.score
+        }
+      }
+      // console.log('batchObj is', batchObj)
+      studentObj.batches.push(batchObj)
     }
-    allScores.push(aggScore);
+    // console.log(studentObj)
+    allScores.push(studentObj)
   }
-
-  console.log(allScores);
 
   // sends batch id or 'none'
   try {
-    res.send(scores);
+    res.send(allScores);
   } catch (err) {
     res.sendStatus(500);
   }
