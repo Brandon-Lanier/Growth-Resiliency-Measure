@@ -23,7 +23,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import CsvExport from "../CsvExport/CsvExport";
-import StudentList from '../StudentList/StudentList';
+import StudentList from "../StudentList/StudentList";
 import Schools from "../Schools/Schools";
 import Assessment from "../Assessment/Assessment";
 import StudentHomepage from "../StudentHomepage/StudentHomepage";
@@ -40,7 +40,7 @@ import Assessment9 from "../Assessment/Assessment9";
 import Review from "../Assessment/Review";
 import Confirmation from "../Assessment/Confirmation";
 import Dashboard from "../Dashboard/Dashboard";
-
+import AdminControl from "../AdminControl/AdminControl";
 
 import Box from "@mui/material/Box";
 
@@ -50,20 +50,24 @@ function App() {
   const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' }),
-    dispatch({ type: 'GET_STUDENTS' });
+    dispatch({ type: "FETCH_USER" }), dispatch({ type: "GET_STUDENTS" });
   }, [dispatch]);
 
   return (
     <Router>
       <div id="appContainer">
-  
-      <NavBar />
+        <NavBar />
 
         {/* <Nav /> */}
         <Switch>
-          
-      <Route path="/students"><StudentList /></Route>
+          <Route path="/students">
+            <StudentList />
+          </Route>
+
+          <ProtectedRoute exact path="/superadmin">
+            <AdminControl />
+          </ProtectedRoute>
+
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
@@ -85,8 +89,7 @@ function App() {
             exact
             path="/dashboard"
           >
-
-              {user.permission < 1 ? <StudentHomepage /> : <Dashboard />}
+            {user.permission < 1 ? <StudentHomepage /> : <Dashboard />}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -193,9 +196,7 @@ function App() {
             <Confirmation />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            {/* <h1>404</h1> */}
-          </Route>
+          <Route>{/* <h1>404</h1> */}</Route>
         </Switch>
       </div>
       {/* <Footer /> */}

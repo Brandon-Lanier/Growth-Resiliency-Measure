@@ -39,6 +39,12 @@ router.post('/', async (req, res) => {
 // returns the batch number for student if they need to take the test
 // otherwise returns none
 router.get('/studentbatch', async (req, res) => {
+
+    if (user.permission == 1){
+
+        res.sendStatus(500);
+    }
+    
     let activeBatch = 'none';
     
     // This sql text grabs the school id of the student logged in
@@ -49,8 +55,8 @@ router.get('/studentbatch', async (req, res) => {
     
     // const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
+    console.log('schoolId is', schoolIdObject);
     const schoolId = schoolIdObject.rows[0].schoolId;
-    console.log('schoolId is', schoolId);
     
     // This grabs all batches for the school
     const batchesQuery = `SELECT * FROM "assessmentBatches" WHERE "schoolId" = $1;`;
