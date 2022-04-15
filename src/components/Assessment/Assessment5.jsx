@@ -43,11 +43,7 @@ function Assessment5() {
     }
   };
 
-  const progressValue = () => {
-    let percent = 27 / assessment.length;
-    return percent;
-  }
-
+  
 const handleBack = () => {
     history.goBack();
 }

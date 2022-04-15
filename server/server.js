@@ -19,6 +19,7 @@ const questionRouter = require('./routes/questions.router');
 const cohortRouter = require('./routes/cohort.router');
 const scoresRouter = require('./routes/scores.router');
 const studentsRouter = require('./routes/students.router');
+const assessmentRouter = require('./routes/assessment.router');
 
 // Router that adds new schools and admin users for schools
 const schoolsRouter = require('./routes/schools.router');
@@ -43,7 +44,7 @@ app.use('/api/adminCsv', adminCsvRouter);
 app.use('/students', studentsRouter);
 app.use('/api/student', studentRouter);
 app.use('/questions', questionRouter);
-
+app.use('/assessment', assessmentRouter)
 app.use('/api/admin/cohort', cohortRouter)
 app.use('/scores', scoresRouter);
 
