@@ -54,6 +54,34 @@ router.get('/', async (req, res) => {
 
 
   // creating objects for each student for each batch which contain answers for each question
+  let one = 1;
+  let two = 2;
+  let three = 3;
+  let four = 4;
+  let five = 5;
+  let six = 6;
+  let seven = 7;
+  let eight = 8;
+  let nine = 9;
+  let ten = 10;
+  let eleven = 11;
+  let twelve = 12;
+  let thirteen = 13;
+  let fourteen = 14;
+  let fifteen = 15;
+  let sixteen = 16;
+  let seventeen = 17;
+  let eighteen = 18;
+  let nineteen = 19;
+  let twenty = 20;
+  let twentyOne = 21;
+  let twentyTwo = 22;
+  let twentyThree = 23;
+  let twentyFour = 24;
+  let twentyFive = 25;
+  let twentySix = 26;
+  let twentySeven = 27;
+
   let allScores = []
   for (let student of students) {
     let studentObj = {
@@ -98,7 +126,22 @@ router.get('/', async (req, res) => {
           batchObj.scores[score.questionId] = score.score
         }
       }
-      studentObj.batches.push(batchObj)
+      let batchAverage = {
+        batchId: batchObj.batchId,
+        scores: {
+          balanced: (batchObj.scores[one] + batchObj.scores[two] + batchObj.scores[three]) / 3,
+          selfConfidence: (batchObj.scores[four] + batchObj.scores[five]) / 2,
+          understandingAdaptability: (batchObj.scores[six] + batchObj.scores[seven] + batchObj.scores[eight]) / 3,
+          connection: (batchObj.scores[nine] + batchObj.scores[ten] + batchObj.scores[eleven] + batchObj.scores[twelve]+ batchObj.scores[thirteen]) / 5,
+          contribution: (batchObj.scores[fourteen] + batchObj.scores[fifteen]) / 2,
+          empathy: (batchObj.scores[sixteen] + batchObj.scores[seventeen] + batchObj.scores[eighteen] + batchObj.scores[nineteen]) / 4,
+          selfExpression: (batchObj.scores[twenty] + batchObj.scores[twentyOne] + batchObj.scores[twentyTwo]) / 3,
+          selfControl: (batchObj.scores[twentyThree] + batchObj.scores[twentyFour] + batchObj.scores[twentyFive] + batchObj.scores[twentySix]) / 4,
+          qualitative: batchObj.scores[twentySeven]
+        }
+      }
+      console.log(batchAverage);
+      studentObj.batches.push(batchAverage);
     }
     allScores.push(studentObj)
   }
