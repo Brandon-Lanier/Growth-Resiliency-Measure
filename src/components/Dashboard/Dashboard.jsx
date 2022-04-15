@@ -47,13 +47,13 @@ function Dashboard() {
         </Grid>
         <Grid item xs={6}>
           <Card elevation={4}>
-            <CardActionArea onClick={() => history.push("/students")}>
+            <CardActionArea onClick={() => history.push("/assessments")}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   Active Assessments
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  {batch ? batch.length : 0}
+                  Replace This With Complete Percentage
                 </Typography>
                 <Box sx={{ width: "100%" }}>
                 <LinearProgress variant="determinate" value={75} />

@@ -72,6 +72,7 @@ function StudentList() {
         rowsPerPageOptions={[20]}
         checkboxSelection
         disableSelectionOnClick
+        fullWidth
       />
     </div>
   );
