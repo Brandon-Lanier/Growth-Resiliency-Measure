@@ -4,8 +4,8 @@ const router = express.Router();
 
 
 router.post('/', (req, res) => {
-  let queryText = `INSERT INTO "userId", "firstName", "lastName", "email", 
-  "schoolId", "permissionLevel", "admin_pk";`;
+  let queryText = `INSERT INTO ("userId", "firstName", "lastName", "email", 
+  "schoolId", "permissionLevel", "admin_pk") VALUES $1, $2, $3, $4, $5, $6, $7;`;
 
   let queryInserts = [
     req.body.userId,
