@@ -2,28 +2,30 @@ import { combineReducers } from "redux";
 
 // Reducer will hold the admin active batch if available.
 const activeAdminBatch = (state = [], action) => {
-    switch(action.type) {
-        case 'SET_ADMIN_ACTIVE_BATCH': 
-            return action.payload;
-        case 'EMPTY_ADMIN_ACTIVE_BATCH':
-            return ''
-        default:
-            return state;
-    }  
-}
+  switch (action.type) {
+    case "SET_ADMIN_ACTIVE_BATCH":
+      return action.payload;
+    case "EMPTY_ADMIN_ACTIVE_BATCH":
+      return "";
+    default:
+      return state;
+  }
+};
 
 const adminBatches = (state = [], action) => {
-    switch(action.type) {
-        case 'SET_ADMIN_BATCH':
-            return action.payload;
-        case 'EMPTY_ADMIN_BATCH':
-            return []
-    }
-}
+  switch (action.type) {
+    case "SET_ADMIN_BATCH":
+      return action.payload;
+    case "EMPTY_ADMIN_BATCH":
+      return [];
+    default:
+      return state;
+  }
+};
 
 const adminBatch = combineReducers({
-    activeAdminBatch,
-    adminBatches
-})
+  activeAdminBatch,
+  adminBatches,
+});
 
 export default adminBatch;

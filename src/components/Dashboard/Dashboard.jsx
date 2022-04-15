@@ -20,7 +20,7 @@ function Dashboard() {
 
   
   const students = useSelector((store) => store.studentReducer);
-  const batch = useSelector((store) => store.adminBatch);
+  const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
 
 
   const history = useHistory();
@@ -55,7 +55,7 @@ function Dashboard() {
         </Grid>
         <Grid item xs={6}>
           <Card elevation={4}>
-            <CardActionArea onClick={() => history.push("/assessments")}>
+            <CardActionArea onClick={() => history.push("/assessmentoverview")}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   Active Assessments
