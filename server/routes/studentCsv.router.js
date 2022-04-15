@@ -45,15 +45,14 @@ router.get('/', async (req, res) => {
 
   // pulling students scores from db
   const scoreQryTxt = `
-  SELECT "scores"."userId", "scores"."score", "scores"."assessmentBatchId", "questions"."measureName", "students"."firstName", "students"."lastName", "students"."graduationYear", "students"."studentId", "questions"."id" AS "questionId"
+  SELECT "scores"."userId", "scores"."score", "scores"."scoreQualitative", "scores"."assessmentBatchId", "questions"."measureName", "students"."firstName", "students"."lastName", "students"."graduationYear", "students"."studentId", "questions"."id" AS "questionId"
   FROM "scores"
   JOIN "students" ON "students"."userId" = "scores"."userId"
   JOIN "questions" ON "questions"."id" = "scores"."questionId";`;
   const scoresData = await pool.query(scoreQryTxt);
   const scores = scoresData.rows
 
-
-  // creating objects for each student for each batch which contain answers for each question
+  // creating strings for numbers since object properties need to be referenced through strings
   let one = 1;
   let two = 2;
   let three = 3;
@@ -81,7 +80,8 @@ router.get('/', async (req, res) => {
   let twentyFive = 25;
   let twentySix = 26;
   let twentySeven = 27;
-
+  
+  // creating objects for each student for each batch which contain answers for each question
   let allScores = []
   for (let student of students) {
     let studentObj = {
@@ -123,7 +123,12 @@ router.get('/', async (req, res) => {
       }
       for (score of scores) {
         if (score.studentId === student.studentId && score.assessmentBatchId === batch.batchNumber) {
-          batchObj.scores[score.questionId] = score.score
+          if (score.questionId != 27) {
+            batchObj.scores[score.questionId] = score.score
+          } else {
+            // console.log(qualitative)
+            batchObj.scores[twentySeven] = score.scoreQualitative
+          }
         }
       }
       let batchAverage = {
@@ -140,7 +145,7 @@ router.get('/', async (req, res) => {
           qualitative: batchObj.scores[twentySeven]
         }
       }
-      console.log(batchAverage);
+      // console.log(batchAverage);
       studentObj.batches.push(batchAverage);
     }
     allScores.push(studentObj)
