@@ -16,7 +16,7 @@ function* getStudents() {
   }
   function* csvStudents(action) {
     try {
-      console.log(action.payload)
+      console.log('inside csvStudents SAGA, payload is:',action.payload)
       yield axios.post('/api/studentCsv', action.payload);
       yield put({ type: 'GET_STUDENTS' });
     } catch (error) {
