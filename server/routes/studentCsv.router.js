@@ -52,35 +52,6 @@ router.get('/', async (req, res) => {
   const scoresData = await pool.query(scoreQryTxt);
   const scores = scoresData.rows
 
-  // creating strings for numbers since object properties need to be referenced through strings
-  let one = 1;
-  let two = 2;
-  let three = 3;
-  let four = 4;
-  let five = 5;
-  let six = 6;
-  let seven = 7;
-  let eight = 8;
-  let nine = 9;
-  let ten = 10;
-  let eleven = 11;
-  let twelve = 12;
-  let thirteen = 13;
-  let fourteen = 14;
-  let fifteen = 15;
-  let sixteen = 16;
-  let seventeen = 17;
-  let eighteen = 18;
-  let nineteen = 19;
-  let twenty = 20;
-  let twentyOne = 21;
-  let twentyTwo = 22;
-  let twentyThree = 23;
-  let twentyFour = 24;
-  let twentyFive = 25;
-  let twentySix = 26;
-  let twentySeven = 27;
-  
   // creating objects for each student for each batch which contain answers for each question
   let allScores = []
   for (let student of students) {
@@ -126,26 +97,24 @@ router.get('/', async (req, res) => {
           if (score.questionId != 27) {
             batchObj.scores[score.questionId] = score.score
           } else {
-            // console.log(qualitative)
-            batchObj.scores[twentySeven] = score.scoreQualitative
+            batchObj.scores[27] = score.scoreQualitative
           }
         }
       }
       let batchAverage = {
         batchId: batchObj.batchId,
         scores: {
-          balanced: (batchObj.scores[one] + batchObj.scores[two] + batchObj.scores[three]) / 3,
-          selfConfidence: (batchObj.scores[four] + batchObj.scores[five]) / 2,
-          understandingAdaptability: (batchObj.scores[six] + batchObj.scores[seven] + batchObj.scores[eight]) / 3,
-          connection: (batchObj.scores[nine] + batchObj.scores[ten] + batchObj.scores[eleven] + batchObj.scores[twelve]+ batchObj.scores[thirteen]) / 5,
-          contribution: (batchObj.scores[fourteen] + batchObj.scores[fifteen]) / 2,
-          empathy: (batchObj.scores[sixteen] + batchObj.scores[seventeen] + batchObj.scores[eighteen] + batchObj.scores[nineteen]) / 4,
-          selfExpression: (batchObj.scores[twenty] + batchObj.scores[twentyOne] + batchObj.scores[twentyTwo]) / 3,
-          selfControl: (batchObj.scores[twentyThree] + batchObj.scores[twentyFour] + batchObj.scores[twentyFive] + batchObj.scores[twentySix]) / 4,
-          qualitative: batchObj.scores[twentySeven]
+          balanced: (batchObj.scores[1] + batchObj.scores[2] + batchObj.scores[3]) / 3,
+          selfConfidence: (batchObj.scores[4] + batchObj.scores[5]) / 2,
+          understandingAdaptability: (batchObj.scores[6] + batchObj.scores[7] + batchObj.scores[8]) / 3,
+          connection: (batchObj.scores[9] + batchObj.scores[10] + batchObj.scores[11] + batchObj.scores[12]+ batchObj.scores[13]) / 5,
+          contribution: (batchObj.scores[14] + batchObj.scores[15]) / 2,
+          empathy: (batchObj.scores[16] + batchObj.scores[17] + batchObj.scores[18] + batchObj.scores[19]) / 4,
+          selfExpression: (batchObj.scores[20] + batchObj.scores[21] + batchObj.scores[22]) / 3,
+          selfControl: (batchObj.scores[23] + batchObj.scores[24] + batchObj.scores[25] + batchObj.scores[26]) / 4,
+          qualitative: batchObj.scores[27]
         }
       }
-      // console.log(batchAverage);
       studentObj.batches.push(batchAverage);
     }
     allScores.push(studentObj)
