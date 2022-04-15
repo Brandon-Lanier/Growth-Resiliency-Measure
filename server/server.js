@@ -20,6 +20,9 @@ const cohortRouter = require('./routes/cohort.router');
 const scoresRouter = require('./routes/scores.router');
 const studentsRouter = require('./routes/students.router');
 
+// Router that adds new schools and admin users for schools
+const schoolsRouter = require('./routes/schools.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -44,6 +47,7 @@ app.use('/questions', questionRouter);
 app.use('/api/admin/cohort', cohortRouter)
 app.use('/scores', scoresRouter);
 
+app.use('/api/schools', schoolsRouter);
 
 // Serve static files
 app.use(express.static('build'));
