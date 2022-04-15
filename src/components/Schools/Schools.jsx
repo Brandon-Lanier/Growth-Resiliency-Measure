@@ -4,6 +4,11 @@ import {useSelector} from 'react-redux';
 import AddCohort from '../AddCohort/AddCohort';
 
 import Box from "@mui/material/Box";
+import SchoolIcon from "@mui/icons-material/School";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+
 
 function Schools(props) {
 
@@ -20,6 +25,14 @@ function Schools(props) {
       }}>
 {/* <h1>Add Cohort</h1> */}
       <AddCohort />
+      </Box>
+      
+      <Box sx={{ width: 500, boxShadow: 1,
+            p: 5, display: 'flex', justifyContent: 'center'}}>
+        <TextField fullWidth label="School Name" id="school-name" size="normal" sx={{p: 1}}/>
+        <Button variant="contained" >
+          Add New School
+        </Button>
       </Box>
     </div>
   );
