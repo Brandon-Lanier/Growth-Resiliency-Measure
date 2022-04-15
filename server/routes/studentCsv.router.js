@@ -10,25 +10,27 @@ const { batch } = require("react-redux");
 
 
 //-------------------------------Get route for student CSV export-----------------------------------
-// router.get('/', (req, res) => {
-//     console.log('in router.get')
-//     const qryTxt = `
-//       SELECT * From "scores";`;
-//     pool.query(qryTxt)
-//       .then((result) => {
-//         res.send(result.rows); 
-//         console.log('result', result.rows);
+// sends scores table
+router.get('/', (req, res) => {
+    console.log('in router.get')
+    const qryTxt = `
+      SELECT * From "scores";`;
+    pool.query(qryTxt)
+      .then((result) => {
+        res.send(result.rows); 
+        console.log('result', result.rows);
 
-//       })
-//       .catch((err) => {
-//         res.sendStatus(500);
-//       });
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      });
 
-// }); // end Get student Csv export---
+}); // end Get student Csv export---
 
 
-//-------------------------------Get route for student CSV export-----------------------------------
-router.get('/', async (req, res) => {
+//-------------------------------Get route for student CSV export NESTED OBJECTS-----------------------------------
+// sends average scores by measure for each student and assessment
+router.get('/nestedObjects', async (req, res) => {
 
   // pulling students ids from db
   const studentQryTxt = `
@@ -128,7 +130,7 @@ router.get('/', async (req, res) => {
     res.sendStatus(500);
   }
 
-}); // end Get student Csv export---
+}); // end Get student Csv export NESTED OBJECTS---
 
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post("/", async (req, res) => {
