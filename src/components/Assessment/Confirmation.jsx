@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Slide } from "@mui/material";
 
 function Confirmation() {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ function Confirmation() {
   }, []);
 
   return (
+    <Slide direction="left" in="open" mountOnEnter unmountOnExit>
     <div className="result-container">
       {scores?.map((def, index) => {
           return (
@@ -20,6 +22,7 @@ function Confirmation() {
           )
       })}
     </div>
+    </Slide>
   );
 }
 
