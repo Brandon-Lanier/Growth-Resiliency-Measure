@@ -53,61 +53,13 @@ router.get('/', async (req, res) => {
   const scores = scoresData.rows
 
 
-
-
-  // // creating objects for each students which contain answers for each student score
-  // for (let student of students) {
-  //   let aggScore = {
-  //     id: student.studentId,
-  //     1: '',
-  //     2: '',
-  //     3: '',
-  //     4: '',
-  //     5: '',
-  //     6: '',
-  //     7: '',
-  //     8: '',
-  //     9: '',
-  //     10: '',
-  //     11: '',
-  //     12: '',
-  //     13: '',
-  //     14: '',
-  //     15: '',
-  //     16: '',
-  //     17: '',
-  //     18: '',
-  //     19: '',
-  //     20: '',
-  //     21: '',
-  //     22: '',
-  //     23: '',
-  //     24: '',
-  //     25: '',
-  //     26: '',
-  //     27: '',
-  //   }
-  //   for (score of scores) {
-  //     if (score.studentId === student.studentId) {
-  //       aggScore[score.questionId] = score.score
-  //     }
-  //   }
-  //   allScores.push(aggScore);
-  // }
-  // console.log(allScores);
-
-
-  // write down expected result
-  // clear up student router duplicate
-
+  // creating objects for each student for each batch which contain answers for each question
   let allScores = []
-
   for (let student of students) {
     let studentObj = {
       studentId: student.studentId,
       batches: []
     }
-    // console.log('studentObj is', studentObj)
     for (let batch of batches) {
       let batchObj = {
         batchId: batch.batchNumber,
@@ -146,27 +98,18 @@ router.get('/', async (req, res) => {
           batchObj.scores[score.questionId] = score.score
         }
       }
-      // console.log('batchObj is', batchObj)
       studentObj.batches.push(batchObj)
     }
-    // console.log(studentObj)
     allScores.push(studentObj)
   }
 
-  // sends batch id or 'none'
+
+  // sends aggregate scores for each measure, for each student, for each batch
   try {
     res.send(allScores);
   } catch (err) {
     res.sendStatus(500);
   }
-
-  // .then((result) => {
-  // console.log('result', result.rows);
-
-  // })
-  // .catch((err) => {
-  // res.sendStatus(500);
-  // });
 
 }); // end Get student Csv export---
 
