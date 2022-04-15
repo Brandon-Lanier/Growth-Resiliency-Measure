@@ -17,7 +17,7 @@ function AdminAssess() {
     return (
         <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', mt: 10}}>
             <Typography variant="b1">
-                {batch[0].startDate}
+                {batch[0]?.startDate}
             </Typography>
             
         </Box>
