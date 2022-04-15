@@ -8,7 +8,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import { Slide } from "@mui/material";
 import ProgressBar from "./ProgressBar";
 import "./Assessment.css";
@@ -32,11 +31,6 @@ function Assessment3() {
 
   const handleChange8 = (e) => {
     setValue8(e.target.value);
-  };
-
-  const progressValue = () => {
-    let percent = 27 / assessment.length;
-    return percent;
   };
 
   const handleNext = () => {
