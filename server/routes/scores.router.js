@@ -6,16 +6,15 @@ const router = express.Router();
 router.get("/", (req, res) => {
   if (req.isAuthenticated()) {
     const qryTxt = `
-      SELECT "questions"."measureName" AS measure, avg("scores"."score") AS average, "scores"."assessmentBatchId" FROM "scores"
-      JOIN "questions" ON "questions"."id" = "scores"."questionId"
-      WHERE "scores"."userId" = $1
-      GROUP BY "questions"."measureName", "scores"."assessmentBatchId";`;
-    pool
-      .query(qryTxt, [req.user.id])
+    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", "scores"."assessmentBatchId" FROM "scores"
+    JOIN "questions" ON "questions"."id" = "scores"."questionId"
+    WHERE "scores"."userId" = $1
+    GROUP BY "questions"."measureName", "scores"."assessmentBatchId"
+    ORDER BY "measure"`;
+    pool.query(qryTxt, [req.user.id])
       .then((result) => {
-        res.send(result.rows); 
-        console.log('result', result.rows);
-        
+        res.send(result.rows);
+        console.log("result", result.rows);
       })
       .catch((err) => {
         res.sendStatus(500);

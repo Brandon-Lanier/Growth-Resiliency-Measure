@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, Slide, Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import ProgressBar from "./ProgressBar";
 import "./Assessment.css";
 
 function Assessment2() {
@@ -30,7 +31,10 @@ function Assessment2() {
     setValue5(e.target.value);
   };
 
-
+  const progressValue = () => {
+    let percent = 27 / assessment.length
+    return percent;
+  }
 
   const handleNext = () => {
     if (value4 && value5) {
@@ -46,13 +50,18 @@ const handleBack = () => {
 }
 
   return (
+    <Slide direction="left" in="open" mountOnEnter unmountOnExit>
     <Container
       sx={{
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        mt: 10
       }}
     >
+      <div id="progress-bar">
+      <ProgressBar progress={11.11}/>
+      </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
           {questions[3]?.name}
@@ -160,6 +169,7 @@ const handleBack = () => {
         <Button variant="contained" sx={{m: 2}} className="assess-buttons" onClick={handleNext}>Next</Button>
         </div>
     </Container>
+    </Slide>
   );
 }
 
