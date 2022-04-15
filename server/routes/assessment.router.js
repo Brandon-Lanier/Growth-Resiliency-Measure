@@ -4,7 +4,18 @@ const router = express.Router();
 
 let currentDate = new Date();
 
-//Pull Active assessment for Admin
+// Pull all assessments for admin
+router.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
+        const qryTxt = `SELECT * FROM "assessmentBatches";`;
+        pool.query(qryTxt).then(result => {res.send(result.rows)}).catch(error => {res.sendStatus(500)})
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+
+//Pull all completed assessments for an active admin batch
 router.get("/adminbatch", async (req, res) => {
   if (req.isAuthenticated()) {
     const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate";`;
