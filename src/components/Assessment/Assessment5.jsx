@@ -9,6 +9,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import ProgressBar from "./ProgressBar";
+import { Slide } from "@mui/material";
 import "./Assessment.css";
 
 function Assessment5() {
@@ -32,7 +34,6 @@ function Assessment5() {
   };
 
 
-
   const handleNext = () => {
     if (value14 && value15) {
       dispatch({ type: "SET_CONTRIBUTION", payload: {14: Number(value14), 15: Number(value15)}});
@@ -42,18 +43,28 @@ function Assessment5() {
     }
   };
 
+  const progressValue = () => {
+    let percent = 27 / assessment.length;
+    return percent;
+  }
+
 const handleBack = () => {
     history.goBack();
 }
 
   return (
+    <Slide direction="left" in="open" mountOnEnter unmountOnExit>
     <Container
       sx={{
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        mt: 10
       }}
     >
+      <div id="progress-bar">
+      <ProgressBar progress={44.44}/>
+      </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
           {questions[13]?.name}
@@ -161,6 +172,7 @@ const handleBack = () => {
         <Button variant="contained" sx={{m: 2}} className="assess-buttons" onClick={handleNext}>Next</Button>
         </div>
     </Container>
+    </Slide>
   );
 }
 

@@ -1,0 +1,12 @@
+.dash-graph-container {
+    width: 400px;
+}
+
+.dash-filter-data-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    width: 90%;
+    gap: 5px;
+}

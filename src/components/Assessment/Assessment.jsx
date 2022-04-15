@@ -3,18 +3,22 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import ProgressBar from "./ProgressBar";
+import Slide from '@mui/material/Slide';
 import "./Assessment.css";
 
+
 function Assessment() {
+
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
+  const assess = useSelector((store) => store.assessment)
 
   useEffect(() => {
     dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
@@ -24,6 +28,7 @@ function Assessment() {
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
+
 
   const handleChange1 = (e) => {
     setValue1(e.target.value);
@@ -50,13 +55,18 @@ function Assessment() {
   };
 
   return (
+    <Slide direction="left" in="open" mountOnEnter unmountOnExit>
     <Container
       sx={{
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        mt: 10
       }}
     >
+      <div id="progress-bar">
+      <ProgressBar progress={0}/>
+      </div>
       <div className="question-container">
         <Typography variant="b1" className="question-text">
           {questions[0]?.name}
@@ -222,6 +232,7 @@ function Assessment() {
         </Button>
       </div>
     </Container>
+    </Slide>
   );
 }
 

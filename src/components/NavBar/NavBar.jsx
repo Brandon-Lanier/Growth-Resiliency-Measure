@@ -113,7 +113,9 @@ function ResponsiveDrawer(props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: '#fff'
         }}
+        elevation={1}
       >
         <Toolbar>
           <IconButton
@@ -169,11 +171,14 @@ function ResponsiveDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
+            backgroundColor: "rgba(255, 255, 255, 0.08)",
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "rgba(255, 255, 255, 0.08)"
             },
+            
           }}
           open
         >
