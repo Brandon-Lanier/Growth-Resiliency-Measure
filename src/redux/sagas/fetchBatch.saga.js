@@ -16,8 +16,21 @@ function* fetchBatch() {
     }
 }
 
+// This grabs the active batch for admins and pulls back all the students that have completed the assessment
+function* fetchAdminBatch() {
+    try {
+        const batch = yield axios.get(`/assessment/adminbatch`)
+        if (batch !== []) {
+            yield put({type: 'SET_ADMIN_BATCH', payload: batch.data})
+        }
+    } catch (error) {
+        console.log('Failed to grab the active admin batch ins fetchBatch saga', error);
+    }
+}
+
 function* fetchBatchSaga() {
     yield takeLatest('FETCH_BATCH', fetchBatch);
+    yield takeLatest('FETCH_ADMIN_ACTIVE_BATCH', fetchAdminBatch)
 };
 
 export default fetchBatchSaga;
