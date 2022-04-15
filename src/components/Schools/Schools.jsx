@@ -18,7 +18,7 @@ function Schools(props) {
           
           justifyContent: 'center'
       }}>
-{/* <h1>Add Cohort</h1> */}
+<h1>Add Cohort</h1>
       <AddCohort />
       </Box>
     </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import CsvUpload from "../CsvUpload/CsvUpload";
+import Box from "@mui/material/Box";
 
 function StudentList() {
   const store = useSelector((store) => store);
@@ -62,7 +63,18 @@ function StudentList() {
   ];
 
   return (
-    <div className="student-list-container">
+    <Box
+    
+    sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      alignContent: 'center',
+      p: 10,
+      m: 10,
+    }}
+    >
+
       <CsvUpload />
 
       <DataGrid
@@ -73,8 +85,9 @@ function StudentList() {
         checkboxSelection
         disableSelectionOnClick
         fullWidth
-      />
-    </div>
+        />
+        </Box>
+    
   );
 }
 

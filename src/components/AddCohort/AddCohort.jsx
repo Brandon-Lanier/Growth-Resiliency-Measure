@@ -32,6 +32,7 @@ function AddCohort(props) {
   const [valueYear, setValueYear] = useState(new Date());
 
   const handleSubmit = () => {
+      
     const newBatch = {
       startDate: value1.toISOString().split("T")[0],
       endDate: value2.toISOString().split("T")[0],

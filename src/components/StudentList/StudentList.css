@@ -1,6 +1,7 @@
 .student-list-container {
     display: flex;
     flex-direction: column;
+    align-content: center;
     margin-top: 20px;
     width: 100%;
 }
