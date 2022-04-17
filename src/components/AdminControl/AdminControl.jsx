@@ -4,7 +4,7 @@
 //
 //
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -21,10 +21,33 @@ import Select from "@mui/material/Select";
 
 import axios from "axios";
 
-function AdminControl(props) {
-  //   const store = useSelector((store) => store);
-  const [heading, setHeading] = useState("Add Assessment Cohort");
+import AddAdminForm from "./AddAdminForm"
 
+function AdminControl(props) {
+
+  const school = useSelector((store) => store);
+//   const admins = useSelector((store) => store.admins)
+  const [heading, setHeading] = useState("Add Assessment Cohort");
+  const [admins, setAdmins] = useState([]); 
+
+
+  
+  useEffect(() => {
+    fetchAdministrators();
+  }, []);
+
+  const fetchAdministrators = () => {
+
+    axios.get('/api/admincsv')
+      .then((response) => {
+        console.log('GET response.data is', response.data)
+        // dispatch admins to admin reducer 
+
+      }).catch((err) => {
+        console.log('GET error is', err)
+      })
+  }
+  
   //   const [term, setTerm] = useState(1);
   //   const [value1, setValue1] = useState(new Date());
   //   const [value2, setValue2] = useState(new Date());
@@ -53,6 +76,7 @@ function AdminControl(props) {
       <Box
         sx={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignContent: "center",
           color: "black",
@@ -60,12 +84,8 @@ function AdminControl(props) {
         }}
       >
         <h1>{heading}</h1>
-        <p>
-          &Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-          ducimus eius suscipit dicta hic labore. Quod, exercitationem ducimus
-          cum expedita odio, neque perferendis deleniti minima minus accusantium
-          aperiam, autem suscipit.
-        </p>
+
+          {/* <AddAdminForm />  */}
       </Box>
     </div>
   );

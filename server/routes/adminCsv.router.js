@@ -7,9 +7,9 @@ const {
 } = require("../modules/authentication-middleware");
 const encryptLib = require("../modules/encryption");
 
+// Theoretically adds admins via CSV uploads. HASN'T NOT BEEN THOROUGHLY TESTED YET
 
 router.post("/", async (req, res) => {
-
   const connection = await pool.connect();
 
   try {
@@ -56,5 +56,27 @@ router.post("/", async (req, res) => {
     res.sendStatus(200);
   }
 }); // End Post route
+
+
+// Send back a list of all admins, all schools, for the superadmin
+router.get("/", (req, res) => {
+  let queryText = `SELECT * FROM "admin"; `;
+
+  pool
+    .query(queryText)
+    .then((result) => {
+      console.log("result.rows is", result.rows);
+      const admins = result.rows;
+      pool.query(`SELECT * FROM "schools";`).then((result) => {
+        console.log("schools are", result.rows);
+        const schools = result.rows;
+        res.send({ admins: admins, schools: schools });
+      });
+    })
+    .catch((err) => {
+      console.log("Error is", err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
