@@ -77,6 +77,7 @@ function StudentDetails(){
                 </Typography>
               </CardContent>
           </Card> */}
+          <div className="detailsContainer">
           <h3>{userName}</h3>
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
@@ -125,6 +126,7 @@ function StudentDetails(){
             },
           }}
         />
+        </div>
         </div>
     </>
     )
