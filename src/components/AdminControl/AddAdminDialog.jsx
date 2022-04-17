@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AddAdminForm from './AddAdminForm';
 
 
-export default function FormDialog({schools}) {
+export default function FormDialog({schools, get}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -19,6 +19,7 @@ export default function FormDialog({schools}) {
 
   const handleClose = () => {
     setOpen(false);
+    get();
   };
 
   return (
