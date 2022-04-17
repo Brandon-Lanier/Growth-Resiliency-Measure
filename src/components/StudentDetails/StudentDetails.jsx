@@ -7,7 +7,7 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-
+import './StudentDetails.css'
 import { Radar } from "react-chartjs-2";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,7 +78,6 @@ function StudentDetails(){
               </CardContent>
           </Card> */}
           <h3>{userName}</h3>
-          <div className="dash-filter-data-container">
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
@@ -106,8 +105,8 @@ function StudentDetails(){
               <MenuItem value="spring">Spring</MenuItem>
             </Select>
           </FormControl>
-</div> 
 <br></br>
+<div className="dash-filter-graph-container">
 <Radar
           data={data}
           options={{
@@ -126,6 +125,7 @@ function StudentDetails(){
             },
           }}
         />
+        </div>
     </>
     )
 }

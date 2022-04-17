@@ -66,4 +66,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/adminStudent", (req, res) => {
+  console.log('req.body is', req.body)
+  if (req.isAuthenticated()) {
+    
+    const qryTxt = `
+    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", "scores"."assessmentBatchId" FROM "scores"
+    JOIN "questions" ON "questions"."id" = "scores"."questionId"
+    WHERE "scores"."userId" = 1
+    GROUP BY "questions"."measureName", "scores"."assessmentBatchId"
+    ORDER BY "measure"`;
+    pool.query(qryTxt)
+      .then((result) => {
+        res.send(result.rows);
+        console.log("result", result.rows);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
 module.exports = router;
