@@ -60,7 +60,8 @@ router.post("/", async (req, res) => {
 
 // Send back a list of all admins, all schools, for the superadmin
 router.get("/", (req, res) => {
-  let queryText = `SELECT * FROM "admin"; `;
+  let queryText = `SELECT "admin"."id", "admin".email, "admin"."firstName", "admin"."lastName", "schools"."name", "schools"."id" AS "school_id" FROM "admin"
+  JOIN "schools" on "admin"."schoolId" = schools.id; `;
 
   pool
     .query(queryText)
@@ -72,6 +73,23 @@ router.get("/", (req, res) => {
         const schools = result.rows;
         res.send({ admins: admins, schools: schools });
       });
+    })
+    .catch((err) => {
+      console.log("Error is", err);
+      res.sendStatus(500);
+    });
+});
+
+
+
+router.delete("/:id", (req, res) => {
+  const queryText = `DELETE FROM "admin" WHERE id = $1;`;
+  
+
+  pool
+    .query(queryText,[req.params.id])
+    .then(() => {
+      res.sendStatus(200);
     })
     .catch((err) => {
       console.log("Error is", err);

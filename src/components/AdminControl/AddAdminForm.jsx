@@ -1,62 +1,119 @@
-import { useState } from 'react'
-import { AdvancedForm } from '../../forms/AdvancedForm';
 
-export default function AddAdminForm() {
-  const [formValues, setFormValues] = useState([])
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
+import axios from "axios";
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true)
-    setFormValues(values)
-    await new Promise((r) => setTimeout(r, 1000))
-    setSubmitting(false)
+export default function Form({ schools, handleClose }) {
+
+  const history = useHistory();
+
+  const schoolOptions = [];
+
+  for (let school of schools) {
+    schoolOptions.push({ label: school.name, value: school.id });
+    console.log("schooolOptions are", schoolOptions);
   }
 
-  const formSchema = [
-    { name: 'firstName', label: 'First Name', componentType: 'text', required: true },
-    { name: 'lastName', label: 'Last Name', componentType: 'text', required: true },
-    
-    { name: 'playable', label: 'Playable', componentType: 'checkbox' },
-    
-    {
-      name: 'class',
-      label: 'Class',
-      componentType: 'select',
-      options: [
-        { label: 'Ranger', value: 'ranger' },
-        { label: 'Wizard', value: 'wizard' },
-        { label: 'Healer', value: 'healer' },
-      ],
-    },
-    {
-      name: 'spell',
-      label: 'Spell',
-      componentType: 'select',
-      options: [
-        { label: 'Fire', value: 'fire' },
-        { label: 'Ice', value: 'ice' },
-      ],
-      condition: { key: 'class', value: 'wizard', operator: '=' },
-    },
-    {
-      name: 'description',
-      label: 'Description',
-      componentType: 'textarea',
-    },
-  ]
+  const defaultValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    school: 1,
+  };
+
+  const [formValues, setFormValues] = useState(defaultValues);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log("name is ", name);
+    console.log("value is", value);
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formValues);
+    axios
+      .post("/api/admincsv", formValues)
+      .then((response) => {
+        console.log("success");
+        handleClose();
+      })
+      .catch((err) => {console.log("error on post", err);
+      handleClose();});
+  };
 
   return (
-    <>
-      <h1>Advanced Form</h1>
+    <form onSubmit={handleSubmit}>
+      <Grid container alignItems="center" justify="center" direction="column">
+        <Grid item>
+          <TextField
+            required
+            id="first-name-input"
+            name="firstName"
+            label="First Name"
+            type="text"
+            value={formValues.firstName}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            required
+            id="last-name-input"
+            name="lastName"
+            label="Last Name"
+            type="text"
+            value={formValues.lastName}
+            onChange={handleInputChange}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            required
+            id="email-input"
+            name="email"
+            label="Email"
+            type="text"
+            value={formValues.email}
+            onChange={handleInputChange}
+          />
+        </Grid>
 
-      <div className="flex">
-        <div className="form section">
-          <AdvancedForm schema={formSchema} onSubmit={handleSubmit} />
-        </div>
-        <div className="results section">
-          <pre>{JSON.stringify(formValues, null, 2)}</pre>
-        </div>
-      </div>
-    </>
-  )
-
+        <Grid item>
+          <FormControl>
+            <Select
+              name="school"
+              value={formValues.school}
+              onChange={handleInputChange}
+            >
+              {schoolOptions.map((school) => (
+                <MenuItem key={school.value} value={school.value}>
+                  {school.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Button variant="contained" color="primary" type="submit">
+          Submit
+        </Button>
+      </Grid>
+    </form>
+  );
 }
+//   export default Form;

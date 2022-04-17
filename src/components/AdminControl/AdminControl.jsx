@@ -21,55 +21,43 @@ import Select from "@mui/material/Select";
 
 import axios from "axios";
 
-import AddAdminForm from "./AddAdminForm"
+import AddAdminDialog from "./AddAdminDialog";
+import AdminTable from "./AdminTable";
 
 function AdminControl(props) {
-
-  const school = useSelector((store) => store);
-//   const admins = useSelector((store) => store.admins)
+  //   const school = useSelector((store) => store);
+  //   const admins = useSelector((store) => store.admins)
   const [heading, setHeading] = useState("Add Assessment Cohort");
-  const [admins, setAdmins] = useState([]); 
+  const [admins, setAdmins] = useState([]);
+  const [schools, setSchools] = useState([]);
 
-
-  
   useEffect(() => {
     fetchAdministrators();
   }, []);
 
   const fetchAdministrators = () => {
-
-    axios.get('/api/admincsv')
+    axios
+      .get("/api/admincsv")
       .then((response) => {
-        console.log('GET response.data is', response.data)
-        // dispatch admins to admin reducer 
-
-      }).catch((err) => {
-        console.log('GET error is', err)
+        console.log("GET response.data is", response.data);
+        setAdmins(response.data.admins);
+        setSchools(response.data.schools);
       })
-  }
-  
-  //   const [term, setTerm] = useState(1);
-  //   const [value1, setValue1] = useState(new Date());
-  //   const [value2, setValue2] = useState(new Date());
-  //   const [valueYear, setValueYear] = useState(new Date());
+      .catch((err) => {
+        console.log("GET error is", err);
+      });
+  };
 
-  //   const handleSubmit = () => {
-
-  //     const newBatch = {
-  //       startDate: value1.toISOString().split("T")[0],
-  //       endDate: value2.toISOString().split("T")[0],
-  //       fiscalYear: valueYear.toISOString().substring(0, 4),
-  //       term: term
-  //     };
-  //     console.log("New batch is", newBatch);
-  //     try {
-  //         axios.post("/api/admin/cohort", newBatch);
-
-  //     } catch (error) {
-  //         console.log('error on batch post',error);
-  //     }
-
-  //   };
+  const removeAdmin = (id) => {
+    axios.delete(`/api/admincsv/${id}`)
+    .then((res) => {
+        console.log('Deleted administrator row');
+        fetchAdministrators();
+    })
+    .catch((err) => {
+        console.log('Error on delete admin');
+    });
+  };
 
   return (
     <div>
@@ -83,9 +71,22 @@ function AdminControl(props) {
           pt: 10,
         }}
       >
-        <h1>{heading}</h1>
+        <h1>Super Admin</h1>
 
-          {/* <AddAdminForm />  */}
+        <AddAdminDialog schools={schools}/>
+        
+        {schools.map((school) => (
+          <>
+            <h1>{school.name}</h1>
+            <AdminTable
+              key={school.id}
+              admins={admins}
+              school={school}
+              removeAdmin={removeAdmin}
+            />
+            
+          </>
+        ))}
       </Box>
     </div>
   );
