@@ -2,7 +2,8 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 
-// GET average score for each measure sorted by assessment batch id
+// GET average score for each measure sorted by assessment batch id.  
+// This is used for students to view their own previous results.
 router.get("/", (req, res) => {
   if (req.isAuthenticated()) {
     const qryTxt = `
@@ -25,7 +26,7 @@ router.get("/", (req, res) => {
 });
 
 let currentDate = new Date();
-// POST scores
+// POST scores for individual student after taking test
 router.post("/", async (req, res) => {
   if (req.isAuthenticated()) {
     const batch = req.body[0]; //Batch id from user
