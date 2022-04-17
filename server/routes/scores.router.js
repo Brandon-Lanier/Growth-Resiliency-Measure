@@ -66,17 +66,17 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/adminStudent", (req, res) => {
-  console.log('req.body is', req.body)
+router.get("/adminStudent/:id", (req, res) => {
+  console.log('req.params.id is', req.params.id)
   if (req.isAuthenticated()) {
     
     const qryTxt = `
     SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", "scores"."assessmentBatchId" FROM "scores"
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
-    WHERE "scores"."userId" = 1
+    WHERE "scores"."userId" = $1
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId"
     ORDER BY "measure"`;
-    pool.query(qryTxt)
+    pool.query(qryTxt, [req.params.id])
       .then((result) => {
         res.send(result.rows);
         console.log("result", result.rows);

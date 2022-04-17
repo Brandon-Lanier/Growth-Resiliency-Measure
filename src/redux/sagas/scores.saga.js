@@ -26,8 +26,9 @@ function* fetchStudentScores() {
 
 function* fetchIndScores(studentId) {
     try {
-        console.log ('in fetchIndScores, payload is',studentId.payload)
-        const indScores = yield axios.get('/scores/adminStudent', studentId.payload)
+        const studId = studentId.payload
+        console.log ('in fetchIndScores, payload is', studId)
+        const indScores = yield axios.get(`/scores/adminStudent/${studId}`);
         yield put({type: 'SET_IND_SCORES', payload: indScores.data})
     } catch(error) {
         console.log('ADMIN Error getting a single student scores in postScoresSaga', error);  
