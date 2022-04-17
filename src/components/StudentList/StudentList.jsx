@@ -11,9 +11,11 @@ import { ContactlessOutlined } from "@mui/icons-material";
 function StudentList() {
   const dispatch = useDispatch();
   const history = useHistory ();
+  //pull student list from student reducer/store
   const students = useSelector((store) => store.studentReducer.studentReducer);
   console.log(students);
   const columns = [
+    //create a button for each line.
     {
       field: "",
       headerName: "Details",
@@ -24,7 +26,7 @@ function StudentList() {
         <Button
         variant="outlined"
           onClick={() => {
-            storeDetails(params.row)
+            storeDetails(params.row)//send what row was clicked to function storeDetails
           }}
         >
           Details
@@ -77,6 +79,7 @@ function StudentList() {
       width: 80,
     },
   ];
+  //dispatch selected student and history.push to details page 
 function storeDetails(details){
   console.log(details)
   dispatch({
@@ -87,7 +90,7 @@ function storeDetails(details){
 })
 history.push('/studentdetails')
 }
-
+//show datagrid of current students and import csv upload button component for display on this page.
   return (
     <>
     <div className="student-list-container">
