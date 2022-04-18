@@ -35,32 +35,47 @@ function AdminDashData() {
   useEffect(() => {
     dispatch({ type: "FETCH_STUDENT_SCORES" });
     dispatch({ type: "FETCH_ALL_SCORES" });
-    dispatch({ type: "FETCH_ALL_SCHOOLS"});
+    dispatch({ type: "FETCH_ALL_SCHOOLS" });
   }, []);
 
   const scores = useSelector((store) => store.scores.adminAllScores);
-  const schools = useSelector(store => store.schools)
+  const schools = useSelector((store) => store.schools);
+  const report = useSelector((store) => store.report);
 
-  let data = {
-    labels: [
-      "Balance",
-      "Confidence",
-      "Adaptability",
-      "Connection",
-      "Contribution",
-      "Empathy",
-      "Expression",
-      "Self Control",
-    ],
-    datasets: [
-      {
-        label: "All Students",
-        data: [2, 4.3, 3, 4, 2, 3, 1, 3],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
-    ],
+  const getData = () => {
+    if (report != []) {
+      let labels = report?.map((item) => item.measureName);
+      console.log('labels', labels);
+      let dataSets = report?.map((values) => values.averageScore);
+      console.log('data', dataSets);
+      let data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "All Students",
+            data: dataSets,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+      return data;
+    } else {
+      let data = {
+        labels: [],
+        datasets: [
+          {
+            label: "All Students",
+            data: [0],
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+      return data;
+    }
   };
 
   const [year, setYear] = useState(0);
@@ -90,7 +105,7 @@ function AdminDashData() {
     });
   };
 
-  console.log("Admin all scores", scores);
+
   return (
     <>
       <div className="dash-filter-data-container">
@@ -103,10 +118,8 @@ function AdminDashData() {
             label="School"
             onChange={(e) => setSchoolId(e.target.value)}
           >
-            {schools.map(school => {
-              return (
-                <MenuItem value={school.id}>{school.name}</MenuItem>
-              )
+            {schools.map((school) => {
+              return <MenuItem value={school.id}>{school.name}</MenuItem>;
             })}
           </Select>
         </FormControl>
@@ -241,7 +254,7 @@ function AdminDashData() {
       </div>
       <div className="dash-graph-container">
         <Radar
-          data={data}
+          data={getData()}
           options={{
             events: ["click"],
             scales: {
