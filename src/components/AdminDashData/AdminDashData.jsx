@@ -17,16 +17,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
+import { Select } from "@mui/material";
 
 function AdminDashData() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({ type: "FETCH_STUDENT_SCORES" });
-  }, []);
-
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -36,7 +29,16 @@ function AdminDashData() {
     Legend
   );
 
-  const data = {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_STUDENT_SCORES" });
+    dispatch({ type: "FETCH_ALL_SCORES" });
+  }, []);
+
+  const scores = useSelector((store) => store.scores.adminAllScores);
+
+  let data = {
     labels: [
       "Balance",
       "Confidence",
@@ -58,115 +60,176 @@ function AdminDashData() {
     ],
   };
 
-  const [year, setYear] = useState('');
-  const [term, setTerm] = useState('');
-  const [grade, setGrade] = useState("");
-  const [ethnicity, setEthnicity] = useState('');
-  const [gender, setGender] = useState('');
-  const [eip, setEip] = useState('');
+  const [year, setYear] = useState(0);
+  const [schoolId, setSchoolId] = useState(1);
+  const [term, setTerm] = useState(0);
+  const [grade, setGrade] = useState("all");
+  const [ethnicity, setEthnicity] = useState("all");
+  const [gender, setGender] = useState("all");
+  const [eip, setEip] = useState("all");
+  const [lunchStatus, setLunchStatus] = useState("all");
+  const [batch, setBatch] = useState("all");
 
   const generateReport = () => {
-    console.log(year, term, grade, ethnicity, gender, eip);
-  }
+    dispatch({
+      type: "GENERATE_REPORT",
+      payload: {
+        schoolId: schoolId,
+        year: year,
+        term: term,
+        grade: grade,
+        ethnicity: ethnicity,
+        gender: gender,
+        eip: eip,
+        lunchStatus: lunchStatus,
+        batch: batch,
+      },
+    });
+  };
 
-
+  console.log("Admin all scores", scores);
   return (
     <>
       <div className="dash-filter-data-container">
-        {/* <Stack direction="row" spacing={4}> */}
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="yearLabel">Year</InputLabel>
-            <Select
-              labelId="yearLabel"
-              id="year"
-              value={year}
-              label="Year"
-              onChange={(e) => setYear(e.target.value)}
-            >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value={2022}>2022</MenuItem>
-              <MenuItem value={2021}>2021</MenuItem>
-              <MenuItem value={2020}>2020</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="termLabel">Term</InputLabel>
-            <Select
-              labelId="termLabel"
-              id="term"
-              value={term}
-              label="Term"
-              onChange={(e) => setTerm(e.target.value)}
-            >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="fall">Fall</MenuItem>
-              <MenuItem value="spring">Spring</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="gradeLabel">Grade</InputLabel>
-            <Select
-              labelId="gradeLabel"
-              id="grade"
-              value={grade}
-              label="Grade"
-              onChange={(e) => setGrade(e.target.value)}
-            >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value={12}>12</MenuItem>
-              <MenuItem value={11}>11</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={9}>9</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="ethnicityLabel">Ethnicity</InputLabel>
-            <Select
-              labelId="ethnicityLabel"
-              id="ethnicity"
-              value={ethnicity}
-              label="Ethnicity"
-              onChange={(e) => setEthnicity(e.target.value)}
-            >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="asian">Asian</MenuItem>
-              <MenuItem value="black">Black</MenuItem>
-              <MenuItem value="caucausian">Caucasian</MenuItem>
-              <MenuItem value="hispanic">Hispanic</MenuItem>
-              <MenuItem value="mixed">Mixed</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="genderLabel">Gender</InputLabel>
-            <Select
-              labelId="ethnicityLabel"
-              id="ethnicity"
-              value={gender}
-              label="Gender"
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="non-binary">Non-Binary</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{minWidth: 100}} size="small">
-            <InputLabel id="eip">EIP</InputLabel>
-            <Select
-              labelId="eip"
-              id="eip"
-              value={eip}
-              label="EIP"
-              onChange={(e) => setEip(e.target.value)}
-            >
-              <MenuItem value={true}>True</MenuItem>
-              <MenuItem value={false}>False</MenuItem>
-            </Select>
-          </FormControl>
-          <Button variant="contained" onClick={generateReport}>
-              Generate Report
-          </Button>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="schoolLabel">School</InputLabel>
+          <Select
+            labelId="schoolLabel"
+            id="School"
+            value={schoolId}
+            label="School"
+            onChange={(e) => setSchoolId(e.target.value)}
+          >
+            <MenuItem value={1}>1</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="yearLabel">Year</InputLabel>
+          <Select
+            labelId="yearLabel"
+            id="year"
+            value={year}
+            label="Year"
+            onChange={(e) => setYear(e.target.value)}
+          >
+            <MenuItem value={0}>Year</MenuItem>
+            <MenuItem value={2022}>2022</MenuItem>
+            <MenuItem value={2021}>2021</MenuItem>
+            <MenuItem value={2020}>2020</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="termLabel">Term</InputLabel>
+          <Select
+            labelId="termLabel"
+            id="term"
+            value={term}
+            label="Term"
+            onChange={(e) => setTerm(e.target.value)}
+          >
+            <MenuItem value={0}>Term</MenuItem>
+            <MenuItem value={1}>Fall</MenuItem>
+            <MenuItem value={2}>Spring</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="gradeLabel">Grade</InputLabel>
+          <Select
+            labelId="gradeLabel"
+            id="grade"
+            value={grade}
+            label="Grade"
+            onChange={(e) => setGrade(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={11}>11</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={9}>9</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="ethnicityLabel">Ethnicity</InputLabel>
+          <Select
+            labelId="ethnicityLabel"
+            id="ethnicity"
+            value={ethnicity}
+            label="Ethnicity"
+            onChange={(e) => setEthnicity(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value={2}>Asian</MenuItem>
+            <MenuItem value={4}>Black</MenuItem>
+            <MenuItem value={3}>Caucasian</MenuItem>
+            <MenuItem value={1}>Hispanic</MenuItem>
+            <MenuItem value={5}>Mixed</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <div className="dash-filter-data-container">
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="genderLabel">Gender</InputLabel>
+          <Select
+            labelId="ethnicityLabel"
+            id="ethnicity"
+            value={gender}
+            label="Gender"
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value={1}>Female</MenuItem>
+            <MenuItem value={2}>Male</MenuItem>
+            <MenuItem value={3}>Non-Binary</MenuItem>
+            <MenuItem value={4}>Not Listed</MenuItem>
+            <MenuItem value={5}>Prefer Not To Say</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="eip">EIP</InputLabel>
+          <Select
+            labelId="eip"
+            id="eip"
+            value={eip}
+            label="EIP"
+            onChange={(e) => setEip(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value={false}>False</MenuItem>
+            <MenuItem value={true}>True</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="lunchStatus">Lunch Status</InputLabel>
+          <Select
+            labelId="lunchStatus"
+            id="lunchStatus"
+            value={lunchStatus}
+            label="School"
+            onChange={(e) => setLunchStatus(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value="na">N/A</MenuItem>
+            <MenuItem value="free">Free</MenuItem>
+            <MenuItem value="reduced">Reduced</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 100 }} size="small">
+          <InputLabel id="batch">Batch</InputLabel>
+          <Select
+            labelId="batch"
+            id="batch"
+            value={batch}
+            label="batch"
+            onChange={(e) => setBatch(e.target.value)}
+          >
+            <MenuItem value="all">Select All</MenuItem>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+          </Select>
+        </FormControl>
+        <Button variant="contained" onClick={generateReport}>
+          Generate Report
+        </Button>
         {/* </Stack> */}
       </div>
       <div className="dash-graph-container">
@@ -189,9 +252,7 @@ function AdminDashData() {
           }}
         />
       </div>
-      <div>
-          
-      </div>
+      <div></div>
     </>
   );
 }

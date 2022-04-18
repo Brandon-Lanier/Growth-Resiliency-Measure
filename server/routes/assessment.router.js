@@ -20,8 +20,6 @@ router.get("/adminbatch", async (req, res) => {
   if (req.isAuthenticated()) {
     const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate";`;
     let assessments = await pool.query(checkActiveSql, [currentDate]);
-
-    // row below will break my server - bp April 18th
     // console.log("assesssment id", assessments.rows[0].id);
 
     // check the scores table to see if a student has taken the test.
