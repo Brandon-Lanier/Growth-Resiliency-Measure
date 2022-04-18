@@ -149,10 +149,7 @@ router.get("/", (req, res) => {
 
         const qryTextThree = `
         AND "questions"."measureName" <> 'Qualitative'
-        GROUP BY 
-        "students"."schoolId",
-        "students"."graduationYear", 
-        "questions"."measureName"
+        GROUP BY "questions"."measureName"
         `;
 
 
