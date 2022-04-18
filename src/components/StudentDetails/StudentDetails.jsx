@@ -65,7 +65,7 @@ function StudentDetails(){
       },
       // {scores[0].assessmentBatchId}
       {
-        label: [scores[1].assessmentBatchId],
+        label: 2,
         data: [scores[1].avgScore, scores[3].avgScore, scores[5].avgScore, scores[7].avgScore, scores[11].avgScore, scores[13].avgScore, scores[15].avgScore,scores[17].avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
