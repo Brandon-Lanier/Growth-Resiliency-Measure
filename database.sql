@@ -194,9 +194,9 @@ VALUES
 
 INSERT INTO "lunchStatus"("status")
 VALUES
-(E'yes'),
-(E'no');
-
+(E'na'),
+(E'free');
+(E'reduced');
 
 --DROP TABLE "admin";
 --DROP TABLE "scores";
