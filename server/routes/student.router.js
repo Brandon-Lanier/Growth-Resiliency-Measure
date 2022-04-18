@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         });
       }
-});
+);
 
 /**
  * POST route template
