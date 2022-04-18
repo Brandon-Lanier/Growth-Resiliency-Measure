@@ -8,6 +8,7 @@ import postScoresSaga from './scores.saga';
 import fetchBatchSaga from './fetchBatch.saga';
 import adminScores from './adminScores.saga';
 import reports from './reports.saga';
+import schools from './schools.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -26,6 +27,7 @@ export default function* rootSaga() {
     postScoresSaga(),
     fetchBatchSaga(),
     adminScores(),
-    reports()
+    reports(),
+    schools()
   ]);
 }

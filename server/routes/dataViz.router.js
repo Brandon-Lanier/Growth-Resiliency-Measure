@@ -139,9 +139,9 @@ router.get("/", (req, res) => {
         const qryTextOne = `
         SELECT avg("scores"."score") AS "averageScore", 
         "questions"."measureName"
-        FROM "students"
+        FROM "scores"
+        JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
-        JOIN "scores" ON "scores"."userId" = "students"."userId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
         WHERE "students"."schoolId" = $1 `;
 
