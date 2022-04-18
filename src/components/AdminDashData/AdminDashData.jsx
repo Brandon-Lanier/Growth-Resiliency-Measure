@@ -21,6 +21,7 @@ import { Select } from "@mui/material";
 
 
 
+
 function AdminDashData() {
 
   ChartJS.register(
@@ -43,12 +44,9 @@ function AdminDashData() {
 const scores = useSelector(store => store.scores.adminAllScores)
 
 
-  const renderAllStudents = () => {
-    let data = [
-      
-    ]
+ 
 
-  }
+
   let data = {
     labels: [
       "Balance",
@@ -79,8 +77,9 @@ const scores = useSelector(store => store.scores.adminAllScores)
   const [eip, setEip] = useState('');
 
   const generateReport = () => {
-    console.log(year, term, grade, ethnicity, gender, eip);
+      dispatch({type: 'GENERATE_REPORT', payload: {year: year, term: term, grade: grade, ethnicity: ethnicity, gender: gender, eip: eip}})
   }
+
 
 
   console.log('Admin all scores', scores);
