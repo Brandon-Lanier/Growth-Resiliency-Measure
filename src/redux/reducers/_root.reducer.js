@@ -8,6 +8,7 @@ import scores from './scores.reducer';
 import studentReducer from './student.reducer';
 import adminBatch from './adminBatch.reducer';
 import report from './report.reducer';
+import schools from './schools.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   scores, // Holds students average scores on an assessment
   studentReducer,
   adminBatch,
-  report
+  report,
+  schools
 });
 
 export default rootReducer;
