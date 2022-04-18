@@ -24,9 +24,21 @@ function* fetchStudentScores() {
     }
 }
 
+function* fetchIndScores(studentId) {
+    try {
+        const studId = studentId.payload
+        console.log ('in fetchIndScores, payload is', studId)
+        const indScores = yield axios.get(`/scores/adminStudent/${studId}`);
+        yield put({type: 'SET_IND_SCORES', payload: indScores.data})
+    } catch(error) {
+        console.log('ADMIN Error getting a single student scores in postScoresSaga', error);  
+    }
+}
+
 function* postScoresSaga() {
     yield takeLatest('POST_SCORES', postScores);
     yield takeLatest('FETCH_STUDENT_SCORES', fetchStudentScores);
+    yield takeLatest('FETCH_IND_SCORES', fetchIndScores);
 };
 
 export default postScoresSaga;
