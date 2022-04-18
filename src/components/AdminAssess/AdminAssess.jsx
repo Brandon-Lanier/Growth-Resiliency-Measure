@@ -25,7 +25,9 @@ function AdminAssess() {
             {/* <Typography variant="b1">
                 {batch[0].startDate}
             </Typography> */}
+              <AddBatch />
             </Box>  
+          
     )
 }
 

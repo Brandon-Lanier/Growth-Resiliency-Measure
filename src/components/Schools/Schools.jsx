@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 
-import AddCohort from '../AddCohort/AddCohort';
+// import AddBatch from '../AddBatch/AddBatch';
 
 import Box from "@mui/material/Box";
 import SchoolIcon from "@mui/icons-material/School";
