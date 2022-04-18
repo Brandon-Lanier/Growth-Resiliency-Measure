@@ -1,5 +1,5 @@
 //
-// This component creates a new cohort for tests to the database. It should end up creating two lines in the
+// This component creates a new batch for tests to the database. It should end up creating two lines in the
 // AssessmentBatches table
 //
 //
@@ -22,7 +22,7 @@ import Select from '@mui/material/Select';
 
 import axios from "axios";
 
-function AddCohort(props) {
+function AddBatch(props) {
   //   const store = useSelector((store) => store);
   const [heading, setHeading] = useState("Add Assessment Cohort");
 
@@ -115,4 +115,4 @@ function AddCohort(props) {
   );
 }
 
-export default AddCohort;
+export default AddBatch;
