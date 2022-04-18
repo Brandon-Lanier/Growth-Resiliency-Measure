@@ -122,8 +122,19 @@ router.post("/", async (req, res) => {
       // Username is email
       const username = student.email;
 
-      // Password encryption
-      const password = encryptLib.encryptPassword(student.firstName + student.studentId);
+      let password; 
+
+      //Need to check if this is individual or CSV upload. Individual student will have entered a password
+      if (student.password.length > 0){
+        console.log('inside submtted passworld', student.password);
+        password = encryptLib.encryptPassword(student.password);
+        
+      } else {
+        // Password encryption
+        password = encryptLib.encryptPassword(student.firstName + student.studentId);
+      }
+
+
 
       console.log("username is", username);
       console.log("password is", password);

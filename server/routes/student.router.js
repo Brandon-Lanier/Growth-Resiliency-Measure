@@ -21,7 +21,8 @@ router.get('/', (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500);
         });
-});
+      }
+);
 
 /**
  * POST route template

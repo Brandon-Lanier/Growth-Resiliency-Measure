@@ -38,6 +38,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
   'local',
   new LocalStrategy((username, password, done) => {
+    console.log('about to check password');
+    
     pool
       .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result) => {
@@ -47,6 +49,8 @@ passport.use(
           // done takes an error (null in this case) and a user
           done(null, user);
         } else {
+          console.log('inside passport use, pass does not match', username);
+          
           // Not good! Username and password do not match.
           // done takes an error (null in this case) and a user (also null in this case)
           // this will result in the server returning a 401 status code
