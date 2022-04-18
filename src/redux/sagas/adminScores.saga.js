@@ -7,7 +7,7 @@ function* adminScores() {
 
 function* fetchAllScores() {
     try {
-        const scores = yield axios.get('')
+        const scores = yield axios.get('api/studentCsv')
         yield put({type: 'SET_ALL_SCORES', payload: scores.data})
     } catch(error) {
         console.log('Error grabbing all scores for admin', error);   

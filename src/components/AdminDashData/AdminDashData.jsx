@@ -17,15 +17,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { Select } from "@mui/material";
+
 
 
 function AdminDashData() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({ type: "FETCH_STUDENT_SCORES" });
-  }, []);
 
   ChartJS.register(
     RadialLinearScale,
@@ -36,7 +32,24 @@ function AdminDashData() {
     Legend
   );
 
-  const data = {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_STUDENT_SCORES" });
+    dispatch({type: "FETCH_ALL_SCORES"})
+  }, []);
+
+
+const scores = useSelector(store => store.scores.adminAllScores)
+
+
+  const renderAllStudents = () => {
+    let data = [
+      
+    ]
+
+  }
+  let data = {
     labels: [
       "Balance",
       "Confidence",
@@ -70,6 +83,7 @@ function AdminDashData() {
   }
 
 
+  console.log('Admin all scores', scores);
   return (
     <>
       <div className="dash-filter-data-container">
