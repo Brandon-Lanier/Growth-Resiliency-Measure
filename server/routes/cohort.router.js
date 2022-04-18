@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     WHERE "user".id = $1;`;
 
     const schoolId = await pool.query(schoolIdquery, [req.user.id]);
-    console.log('schoolId is', schoolId.rows[0].schoolId);
+    // console.log('schoolId is', schoolId.rows[0].schoolId);
 
     // This creates two rows, both identical, except for batchNumber which is coded to 1 and 2 consecutively 
     const sqlText = `INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
@@ -56,7 +56,7 @@ router.get('/studentbatch', async (req, res) => {
     // const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     console.log('schoolId is', schoolIdObject);
-    const schoolId = schoolIdObject.rows[0].schoolId;
+    // const schoolId = schoolIdObject.rows[0].schoolId;
     
     // This grabs all batches for the school
     const batchesQuery = `SELECT * FROM "assessmentBatches" WHERE "schoolId" = $1;`;
