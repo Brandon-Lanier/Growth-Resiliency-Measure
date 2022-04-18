@@ -9,6 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+import AddBatch from '../AddBatch/AddBatch';
+import './AdminAssess.css';
 
 function AdminAssess() {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function AdminAssess() {
   console.log(batch.length);
 
   return (
+      <>
     <Box
       sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
     >
@@ -57,6 +60,11 @@ function AdminAssess() {
         </Table>
       </TableContainer>
     </Box>
+    <div className="add-batch">
+    <AddBatch/>
+    </div>
+    </>
+    
   );
 }
 
