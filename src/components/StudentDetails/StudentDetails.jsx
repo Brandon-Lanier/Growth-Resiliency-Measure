@@ -26,9 +26,9 @@ function StudentDetails(){
   const history = useHistory ();
   const dispatch = useDispatch();
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
-  console.log(studentDetails.details)
   const [userId, setUserId] = useState (studentDetails.details.id)
-
+  const scores = useSelector((store) => store.scores.indScoresReducer);
+  console.log(scores)
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -57,8 +57,16 @@ function StudentDetails(){
     ],
     datasets: [
       {
-        label: year+term,
-        data: [2, 4.3, 3, 4, 2, 3, 1, 3],
+        label: [scores[0].year],
+        data: [scores[0].avgScore, scores[2].avgScore, scores[4].avgScore, scores[6].avgScore, scores[10].avgScore, scores[12].avgScore, scores[14].avgScore,scores[16].avgScore],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+      // {scores[0].assessmentBatchId}
+      {
+        label: [scores[1].assessmentBatchId],
+        data: [scores[1].avgScore, scores[3].avgScore, scores[5].avgScore, scores[7].avgScore, scores[11].avgScore, scores[13].avgScore, scores[15].avgScore,scores[17].avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
