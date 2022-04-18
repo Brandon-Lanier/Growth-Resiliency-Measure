@@ -28,7 +28,6 @@ function StudentDetails(){
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
   console.log(studentDetails.details)
   const [userId, setUserId] = useState (studentDetails.details.id)
-  // const [userName, setUserName] = useState (studentDetails.details.firstName + studentDetails.details.lastName)
 
   ChartJS.register(
     RadialLinearScale,
@@ -48,13 +47,13 @@ function StudentDetails(){
   const data = {
     labels: [
       "Balance",
-      "Confidence",
-      "Adaptability",
       "Connection",
       "Contribution",
       "Empathy",
-      "Expression",
+      "Confidence",
       "Self Control",
+      "Expression",
+      "Adaptability",
     ],
     datasets: [
       {
