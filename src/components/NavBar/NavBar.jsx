@@ -108,7 +108,7 @@ function ResponsiveDrawer(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {/* <AppBar
+      <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -116,7 +116,8 @@ function ResponsiveDrawer(props) {
           backgroundColor: '#fff'
         }}
         elevation={1}
-      >
+      > 
+        
         <Toolbar>
           <IconButton
             color="inherit"
@@ -127,11 +128,12 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
+          {/* 
           <Typography variant="h6" noWrap component="div">
             Responsive drawer
-          </Typography>
+          </Typography>*/}
         </Toolbar>
-      </AppBar> */}
+      </AppBar> 
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

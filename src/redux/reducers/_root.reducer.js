@@ -7,6 +7,8 @@ import batch from './batch.reducer';
 import scores from './scores.reducer';
 import studentReducer from './student.reducer';
 import adminBatch from './adminBatch.reducer';
+import report from './report.reducer';
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -20,8 +22,9 @@ const rootReducer = combineReducers({
   batch, // holds batch id if active assessment is available for student
   questions,
   scores, // Holds students average scores on an assessment
-  studentReducer,//holds studentDetailsReducer and studentReducer
+  studentReducer,
   adminBatch,
+  report
 });
 
 export default rootReducer;

@@ -17,15 +17,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { Select } from "@mui/material";
+
+
 
 
 function AdminDashData() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({ type: "FETCH_STUDENT_SCORES" });
-  }, []);
 
   ChartJS.register(
     RadialLinearScale,
@@ -36,7 +33,19 @@ function AdminDashData() {
     Legend
   );
 
-  const data = {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_STUDENT_SCORES" });
+    dispatch({type: "FETCH_ALL_SCORES"})
+  }, []);
+
+
+const scores = useSelector(store => store.scores.adminAllScores)
+
+
+
+  let data = {
     labels: [
       "Balance",
       "Confidence",
@@ -58,18 +67,20 @@ function AdminDashData() {
     ],
   };
 
-  const [year, setYear] = useState('');
-  const [term, setTerm] = useState('');
-  const [grade, setGrade] = useState("");
-  const [ethnicity, setEthnicity] = useState('');
-  const [gender, setGender] = useState('');
-  const [eip, setEip] = useState('');
+  const [year, setYear] = useState(0);
+  const [term, setTerm] = useState(0);
+  const [grade, setGrade] = useState("all");
+  const [ethnicity, setEthnicity] = useState("all");
+  const [gender, setGender] = useState("all");
+  const [eip, setEip] = useState("all");
 
   const generateReport = () => {
-    console.log(year, term, grade, ethnicity, gender, eip);
+      dispatch({type: 'GENERATE_REPORT', payload: {year: year, term: term, grade: grade, ethnicity: ethnicity, gender: gender, eip: eip}})
   }
 
 
+
+  console.log('Admin all scores', scores);
   return (
     <>
       <div className="dash-filter-data-container">
@@ -83,7 +94,6 @@ function AdminDashData() {
               label="Year"
               onChange={(e) => setYear(e.target.value)}
             >
-              <MenuItem value="all">Select All</MenuItem>
               <MenuItem value={2022}>2022</MenuItem>
               <MenuItem value={2021}>2021</MenuItem>
               <MenuItem value={2020}>2020</MenuItem>
@@ -98,9 +108,8 @@ function AdminDashData() {
               label="Term"
               onChange={(e) => setTerm(e.target.value)}
             >
-              <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="fall">Fall</MenuItem>
-              <MenuItem value="spring">Spring</MenuItem>
+              <MenuItem value={1}>Fall</MenuItem>
+              <MenuItem value={2}>Spring</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{minWidth: 100}} size="small">
@@ -129,11 +138,11 @@ function AdminDashData() {
               onChange={(e) => setEthnicity(e.target.value)}
             >
               <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="asian">Asian</MenuItem>
-              <MenuItem value="black">Black</MenuItem>
-              <MenuItem value="caucausian">Caucasian</MenuItem>
-              <MenuItem value="hispanic">Hispanic</MenuItem>
-              <MenuItem value="mixed">Mixed</MenuItem>
+              <MenuItem value={2}>Asian</MenuItem>
+              <MenuItem value={4}>Black</MenuItem>
+              <MenuItem value={3}>Caucasian</MenuItem>
+              <MenuItem value={1}>Hispanic</MenuItem>
+              <MenuItem value={5}>Mixed</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{minWidth: 100}} size="small">
@@ -146,9 +155,11 @@ function AdminDashData() {
               onChange={(e) => setGender(e.target.value)}
             >
               <MenuItem value="all">Select All</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="non-binary">Non-Binary</MenuItem>
+              <MenuItem value={1}>Female</MenuItem>
+              <MenuItem value={2}>Male</MenuItem>
+              <MenuItem value={3}>Non-Binary</MenuItem>
+              <MenuItem value={4}>Not Listed</MenuItem>
+              <MenuItem value={5}>Prefer Not To Say</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{minWidth: 100}} size="small">
@@ -160,8 +171,9 @@ function AdminDashData() {
               label="EIP"
               onChange={(e) => setEip(e.target.value)}
             >
-              <MenuItem value={true}>True</MenuItem>
+              <MenuItem value="all">Select All</MenuItem>
               <MenuItem value={false}>False</MenuItem>
+              <MenuItem value={true}>True</MenuItem>
             </Select>
           </FormControl>
           <Button variant="contained" onClick={generateReport}>

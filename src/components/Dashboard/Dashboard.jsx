@@ -28,7 +28,8 @@ function Dashboard() {
 
   useEffect(() => {
     dispatch({ type: "GET_STUDENTS" });
-    dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"})
+    dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"});
+    dispatch({type: 'FETCH_ADMIN_BATCH'});
   }, []);
 
   let batchComplete = () => {

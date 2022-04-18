@@ -11,6 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import ProgressBar from "./ProgressBar";
 import Slide from '@mui/material/Slide';
 import "./Assessment.css";
+import userSaga from "../../redux/sagas/user.saga";
 
 
 function Assessment() {
@@ -21,8 +22,10 @@ function Assessment() {
   const assess = useSelector((store) => store.assessment)
 
   useEffect(() => {
+    
     dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
-    dispatch({ type: "FETCH_BATCH" }); // get batch number form DB.
+      dispatch({ type: "FETCH_BATCH" }); // get batch number form DB.
+    
   }, []);
 
   const [value1, setValue1] = useState("");
