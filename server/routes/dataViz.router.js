@@ -16,16 +16,6 @@ const router = express.Router();
 //   }
 
 router.get("/", (req, res) => {
-    // const sqlTxt = `SELECT * FROM "students" WHERE "id" = $1;`; //Randomly order the rows upon calling
-    // const id = req.query.id;
-    // pool.query(sqlTxt, [id])
-    // .then(result => {
-    //     console.log(result.rows);
-    //     res.send(result.rows)
-    // }).catch(err => {
-    //     console.log('Error getting all questions', err);
-    //     res.sendStatus(500);
-    // })
     if (req.isAuthenticated()) {
         console.log(req.query);
         let year = '';
@@ -72,6 +62,34 @@ router.get("/", (req, res) => {
                 counter++;
                 batch = `AND "assessmentBatches"."batchNumber" = $${counter} `;
                 qryArguments.push(req.query.batch);
+                break;
+        }
+
+        switch (req.query.grade) {
+            case 'all':
+                break;
+            default:
+                counter++;
+                
+                // check what academic year we are in based on current month
+                // new academic year starts September 1st.
+                const d = new Date();
+                let academicYear = d.getFullYear();
+                let month = d.getMonth();
+                if (month > 8) {
+                    academicYear++
+                }
+                
+                // figure out what graduation years to filter on based on grade in req.query
+                let grade = req.query.grade
+                let gradYear = academicYear - grade + 12;
+
+                console.log('grade is', grade)
+                console.log('academicYear is', academicYear)
+                console.log('gradYear is', gradYear)
+
+                batch = `AND "students"."graduationYear" = $${counter} `;
+                qryArguments.push(gradYear.toString());
                 break;
         }
 
@@ -128,16 +146,16 @@ router.get("/", (req, res) => {
         JOIN "scores" ON "scores"."userId" = "students"."userId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
         WHERE "students"."schoolId" = $1 `;
-        
+
         const qryTextTwo = year + semester + batch + race + eip + gender + lunchStatus;
-        
+
         const qryTextThree = `
         GROUP BY 
         "students"."schoolId",
         "students"."graduationYear", 
         "questions"."measureName"
         `;
-        
+
 
         console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
         console.log('qryArguments is', qryArguments)
