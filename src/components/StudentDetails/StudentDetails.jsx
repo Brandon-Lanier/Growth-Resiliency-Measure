@@ -78,6 +78,8 @@ function StudentDetails(){
               </CardContent>
           </Card> */}
           <div className="detailsContainer">
+          <br></br>
+          <br></br>
           <h3>{studentDetails.details.firstName}<span> </span>{studentDetails.details.lastName}</h3>
           <h3>{studentDetails.details.name}</h3>
           <h4>Class of {studentDetails.details.graduationYear}</h4>

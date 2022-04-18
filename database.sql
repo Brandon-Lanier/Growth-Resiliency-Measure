@@ -12,7 +12,6 @@ CREATE TABLE "user" (
 );
 
 
-
 CREATE TABLE "scores" (
 	"id" SERIAL NOT NULL,
 	"userId" integer NOT NULL,
@@ -445,4 +444,4 @@ VALUES
 
 
 INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
-VALUES ("1047", "3022", "Timmy", "Trumpet" , 2023, timmay@trumpet.org, "1", false, "1", false, "1022", "2");
+VALUES (1, 1074, 'Timmy', 'Trumpet' , 2023, 'timmay@trumpet.org', 1, false, 1, 1, 1);
