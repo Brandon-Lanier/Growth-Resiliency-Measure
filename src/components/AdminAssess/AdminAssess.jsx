@@ -11,30 +11,53 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 
 function AdminAssess() {
+  const dispatch = useDispatch();
+  const batch = useSelector((store) => store.adminBatch.adminBatches);
 
-    const dispatch = useDispatch();
-    const batch = useSelector(store => store.adminBatch.adminBatches)
+  useEffect(() => {
+    dispatch({ type: "FETCH_ADMIN_BATCH" });
+  }, []);
 
-    useEffect(() => {
-        dispatch({type: 'FETCH_ADMIN_BATCH'})
-    }, [])
+  console.log(batch);
+  console.log(batch.length);
 
-    console.log(batch);
-    console.log(batch.length);
-
-
-
-    return (
-
-            <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', mt: 10}}>
-                <h1>Broken Component - Needs Review</h1>
-            {/* <Typography variant="b1">
-                {batch[0].startDate}
-            </Typography> */}
-              <AddBatch />
-            </Box>  
-          
-    )
+  return (
+    <Box
+      sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
+    >
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Batch Number</TableCell>
+              <TableCell align="right">Semester Number</TableCell>
+              <TableCell align="right">Year</TableCell>
+              <TableCell align="right">School ID</TableCell>
+              <TableCell align="right">Start Date</TableCell>
+              <TableCell align="right">End Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {batch?.map((row) => (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row?.batchNumber}
+                </TableCell>
+                <TableCell align="right">{row?.semesterNumber}</TableCell>
+                <TableCell align="right">{row?.fiscalYear}</TableCell>
+                <TableCell align="right">{row?.schoolId}</TableCell>
+                <TableCell align="right">{row?.startDate}</TableCell>
+                <TableCell align="right">{row?.endDate}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
 }
 
 export default AdminAssess;
