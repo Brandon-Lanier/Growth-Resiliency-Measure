@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
+import schoolsReducer from "../../redux/reducers/schools.reducer";
 
 function AdminDashData() {
   ChartJS.register(
@@ -34,9 +35,11 @@ function AdminDashData() {
   useEffect(() => {
     dispatch({ type: "FETCH_STUDENT_SCORES" });
     dispatch({ type: "FETCH_ALL_SCORES" });
+    dispatch({ type: "FETCH_ALL_SCHOOLS"});
   }, []);
 
   const scores = useSelector((store) => store.scores.adminAllScores);
+  const schools = useSelector(store => store.schools)
 
   let data = {
     labels: [
@@ -100,7 +103,11 @@ function AdminDashData() {
             label="School"
             onChange={(e) => setSchoolId(e.target.value)}
           >
-            <MenuItem value={1}>1</MenuItem>
+            {schools.map(school => {
+              return (
+                <MenuItem value={school.id}>{school.name}</MenuItem>
+              )
+            })}
           </Select>
         </FormControl>
         <FormControl sx={{ minWidth: 100 }} size="small">
