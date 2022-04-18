@@ -20,7 +20,7 @@ function StudentList() {
       field: "",
       headerName: "Details",
       sortable: false,
-      width: 100,
+      width: 90,
       disableClickEventBubbling: true,
       renderCell: (params: CellParams) => (
         <Button
@@ -49,9 +49,14 @@ function StudentList() {
       width: 80,
     },
     {
-      field: "schoolId",
+      field: "studentId",
+      headerName: "Student Id #",
+      width: 90,
+    },
+    {
+      field: "name",
       headerName: "School",
-      width: 80,
+      width: 160,
     },
     {
       field: "email",
@@ -69,14 +74,14 @@ function StudentList() {
       width: 80,
     },
     {
-      field: "lunchStatus",
-      headerName: " Lunch Status",
-      width: 80,
+      field: "status",
+      headerName: "Lunch Status",
+      width: 100,
     },
     {
       field: "eip",
       headerName: " EIP",
-      width: 80,
+      width: 60,
     },
   ];
   //dispatch selected student and history.push to details page 
