@@ -69,10 +69,10 @@ const scores = useSelector(store => store.scores.adminAllScores)
 
   const [year, setYear] = useState(0);
   const [term, setTerm] = useState(0);
-  const [grade, setGrade] = useState(0);
-  const [ethnicity, setEthnicity] = useState(0);
-  const [gender, setGender] = useState(0);
-  const [eip, setEip] = useState(false);
+  const [grade, setGrade] = useState("all");
+  const [ethnicity, setEthnicity] = useState("all");
+  const [gender, setGender] = useState("all");
+  const [eip, setEip] = useState("all");
 
   const generateReport = () => {
       dispatch({type: 'GENERATE_REPORT', payload: {year: year, term: term, grade: grade, ethnicity: ethnicity, gender: gender, eip: eip}})
