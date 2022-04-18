@@ -21,6 +21,7 @@ router.get("/", (req, res) => {
         let year = '';
         let semester = '';
         let batch = '';
+        let grade = '';
         let race = '';
         let eip = '';
         let gender = '';
@@ -62,6 +63,7 @@ router.get("/", (req, res) => {
                 counter++;
                 batch = `AND "assessmentBatches"."batchNumber" = $${counter} `;
                 qryArguments.push(req.query.batch);
+                console.log('batch is', batch);
                 break;
         }
 
@@ -81,14 +83,13 @@ router.get("/", (req, res) => {
                 }
 
                 // figure out what graduation years to filter on based on grade in req.query
-                let grade = req.query.grade
-                let gradYear = academicYear - grade + 12;
+                let gradYear = academicYear - req.query.grade + 12;
 
                 console.log('grade is', grade)
                 console.log('academicYear is', academicYear)
                 console.log('gradYear is', gradYear)
 
-                batch = `AND "students"."graduationYear" = $${counter} `;
+                grade = `AND "students"."graduationYear" = $${counter} `;
                 qryArguments.push(gradYear.toString());
                 break;
         }
@@ -108,7 +109,7 @@ router.get("/", (req, res) => {
                 break;
             default:
                 counter++;
-                eip = `AND "students"."eip" $${counter} `;
+                eip = `AND "students"."eip" = $${counter} `;
                 qryArguments.push(req.query.eip);
                 break;
         }
@@ -118,7 +119,7 @@ router.get("/", (req, res) => {
                 break;
             default:
                 counter++;
-                gender = `AND "students"."gender" $${counter} `;
+                gender = `AND "students"."gender" = $${counter} `;
                 qryArguments.push(req.query.gender);
                 break;
         }
@@ -138,19 +139,17 @@ router.get("/", (req, res) => {
         const qryTextOne = `
         SELECT avg("scores"."score") AS "averageScore", 
         "questions"."measureName"
-        FROM "students"
+        FROM "scores"
+        JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
-        JOIN "scores" ON "scores"."userId" = "students"."userId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
         WHERE "students"."schoolId" = $1`;
 
-        const qryTextTwo = year + semester + batch + race + eip + gender + lunchStatus;
+        const qryTextTwo = year + semester + batch + grade + race + eip + gender + lunchStatus;
 
         const qryTextThree = `
-        GROUP BY 
-        "students"."schoolId",
-        "students"."graduationYear", 
-        "questions"."measureName"
+        AND "questions"."measureName" <> 'Qualitative'
+        GROUP BY "questions"."measureName"
         `;
 
 
