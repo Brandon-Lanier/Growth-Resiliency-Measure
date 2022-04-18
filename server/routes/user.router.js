@@ -19,25 +19,26 @@ router.get("/", rejectUnauthenticated, async (req, res) => {
 router.get("/permission", async (req, res) => {
   
   
-  const permissionLevel =
-    await pool.query(`SELECT admin."permissionLevel" FROM admin
-  JOIN "user" on "user".id = admin."userId"
-  WHERE "user".id = ${req.user.id} ;`);
+  // const permissionLevel =
+  //   await pool.query(`SELECT admin."permissionLevel" FROM admin
+  // JOIN "user" on "user".id = admin."userId"
+  // WHERE "user".id = ${req.user.id} ;`);
 
-  let permission = 0;
+  // let permission = 0;
   
 
-  if (permissionLevel.rows[0] === undefined){
-    permission = 0;
-  } else {
-    permission = permissionLevel.rows[0].permissionLevel;
-  }
-  console.log('permission is', permission);
+  // if (permissionLevel.rows[0] === undefined){
+  //   permission = 0;
+  // } else {
+  //   permission = permissionLevel.rows[0].permissionLevel;
+  // }
+  console.log('permission is', req.user.access_level);
   
   res.send({
-    permission: permission
+    permission: req.user.access_level
   });
 });
+
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen

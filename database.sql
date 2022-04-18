@@ -2,8 +2,10 @@
 
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"username" varchar(255) NOT NULL,
+	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(255) NOT NULL,
+    "access_level" INT DEFAULT 0,
+    "disabled" BOOLEAN NOT NULL DEFAULT FALSE,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -78,8 +80,7 @@ CREATE TABLE "admin" (
 	"firstName" varchar(255) NOT NULL,
 	"lastName" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"schoolId" integer NOT NULL,
-	"permissionLevel" integer NOT NULL,
+	"schoolId" integer,
 	CONSTRAINT "admin_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
