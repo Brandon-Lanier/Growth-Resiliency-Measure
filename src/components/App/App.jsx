@@ -27,6 +27,7 @@ import StudentList from "../StudentList/StudentList";
 import Schools from "../Schools/Schools";
 import Assessment from "../Assessment/Assessment";
 import StudentHomepage from "../StudentHomepage/StudentHomepage";
+import StudentDetails from "../StudentDetails/StudentDetails";
 
 import "./App.css";
 import Assessment2 from "../Assessment/Assessment2";
@@ -41,8 +42,10 @@ import Review from "../Assessment/Review";
 import Confirmation from "../Assessment/Confirmation";
 import Dashboard from "../Dashboard/Dashboard";
 import AdminControl from "../AdminControl/AdminControl";
+import AdminAssess from "../AdminAssess/AdminAssess";
 
 import Box from "@mui/material/Box";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -115,6 +118,15 @@ function App() {
             <CsvExport />
           </ProtectedRoute>
 
+         
+          <ProtectedRoute
+            // Admin Assessment Page
+            exact
+            path="/assessmentoverview"
+          >
+            <AdminAssess />
+          </ProtectedRoute>
+
           <ProtectedRoute
             //logged in shows schools page - this is current has option to add a semester
             exact
@@ -129,7 +141,13 @@ function App() {
           >
             <Dashboard />
           </ProtectedRoute>
-
+          <ProtectedRoute
+            //logged in shows schools page - this is current has option to add a semester
+            exact
+            path="/studentdetails"
+          >
+            <StudentDetails />
+          </ProtectedRoute>
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,

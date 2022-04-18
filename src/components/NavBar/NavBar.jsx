@@ -116,7 +116,7 @@ function ResponsiveDrawer(props) {
           backgroundColor: '#fff'
         }}
         elevation={1}
-      >
+      > 
         
         <Toolbar>
           <IconButton

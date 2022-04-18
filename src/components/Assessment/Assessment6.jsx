@@ -25,11 +25,6 @@ function Assessment6() {
   const [value18, setValue18] = useState(0);
   const [value19, setValue19] = useState(0);
 
-  const progressValue = () => {
-    let percent = 27 / assessment.length;
-    return percent;
-  }
-
   const handleChange16 = (e) => {
     setValue16(e.target.value);
   };
@@ -45,9 +40,6 @@ function Assessment6() {
   const handleChange19 = (e) => {
     setValue19(e.target.value);
   };
-
- 
-
 
 
   const handleNext = () => {

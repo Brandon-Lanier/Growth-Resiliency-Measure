@@ -18,15 +18,23 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 function Dashboard() {
 
-  const dispatch = useDispatch();
+  
   const students = useSelector((store) => store.studentReducer);
-  const batch = useSelector((store) => store.batch);
-  const history = useHistory();
+  const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
 
+
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: "GET_STUDENTS" });
+    dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"})
   }, []);
+
+  let batchComplete = () => {
+    let percent = (batch.length / students.length) * 100;
+    return percent
+  }
 
   return (
     <Container sx={{ flexGrow: 1, mt: 10 }}>
@@ -47,16 +55,16 @@ function Dashboard() {
         </Grid>
         <Grid item xs={6}>
           <Card elevation={4}>
-            <CardActionArea onClick={() => history.push("/assessments")}>
+            <CardActionArea onClick={() => history.push("/assessmentoverview")}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   Active Assessments
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  Replace This With Complete Percentage
+                  {batchComplete()}%
                 </Typography>
                 <Box sx={{ width: "100%" }}>
-                <LinearProgress variant="determinate" value={75} />
+                <LinearProgress variant="determinate" value={batchComplete()} />
                 </Box>
               </CardContent>
             </CardActionArea>

@@ -13,12 +13,7 @@ function Assessment9() {
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
-  const answers = useSelector(store => store.assessment)
-
- const progressValue = () => {
-   let percent = 27 / assessment.length
-   return percent;
- }
+  
 
   const [value27, setValue27] = useState('');
   

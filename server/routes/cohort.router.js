@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 // otherwise returns none
 router.get('/studentbatch', async (req, res) => {
 
-    if (user.permission == 1){
+    if (req.user.permission == 1){
 
         res.sendStatus(500);
     }

@@ -47,10 +47,6 @@ function Assessment4() {
     setValue13(e.target.value);
   };
 
-  const progressValue = () => {
-    let percent = 27 / assessment.length
-    return percent;
-  }
 
   const handleNext = () => {
     if (value9 && value10 && value11 && value12 && value13) {
