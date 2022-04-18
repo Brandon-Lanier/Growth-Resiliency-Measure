@@ -22,9 +22,14 @@ const rootReducer = combineReducers({
   batch, // holds batch id if active assessment is available for student
   questions,
   scores, // Holds students average scores on an assessment
+<<<<<<< HEAD
   studentReducer,
   adminBatch,
   report
+=======
+  studentReducer,//holds studentDetailsReducer and studentReducer
+  adminBatch,
+>>>>>>> master
 });
 
 export default rootReducer;

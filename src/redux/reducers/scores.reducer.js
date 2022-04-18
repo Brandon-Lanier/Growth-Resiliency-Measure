@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { combineReducers } from "redux";
+=======
+import { combineReducers } from 'redux';
+
+>>>>>>> master
 
 //stores a single student average scores sorted by category and batch id
 const studentScore = (state = [], action) => {
@@ -9,7 +14,18 @@ const studentScore = (state = [], action) => {
             return state;
     }
 };
+//stores individual scores for admin view 
+const indScoresReducer = (state = [], action) => {
+    switch(action.type) {
+        case 'SET_IND_SCORES':
+            return action.payload;
+        default:
+            return state;
+    }
+};
 
+
+<<<<<<< HEAD
 const adminAllScores = (state =[], action) => {
     switch(action.type) {
         case 'SET_ALL_SCORES':
@@ -26,3 +42,9 @@ const scoresReducer = combineReducers({
 });
 
 export default scoresReducer;
+=======
+export default combineReducers({
+    scoresReducer,
+    indScoresReducer,
+  });
+>>>>>>> master
