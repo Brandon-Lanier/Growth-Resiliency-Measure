@@ -14,13 +14,18 @@ function AdminAssess() {
     }, [])
 
     console.log(batch);
+    console.log(batch.length);
+
+
+
     return (
-        <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', mt: 10}}>
-            <Typography variant="b1">
+
+            <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', mt: 10}}>
+                <h1>Broken Component - Needs Review</h1>
+            {/* <Typography variant="b1">
                 {batch[0].startDate}
-            </Typography>
-            
-        </Box>
+            </Typography> */}
+            </Box>  
     )
 }
 

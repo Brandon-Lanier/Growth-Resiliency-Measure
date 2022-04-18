@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { DataGrid } from "@mui/x-data-grid";
 import CsvUpload from "../CsvUpload/CsvUpload";
+import Box from "@mui/material/Box";
 import './StudentList.css'
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { useHistory } from 'react-router-dom';
 import { getAccordionDetailsUtilityClass } from "@mui/material";
 import { ContactlessOutlined } from "@mui/icons-material";

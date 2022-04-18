@@ -29,12 +29,13 @@ function Schools(props) {
   return (
     <div>
       <h2>{heading}</h2>
-      <Box sx={{
+      <h1>BROKEN COMPONENT - NEEDS REVIEW</h1>
+      {/* <Box sx={{
           display: 'flex',
           
           justifyContent: 'center'
       }}>
-{/* <h1>Add Cohort</h1> */}
+<h1>Add Cohort</h1>
       <AddCohort />
       </Box>
       
@@ -44,7 +45,7 @@ function Schools(props) {
         <Button variant="contained" onClick={handleSubmit}>
           Add New School
         </Button>
-      </Box>
+      </Box> */}
     </div>
   );
 }
