@@ -70,7 +70,7 @@ router.get("/", (req, res) => {
                 break;
             default:
                 counter++;
-                
+
                 // check what academic year we are in based on current month
                 // new academic year starts September 1st.
                 const d = new Date();
@@ -79,7 +79,7 @@ router.get("/", (req, res) => {
                 if (month > 8) {
                     academicYear++
                 }
-                
+
                 // figure out what graduation years to filter on based on grade in req.query
                 let grade = req.query.grade
                 let gradYear = academicYear - grade + 12;
@@ -136,10 +136,7 @@ router.get("/", (req, res) => {
         // AND "students"."graduationYear" = 2022
 
         const qryTextOne = `
-            SELECT 
-        "students"."schoolId", 
-        "students"."graduationYear", 
-        avg("scores"."score") AS "averageScore", 
+        SELECT avg("scores"."score") AS "averageScore", 
         "questions"."measureName"
         FROM "students"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
