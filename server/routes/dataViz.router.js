@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.get('/', (req,res) => {
-    console.log('params', req.query);
+    console.log('Query String', req.query);
 })
 
 module.exports = router;
