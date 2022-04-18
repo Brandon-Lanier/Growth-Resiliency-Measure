@@ -12,6 +12,8 @@ const encryptLib = require("../modules/encryption");
 router.post("/", async (req, res) => {
   const connection = await pool.connect();
 
+  // NEEDS AUTHENTICATION 
+
   try {
     await connection.query("BEGIN");
     console.log("post route hit server side");
@@ -19,6 +21,26 @@ router.post("/", async (req, res) => {
 
     // Username is email
     const username = req.body.email;
+
+    console.log("username is", username);
+
+    // checks if user is already generated
+    const checkUsername = await connection.query(
+      `SELECT * FROM "user" WHERE username = '${username}';`
+    );
+
+    console.log("checkUsername is", checkUsername.rows);
+
+
+    // NEEDS WORK HERE
+    if (checkUsername.rows.length > 0) {
+      console.log('INSIDE IF STATEMENT');
+      
+      await connection.query("ROLLBACK");
+      connection.release();
+      console.log("Rolling Back - username taken");
+      res.sendStatus(500);
+    }
 
     // Password encryption
     const password = encryptLib.encryptPassword(
@@ -57,7 +79,6 @@ router.post("/", async (req, res) => {
   }
 }); // End Post route
 
-
 // Send back a list of all admins, all schools, for the superadmin
 router.get("/", (req, res) => {
   let queryText = `SELECT "admin"."id", "admin".email, "admin"."firstName", "admin"."lastName", "schools"."name", "schools"."id" AS "school_id" FROM "admin"
@@ -80,14 +101,11 @@ router.get("/", (req, res) => {
     });
 });
 
-
-
 router.delete("/:id", (req, res) => {
   const queryText = `DELETE FROM "admin" WHERE id = $1;`;
-  
 
   pool
-    .query(queryText,[req.params.id])
+    .query(queryText, [req.params.id])
     .then(() => {
       res.sendStatus(200);
     })

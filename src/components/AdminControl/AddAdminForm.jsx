@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -14,8 +13,7 @@ import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-export default function Form({ schools, handleClose }) {
-
+export default function Form({ schools, handleClose, admins }) {
   const history = useHistory();
 
   const schoolOptions = [];
@@ -46,6 +44,17 @@ export default function Form({ schools, handleClose }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    
+    // Checks if username is already taken. THis prevents admins from covering multiple schools at this point. 
+    if (
+      admins.filter((admin) => admin.email === formValues.email).length > 0
+    ) {
+      console.log("MATCHING ADMIN USERNAME!!!");
+      alert("Username already taken!")
+      return; 
+    }
+
     console.log(formValues);
     axios
       .post("/api/admincsv", formValues)
@@ -53,8 +62,10 @@ export default function Form({ schools, handleClose }) {
         console.log("success");
         handleClose();
       })
-      .catch((err) => {console.log("error on post", err);
-      handleClose();});
+      .catch((err) => {
+        console.log("error on post", err);
+        handleClose();
+      });
   };
 
   return (

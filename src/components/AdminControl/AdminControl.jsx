@@ -73,7 +73,7 @@ function AdminControl(props) {
       >
         <h1>Super Admin</h1>
 
-        <AddAdminDialog schools={schools} get={fetchAdministrators}/>
+        <AddAdminDialog schools={schools} admins={admins} get={fetchAdministrators}/>
         
         {schools.map((school) => (
           <>

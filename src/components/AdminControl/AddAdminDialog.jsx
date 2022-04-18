@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AddAdminForm from './AddAdminForm';
 
 
-export default function FormDialog({schools, get}) {
+export default function FormDialog({schools, get, admins}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -30,7 +30,7 @@ export default function FormDialog({schools, get}) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Adminstrator</DialogTitle>
         <DialogContent>
-        <AddAdminForm schools={schools} handleClose={handleClose}/> 
+        <AddAdminForm schools={schools} admins={admins} handleClose={handleClose}/> 
         </DialogContent>
         <DialogActions>
           {/* <Button onClick={handleClose}>Subscribe</Button> */}
