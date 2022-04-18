@@ -440,8 +440,11 @@ VALUES
 (4,2,27,0,'Second Test','2022-04-12');
 
 
-
-
-
 INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
 VALUES (1, 1074, 'Timmy', 'Trumpet' , 2023, 'timmay@trumpet.org', 1, false, 1, 1, 1);
+
+INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+VALUES (2, 1002, 'Johnny', 'Johnson' , 2023, 'johnny@trumpet.org', 1, false, 1, 1, 1);
+
+INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+VALUES (3, 1002, 'Jimmy', 'Jumper' , 2023, 'jimmyy@trumpet.org', 1, false, 1, 1, 1);
