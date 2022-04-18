@@ -19,7 +19,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 function Dashboard() {
 
   
-  const students = useSelector((store) => store.studentReducer);
+  const students = useSelector((store) => store.studentReducer.studentReducer);
   const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
 
 
@@ -28,13 +28,16 @@ function Dashboard() {
 
   useEffect(() => {
     dispatch({ type: "GET_STUDENTS" });
-    dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"})
+    dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"});
+    dispatch({type: 'FETCH_ADMIN_BATCH'});
   }, []);
 
   let batchComplete = () => {
     let percent = (batch.length / students.length) * 100;
+    console.log(percent);
     return percent
   }
+
 
   return (
     <Container sx={{ flexGrow: 1, mt: 10 }}>

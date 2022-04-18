@@ -56,7 +56,7 @@ router.get('/studentbatch', async (req, res) => {
     // const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     console.log('schoolId is', schoolIdObject);
-    const schoolId = schoolIdObject.rows[0].schoolId;
+    // const schoolId = schoolIdObject.rows[0].schoolId;
     
     // This grabs all batches for the school
     const batchesQuery = `SELECT * FROM "assessmentBatches" WHERE "schoolId" = $1;`;

@@ -27,8 +27,8 @@ function StudentDetails(){
   const dispatch = useDispatch();
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
   console.log(studentDetails.details)
-  const [userId, setUserId] = useState (studentDetails.details.userId)
-  const [userName, setUserName] = useState (studentDetails.details.firstName + studentDetails.details.lastName)
+  const [userId, setUserId] = useState (studentDetails.details.id)
+  // const [userName, setUserName] = useState (studentDetails.details.firstName + studentDetails.details.lastName)
 
   ChartJS.register(
     RadialLinearScale,
@@ -78,7 +78,11 @@ function StudentDetails(){
               </CardContent>
           </Card> */}
           <div className="detailsContainer">
-          <h3>{userName}</h3>
+          <br></br>
+          <br></br>
+          <h3>{studentDetails.details.firstName}<span> </span>{studentDetails.details.lastName}</h3>
+          <h3>{studentDetails.details.name}</h3>
+          <h4>Class of {studentDetails.details.graduationYear}</h4>
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
