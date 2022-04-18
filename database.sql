@@ -12,7 +12,6 @@ CREATE TABLE "user" (
 );
 
 
-
 CREATE TABLE "scores" (
 	"id" SERIAL NOT NULL,
 	"userId" integer NOT NULL,
@@ -194,9 +193,9 @@ VALUES
 
 INSERT INTO "lunchStatus"("status")
 VALUES
-(E'yes'),
-(E'no');
-
+(E'na'),
+(E'free');
+(E'reduced');
 
 --DROP TABLE "admin";
 --DROP TABLE "scores";
@@ -441,8 +440,11 @@ VALUES
 (4,2,27,0,'Second Test','2022-04-12');
 
 
-
-
+INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+VALUES (1, 1074, 'Timmy', 'Trumpet' , 2023, 'timmay@trumpet.org', 1, false, 1, 1, 1);
 
 INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
-VALUES ("1047", "3022", "Timmy", "Trumpet" , 2023, timmay@trumpet.org, "1", false, "1", false, "1022", "2");
+VALUES (2, 1002, 'Johnny', 'Johnson' , 2023, 'johnny@trumpet.org', 1, false, 1, 1, 1);
+
+INSERT INTO "students" ("userId", "studentId", "firstName", "lastName", "graduationYear", "email", "race", "eip", "gender", "lunchStatus", "schoolId") 
+VALUES (3, 1002, 'Jimmy', 'Jumper' , 2023, 'jimmyy@trumpet.org', 1, false, 1, 1, 1);
