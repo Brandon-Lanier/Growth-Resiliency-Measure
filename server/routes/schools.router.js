@@ -24,11 +24,12 @@ router.post('/', (req, res) => {
   }
 }); // end post route
 
+
+// This will grab a list of all schools in the DB for front end.
 router.get('/', (req,res) => {
   pool.query(`SELECT * FROM "schools"`)
   .then(result => {
     res.send(result.rows)
-    console.log('schools', result.rows);
   }).catch(err => {
     res.sendStatus(500);
   })
