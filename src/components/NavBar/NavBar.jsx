@@ -43,7 +43,49 @@ function ResponsiveDrawer(props) {
   const user = useSelector((store) => store.user);
   let navLinks = [];
 
-  if (user.permission === 1) {
+  // Determines Navlinks based on permission, could put into reducer 
+  if (user.permission === 2) {
+    navLinks = [
+      {
+        text: "Dashboard",
+        icon: <DashboardIcon />,
+        onClick: () => history.push("/dashboard"),
+      },
+      {
+        text: "SUPER ADMIN",
+        icon: <DashboardIcon />,
+        onClick: () => history.push("/superadmin"),
+      },
+      {
+        text: "Students",
+        icon: <SchoolIcon />,
+        onClick: () => history.push("/students"),
+      },
+      {
+        text: "Assessments",
+        icon: <QuizIcon />,
+        onClick: () => history.push("/assessmentoverview"),
+      },
+      {
+        text: "Data Export",
+        icon: <DownloadIcon />,
+        onClick: () => history.push("/csvExport"),
+      },
+      {
+        text: "Schools",
+        icon: <LocationCityIcon />,
+        onClick: () => history.push("/schools"),
+      },
+      {
+        text: "Logout",
+        icon: <LogoutIcon />,
+        onClick: () => {
+          history.push("/home");
+          dispatch({ type: "LOGOUT" });
+        },
+      },
+    ];
+  } else if (user.permission === 1) {
     navLinks = [
       {
         text: "Dashboard",
@@ -74,12 +116,12 @@ function ResponsiveDrawer(props) {
         text: "Logout",
         icon: <LogoutIcon />,
         onClick: () => {
-          history.push("/login");
+          history.push("/home");
           dispatch({ type: "LOGOUT" });
         },
       },
     ];
-  } else {
+  } else if (user.permission === 0){
     navLinks = [
       {
         text: "Dashboard",
@@ -95,12 +137,22 @@ function ResponsiveDrawer(props) {
         text: "Logout",
         icon: <LogoutIcon />,
         onClick: () => {
-          history.push("/login");
+          history.push("/home");
           dispatch({ type: "LOGOUT" });
         },
       },
     ];
+  } else {
+    navLinks = [
+      {
+        text: "Login",
+        icon: <DashboardIcon />,
+        onClick: () => history.push("/login"),
+      }
+    ];
   }
+
+
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
