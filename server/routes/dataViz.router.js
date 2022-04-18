@@ -143,7 +143,7 @@ router.get("/", (req, res) => {
         JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
-        WHERE "students"."schoolId" = $1 `;
+        WHERE "students"."schoolId" = $1`;
 
         const qryTextTwo = year + semester + batch + grade + race + eip + gender + lunchStatus;
 
