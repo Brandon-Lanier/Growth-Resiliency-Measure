@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
@@ -22,5 +23,16 @@ router.post('/', (req, res) => {
     res.sendStatus(403);
   }
 }); // end post route
+
+
+// This will grab a list of all schools in the DB for front end.
+router.get('/', (req,res) => {
+  pool.query(`SELECT * FROM "schools"`)
+  .then(result => {
+    res.send(result.rows)
+  }).catch(err => {
+    res.sendStatus(500);
+  })
+})
 
 module.exports = router;
