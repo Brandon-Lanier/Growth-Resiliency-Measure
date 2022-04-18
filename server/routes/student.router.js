@@ -6,6 +6,7 @@ const router = express.Router();
  * GET ALL STUDENTS AND INFO
  */
 router.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
   const sqlText = `SELECT * FROM students ORDER BY id ASC`;
     pool.query(sqlText)
         .then((result) => {
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
             console.log(`Error making database query ${sqlText}`, error);
             res.sendStatus(500);
         });
+      }
 });
 
 /**
