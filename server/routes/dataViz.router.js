@@ -15,7 +15,7 @@ const router = express.Router();
 //     lunchStatus: 'all'
 //   }
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.query);
         let timeFrameSelector = ''
@@ -140,20 +140,112 @@ router.get("/", (req, res) => {
         console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
         console.log('qryArguments is', qryArguments)
 
-        pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments)
-            .then((result) => {
-                res.send(result.rows);
-                console.log("result", result.rows);
-            })
-            .catch((err) => {
-                res.sendStatus(500);
-            });
+        const queryObject = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
+        const query = queryObject.rows;
+
+        // sends query in correct form
+        try {
+            res.send(query);
+        } catch (err) {
+            res.sendStatus(500);
+        }
     } else {
         res.sendStatus(403);
     }
 });
 
 
-
+// [
+//     {
+//         "averageScore": "3.5555555555555556",
+//         "measureName": "Balanced",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5555555555555556",
+//         "measureName": "Balanced",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0333333333333333",
+//         "measureName": "Connection ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0333333333333333",
+//         "measureName": "Connection ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5833333333333333",
+//         "measureName": "Contribution ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5833333333333333",
+//         "measureName": "Contribution ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "2.3333333333333333",
+//         "measureName": "Empathy",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "2.3333333333333333",
+//         "measureName": "Empathy",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Self-Confidence ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Self-Confidence ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "2.7083333333333333",
+//         "measureName": "Self-Control",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "2.7083333333333333",
+//         "measureName": "Self-Control",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "Self-Expression",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "Self-Expression",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Understanding adaptability ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Understanding adaptability ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "self-Confidence ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "self-Confidence ",
+//         "fiscalYear": 2022
+//     }
+// ]
 
 module.exports = router;
