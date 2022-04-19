@@ -10,11 +10,13 @@ import { getAccordionDetailsUtilityClass } from "@mui/material";
 import { ContactlessOutlined } from "@mui/icons-material";
 
 function StudentList() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const history = useHistory ();
   //pull student list from student reducer/store
   const students = useSelector((store) => store.studentReducer.studentReducer);
+  const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
   console.log(students);
+  console.log(studentDetails.details)
   const columns = [
     //create a button for each line.
     {
@@ -93,6 +95,9 @@ function storeDetails(details){
     payload: {
         details
     }
+})
+dispatch({ type: "FETCH_IND_SCORES",
+payload: details.id
 })
 history.push('/studentdetails')
 }
