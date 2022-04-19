@@ -22,7 +22,8 @@ function Dashboard() {
   
   const students = useSelector((store) => store.studentReducer.studentReducer);
   const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
-  const schools = useSelector((store) => store.schools)
+  const schools = useSelector((store) => store.schools);
+ 
 
 
   const history = useHistory();
