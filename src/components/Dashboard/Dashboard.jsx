@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import AdminDashData from "../AdminDashData/AdminDashData";
 import { CardActionArea } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
-import axios from "axios";
+
 
 function Dashboard() {
 
@@ -24,7 +24,7 @@ function Dashboard() {
   const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
   const schools = useSelector((store) => store.schools);
  
-
+ 
 
   const history = useHistory();
   const dispatch = useDispatch();
