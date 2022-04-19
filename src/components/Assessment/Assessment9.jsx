@@ -8,7 +8,7 @@ import { Slide } from "@mui/material";
 import ProgressBar from "./ProgressBar";
 import "./Assessment.css";
 
-function Assessment9({questions , index, setIndex , handleChange, value, setValue}) {
+function Assessment9({questions , index, setIndex , handleChange, value, setValue, submitReview}) {
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,8 +19,7 @@ function Assessment9({questions , index, setIndex , handleChange, value, setValu
       alert('MUST ANSWER QUESTION');
       return;
     }
-    setValue('');
-    setIndex(index + 1);
+    submitReview();
 }
 
 const handleBack = () => {
@@ -50,6 +49,7 @@ const handleBack = () => {
           onChange={handleChange}
           inputProps={{ maxLength: 255 }}
           sx={{mt: 3}}
+          name={questions[index].id}
         />
         </div>
       <div className="assess-buttons-container">

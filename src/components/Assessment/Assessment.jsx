@@ -28,8 +28,6 @@ function Assessment() {
     dispatch({ type: "FETCH_BATCH" }); // get batch number from DB.
   }, []);
 
-
-
   const defaultValues = {
     1: 0,
     2: 0,
@@ -71,11 +69,29 @@ function Assessment() {
       ...formValues,
       [name]: value,
     });
-    setValue(value); 
+    setValue(value);
   };
 
+  const autofill = () => {
+    console.log("inside autofill");
+    for (let i = 1; i < 28; i++) {
+      setFormValues({
+        ...formValues,
+        [i]: (Math.floor(Math.random() * 5) + 1),
+      });
+    }
+    setIndex(26);
+    console.log(formValues);
+  };
 
-  const handleNext = () => {
+  const submitReview = () => {
+    if (index === 26) {
+      dispatch({
+        type: "SET_ANSWERS",
+        payload: formValues,
+      });
+    }
+
     setIndex(index + 1);
     setValue();
   };
@@ -95,27 +111,31 @@ function Assessment() {
       <div id="progress-bar">
         <ProgressBar progress={0} />
       </div>
-      { (questions.length > 0 && questions.length < 26 ) && 
-      <Question
-      questions={questions}
-      index={index}
-      handleChange={handleChange}
-      setIndex={setIndex}
-      value={value}
-      setValue={setValue}
-      /> 
-    }
-    { index == 26 && 
-      <Assessment9
-      questions={questions}
-      index={index}
-      handleChange={handleChange}
-      setIndex={setIndex}
-      value={value}
-      setValue={setValue}
-      /> 
-    }
-    
+
+      {(questions.length > 0 && questions.length < 26)& (
+        <Question
+          questions={questions}
+          index={index}
+          handleChange={handleChange}
+          setIndex={setIndex}
+          value={value}
+          setValue={setValue}
+        />
+      )}
+
+      {index == 26 && (
+        <Assessment9
+          questions={questions}
+          index={index}
+          handleChange={handleChange}
+          setIndex={setIndex}
+          value={value}
+          setValue={setValue}
+          submitReview={submitReview}
+        />
+      )}
+
+      <Button onClick={() => autofill()}>AUTOFILL</Button>
     </>
   );
 }
