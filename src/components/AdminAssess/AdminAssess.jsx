@@ -52,8 +52,8 @@ function AdminAssess() {
                 <TableCell align="right">{row?.semesterNumber}</TableCell>
                 <TableCell align="right">{row?.fiscalYear}</TableCell>
                 <TableCell align="right">{row?.schoolId}</TableCell>
-                <TableCell align="right">{row?.startDate}</TableCell>
-                <TableCell align="right">{row?.endDate}</TableCell>
+                <TableCell align="right">{new Date(row?.startDate).toDateString()}</TableCell>
+                <TableCell align="right">{new Date(row?.endDate).toDateString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>
