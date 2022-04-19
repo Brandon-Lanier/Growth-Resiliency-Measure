@@ -1,4 +1,5 @@
 const express = require('express');
+const { object } = require('prop-types');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -140,12 +141,33 @@ router.get("/", async (req, res) => {
         console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
         console.log('qryArguments is', qryArguments)
 
-        const queryObject = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
-        const query = queryObject.rows;
+        // get data from database
+        const query = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
+        const queryObjects = query.rows;
+
+        // organize data into arrays based off time frames
+        // first get a list of all academic years in the data
+        let years = queryObjects.map(function (object) {
+            return object.fiscalYear;
+        });
+        let uniqueYears = [...new Set(years)];
+
+        // create new arrays of data based on year
+        let allYears = []
+        for (let year of uniqueYears) {
+            let array = []
+            for (let object of queryObjects) {
+                if (object.fiscalYear == year) {
+                    array.push(object)
+                }
+            }
+            // push new array of data into allYears
+            allYears.push(array)
+        }
 
         // sends query in correct form
         try {
-            res.send(query);
+            res.send(allYears);
         } catch (err) {
             res.sendStatus(500);
         }
