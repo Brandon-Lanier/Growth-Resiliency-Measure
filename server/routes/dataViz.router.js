@@ -18,6 +18,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.query);
+        let termSelector = ''
         let grade = '';
         let race = '';
         let eip = '';
@@ -30,6 +31,15 @@ router.get("/", (req, res) => {
             req.query.yearStart,
             req.query.yearEnd
         ]
+
+        switch (req.query.timeFrames) {
+            case 'term':
+                termSelector = ', "assessmentBatches"."semesterNumber"'
+                break;
+            // default is 'year'
+            default:
+                break;
+        }
 
         // check if the req.query has a filter
         // if so, add WHERE text to the pg query text and add parameters to pool.query
@@ -107,6 +117,7 @@ router.get("/", (req, res) => {
         SELECT avg("scores"."score") AS "averageScore", 
         "questions"."measureName",
         "assessmentBatches"."fiscalYear"
+        ${termSelector}
         FROM "scores"
         JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
@@ -120,6 +131,7 @@ router.get("/", (req, res) => {
         AND "questions"."measureName" <> 'Qualitative'
         GROUP BY "questions"."measureName",
         "assessmentBatches"."fiscalYear"
+        ${termSelector}
         `;
 
 
