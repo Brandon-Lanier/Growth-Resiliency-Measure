@@ -47,27 +47,49 @@ function AdminDashData() {
 
   const getData = () => {
     if (report != []) {
-      let labels = report?.map((item) => item.measureName);
-      let dataSets = report?.map((measure) => measure.measureName);
+      console.log('REPORT NOT EMPTY, REPORT IS', report)
+      let firstDataset = report[0]
+      let labels = firstDataset?.map((item) => item.measureName);
+
+
+      // KELSEY WORK HERE //
+
+      let datasets = []
+      function getIndividualDataset(report) {
+        for(let dataset of report) {
+          let array = []
+          for(let object of dataset) {
+            array.push(object.averageScore)
+          }
+          datasets.push(array)
+        }
+      }
+      getIndividualDataset(report)
+      console.log('DATASETS ARE', datasets)
+
+      // KELSEY WORK ENDS //
+
       let data = {
         labels: labels,
         datasets: [
           {
             label: "2022",
-            data: dataSets,
+            data: datasets[0],
             backgroundColor: "rgba(255, 99, 132, 0.2)",
-            borderColor: "rgba(255, 99, 132, 1)",
+            borderColor: "rgba(30, 99, 132, 1)",
             borderWidth: 1,
-          },
+          }
+          ,
           {
             label: "2021",
-            data: dataSets,
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            data: datasets[1],
+            backgroundColor: "rgba(70, 160, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
           },
-        ], 
+        ],
       };
+      console.log('DATA IS', data)
       return data;
     } else {
       let data = {
@@ -124,7 +146,7 @@ function AdminDashData() {
         />
       </div>
       <div className="dash-filter-data-container">
-      <Typography variant="h6">
+        <Typography variant="h6">
           Filters:
         </Typography>
       </div>

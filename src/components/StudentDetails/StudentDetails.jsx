@@ -67,6 +67,7 @@ function StudentDetails(){
     ],
   };
 
+  console.log('DATA FROM STUDENTS GRAPH IS', data)
 
     return (
         <>  
