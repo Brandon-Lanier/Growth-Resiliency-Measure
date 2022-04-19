@@ -33,6 +33,8 @@ router.get("/", async (req, res) => {
             req.query.yearEnd
         ]
 
+        // add columns to query if a time frame of term or batch are chosen
+        // otherwise it will just pull a year column
         switch (req.query.timeFrames) {
             case 'term':
                 timeFrameSelector = ', "assessmentBatches"."semesterNumber"'
@@ -46,7 +48,6 @@ router.get("/", async (req, res) => {
 
         // check if the req.query has a filter
         // if so, add WHERE text to the pg query text and add parameters to pool.query
-
         switch (req.query.grade) {
             case 'all':
                 break;
