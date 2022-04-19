@@ -72,11 +72,11 @@ router.get("/adminStudent/:id", (req, res) => {
   if (req.isAuthenticated()) {
     
     const qryTxt = `
-    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", TO_CHAR("date", 'YYYY') AS "year", "scores"."assessmentBatchId" FROM "scores"
+    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", "scores"."date", "scores"."assessmentBatchId" FROM "scores"
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
     WHERE "scores"."userId" = $1 AND "questions"."measureName" <> 'Qualitative'
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId", "scores"."date"
-    ORDER BY "measure";`;
+    ORDER BY "date";`;
     pool.query(qryTxt, [req.params.id])
       .then((result) => {
         res.send(result.rows);
@@ -89,4 +89,25 @@ router.get("/adminStudent/:id", (req, res) => {
     res.sendStatus(403);
   }
 });
+
+router.get("/testdates/:id", (req, res) => {
+  console.log('req.params.id is', req.params.id)
+  if (req.isAuthenticated()) {
+    const qryTxt = `
+    SELECT min("date")AS "First Test Date", max("date")AS "Last Test Date" FROM "scores"
+    WHERE "userId" = $1;
+    `
+    pool.query(qryTxt, [req.params.id])
+      .then((result) => {
+        res.send(result.rows);
+        console.log("result", result.rows);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
+
 module.exports = router;
