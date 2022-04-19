@@ -1,4 +1,5 @@
 const express = require('express');
+const { object } = require('prop-types');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -15,58 +16,38 @@ const router = express.Router();
 //     lunchStatus: 'all'
 //   }
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.query);
-        let year = '';
-        let semester = '';
-        let batch = '';
+        let timeFrameSelector = ''
         let grade = '';
         let race = '';
         let eip = '';
         let gender = '';
         let lunchStatus = '';
-        let counter = 1;
+        let counter = 3;
 
         let qryArguments = [
-            req.query.schoolId
+            req.query.schoolId,
+            req.query.yearStart,
+            req.query.yearEnd
         ]
+
+        // add columns to query if a time frame of term or batch are chosen
+        // otherwise it will just pull a year column
+        switch (req.query.timeFrames) {
+            case 'term':
+                timeFrameSelector = ', "assessmentBatches"."semesterNumber"'
+                break;
+            case 'batch':
+                timeFrameSelector = ', "assessmentBatches"."semesterNumber", "assessmentBatches"."batchNumber"'
+            default:
+                // default is 'year'
+                break;
+        }
 
         // check if the req.query has a filter
         // if so, add WHERE text to the pg query text and add parameters to pool.query
-        switch (req.query.year) {
-            // NEED TO UPDATE IF THEY CAN SELECT MULTIPLE YEARS
-            case 'all':
-                break;
-            default:
-                counter++;
-                year = `AND "assessmentBatches"."fiscalYear" = $${counter} `;
-                qryArguments.push(req.query.year);
-                break;
-        }
-
-        switch (req.query.term) {
-            // NEED TO UPDATE IF THEY CAN SELECT MULTIPLE SEMESTERS
-            case 'all':
-                break;
-            default:
-                counter++;
-                semester = `AND "assessmentBatches"."semesterNumber" = $${counter} `;
-                qryArguments.push(req.query.term);
-                break;
-        }
-
-        switch (req.query.batch) {
-            case 'all':
-                break;
-            default:
-                counter++;
-                batch = `AND "assessmentBatches"."batchNumber" = $${counter} `;
-                qryArguments.push(req.query.batch);
-                console.log('batch is', batch);
-                break;
-        }
-
         switch (req.query.grade) {
             case 'all':
                 break;
@@ -138,38 +119,156 @@ router.get("/", (req, res) => {
 
         const qryTextOne = `
         SELECT avg("scores"."score") AS "averageScore", 
-        "questions"."measureName"
+        "questions"."measureName",
+        "assessmentBatches"."fiscalYear"
+        ${timeFrameSelector}
         FROM "scores"
         JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
-        WHERE "students"."schoolId" = $1`;
+        WHERE "students"."schoolId" = $1
+        AND "assessmentBatches"."fiscalYear" BETWEEN $2 AND $3`;
 
-        const qryTextTwo = year + semester + batch + grade + race + eip + gender + lunchStatus;
+        const qryTextTwo = grade + race + eip + gender + lunchStatus;
 
         const qryTextThree = `
         AND "questions"."measureName" <> 'Qualitative'
-        GROUP BY "questions"."measureName"
+        GROUP BY "questions"."measureName",
+        "assessmentBatches"."fiscalYear"
+        ${timeFrameSelector}
         `;
 
 
         console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
         console.log('qryArguments is', qryArguments)
 
-        pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments)
-            .then((result) => {
-                res.send(result.rows);
-                console.log("result", result.rows);
-            })
-            .catch((err) => {
-                res.sendStatus(500);
-            });
+        // get data from database
+        const query = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
+        const queryObjects = query.rows;
+
+        // organize data into arrays based off time frames
+        // first get a list of all academic years in the data
+        let years = queryObjects.map(function (object) {
+            return object.fiscalYear;
+        });
+        let uniqueYears = [...new Set(years)];
+
+        // create new arrays of data based on year
+        let allYears = []
+        for (let year of uniqueYears) {
+            let array = []
+            for (let object of queryObjects) {
+                if (object.fiscalYear == year) {
+                    array.push(object)
+                }
+            }
+            // push new array of data into allYears
+            allYears.push(array)
+        }
+
+        // sends query in correct form
+        try {
+            res.send(allYears);
+        } catch (err) {
+            res.sendStatus(500);
+        }
     } else {
         res.sendStatus(403);
     }
 });
 
 
-
+// [
+//     {
+//         "averageScore": "3.5555555555555556",
+//         "measureName": "Balanced",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5555555555555556",
+//         "measureName": "Balanced",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0333333333333333",
+//         "measureName": "Connection ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0333333333333333",
+//         "measureName": "Connection ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5833333333333333",
+//         "measureName": "Contribution ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5833333333333333",
+//         "measureName": "Contribution ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "2.3333333333333333",
+//         "measureName": "Empathy",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "2.3333333333333333",
+//         "measureName": "Empathy",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Self-Confidence ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Self-Confidence ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "2.7083333333333333",
+//         "measureName": "Self-Control",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "2.7083333333333333",
+//         "measureName": "Self-Control",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "Self-Expression",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "Self-Expression",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Understanding adaptability ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.0000000000000000",
+//         "measureName": "Understanding adaptability ",
+//         "fiscalYear": 2022
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "self-Confidence ",
+//         "fiscalYear": 2021
+//     },
+//     {
+//         "averageScore": "3.5000000000000000",
+//         "measureName": "self-Confidence ",
+//         "fiscalYear": 2022
+//     }
+// ]
 
 module.exports = router;
