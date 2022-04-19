@@ -194,7 +194,7 @@ VALUES
 INSERT INTO "lunchStatus"("status")
 VALUES
 (E'na'),
-(E'free');
+(E'free'),
 (E'reduced');
 
 --DROP TABLE "admin";
