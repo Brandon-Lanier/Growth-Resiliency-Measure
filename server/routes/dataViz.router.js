@@ -105,7 +105,8 @@ router.get("/", (req, res) => {
 
         const qryTextOne = `
         SELECT avg("scores"."score") AS "averageScore", 
-        "questions"."measureName"
+        "questions"."measureName",
+        "assessmentBatches"."fiscalYear"
         FROM "scores"
         JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
@@ -117,7 +118,8 @@ router.get("/", (req, res) => {
 
         const qryTextThree = `
         AND "questions"."measureName" <> 'Qualitative'
-        GROUP BY "questions"."measureName"
+        GROUP BY "questions"."measureName",
+        "assessmentBatches"."fiscalYear"
         `;
 
 
