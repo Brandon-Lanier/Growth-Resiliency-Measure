@@ -1,12 +1,29 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const nodemailer = require('nodemailer');
 
 const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const encryptLib = require("../modules/encryption");
 const { batch } = require("react-redux");
+const { default: axios } = require("axios");
+
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    type: 'OAuth2',
+    user: process.env.EMAIL,
+    pass: process.env.WORD,
+    clientId: process.env.OAUTH_CLIENTID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN
+  }
+});
+
+
 
 
 //-------------------------------Get route for student CSV export averaged scores-----------------------------------
@@ -116,33 +133,39 @@ router.post("/", async (req, res) => {
     console.log("post route hit server side");
     console.log('req.body is', req.body);
 
+    let passwordArray = [];
+
     // CREATE NEW USER LOOP ================== 
     for (let student of req.body.studentArray) {
 
       // Username is email
       const username = student.email;
 
-      let password; 
+      // gets a simple password from the dino pass api 
+      
+      let password = await axios.get('https://www.dinopass.com/password/simple'); 
+      console.log('password is', password.data);
+      
 
       //Need to check if this is individual or CSV upload. Individual student will have entered a password
-      if (student.password.length > 0){
-        console.log('inside submtted passworld', student.password);
-        password = encryptLib.encryptPassword(student.password);
+      // if (student.password.length > 0){
+      //   console.log('inside submtted passworld', student.password);
+      //   password = encryptLib.encryptPassword(student.password);
         
-      } else {
+      // } else {
         // Password encryption
-        password = encryptLib.encryptPassword(student.firstName + student.studentId);
-      }
+        EncryptedPassword = encryptLib.encryptPassword(password.data);
+      // }
 
 
 
       console.log("username is", username);
-      console.log("password is", password);
+      console.log("password is", EncryptedPassword);
 
       const sqlAddUser = `INSERT INTO "user" (username, password)
       VALUES ($1, $2) RETURNING id;`;
 
-      const userId = await connection.query(sqlAddUser, [username, password]);
+      const userId = await connection.query(sqlAddUser, [username, EncryptedPassword]);
 
 
       /// ======= INSERT INTO STUDENTS TABLE WITH RETURNED ID
@@ -164,8 +187,31 @@ router.post("/", async (req, res) => {
         student.schoolId,
       ];
       await connection.query(sqlAddStudent, queryInserts);
+
+      passwordArray.push({email:student.email, password:password.data})
     }
     await connection.query('COMMIT');
+
+    for (let user of passwordArray){
+
+      // setting up our mail options 
+      let mailOptions = {
+        from: 'growthresiliencymeasure@gmail.com',
+        to: user.email,
+        subject: 'Nodemailer Project',
+        text: `Hi from your nodemailer project. Your password is: ${user.password}`
+      };
+      
+      transporter.sendMail(mailOptions, function(err, data) {
+        if (err) {
+          console.log("Error " + err);
+        } else {
+          console.log("Email sent successfully");
+        }
+      });
+    }
+      
+
   } catch (error) {
     await connection.query("ROLLBACK");
     console.log("Rolling Back", error);
