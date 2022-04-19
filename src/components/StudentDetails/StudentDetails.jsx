@@ -52,18 +52,32 @@ function StudentDetails(){
     datasets: [
       {
         label: [`${scores[0]?.year}-Test#${scores[0]?.assessmentBatchId}`],
-        data: [scores[0]?.avgScore, scores[2]?.avgScore, scores[4]?.avgScore, scores[6]?.avgScore, scores[10]?.avgScore, scores[12]?.avgScore, scores[14]?.avgScore, scores[16]?.avgScore],
+        data: [scores[0]?.avgScore, scores[2]?.avgScore, scores[4]?.avgScore, scores[6]?.avgScore, scores[8]?.avgScore, scores[10]?.avgScore, scores[12]?.avgScore, scores[14]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
         label: [`${scores[1]?.year}-Test#${scores[1]?.assessmentBatchId}`],
-        data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore, scores[17]?.avgScore],
+        data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[9]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
+      // {
+      //   label: [`${scores[1]?.year}-Test#${scores[1]?.assessmentBatchId}`],
+      //   data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore, scores[17]?.avgScore],
+      //   backgroundColor: "rgba(255, 99, 132, 0.2)",
+      //   borderColor: "rgba(255, 99, 132, 1)",
+      //   borderWidth: 1,
+      // },
+      // {
+      //   label: [`${scores[1]?.year}-Test#${scores[1]?.assessmentBatchId}`],
+      //   data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore, scores[17]?.avgScore],
+      //   backgroundColor: "rgba(255, 99, 132, 0.2)",
+      //   borderColor: "rgba(255, 99, 132, 1)",
+      //   borderWidth: 1,
+      // },
     ],
   };
 

@@ -74,7 +74,7 @@ router.get("/adminStudent/:id", (req, res) => {
     const qryTxt = `
     SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", TO_CHAR("date", 'YYYY') AS "year", "scores"."assessmentBatchId" FROM "scores"
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
-    WHERE "scores"."userId" = $1
+    WHERE "scores"."userId" = $1 AND "questions"."measureName" <> 'Qualitative'
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId", "scores"."date"
     ORDER BY "measure";`;
     pool.query(qryTxt, [req.params.id])
