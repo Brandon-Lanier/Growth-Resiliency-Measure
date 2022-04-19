@@ -94,7 +94,7 @@ router.get("/testdates/:id", (req, res) => {
   console.log('req.params.id is', req.params.id)
   if (req.isAuthenticated()) {
     const qryTxt = `
-    SELECT min("date")AS "First Test Date", max("date")AS "Last Test Date" FROM "scores"
+    SELECT min(to_char("date", 'MM-YYYY'))AS "First Test Date", max(to_char("date",'MM-YYYY'))AS "Last Test Date" FROM "scores"
     WHERE "userId" = $1;
     `
     pool.query(qryTxt, [req.params.id])
