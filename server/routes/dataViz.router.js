@@ -18,54 +18,21 @@ const router = express.Router();
 router.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.query);
-        let year = '';
-        let semester = '';
-        let batch = '';
         let grade = '';
         let race = '';
         let eip = '';
         let gender = '';
         let lunchStatus = '';
-        let counter = 1;
+        let counter = 3;
 
         let qryArguments = [
-            req.query.schoolId
+            req.query.schoolId,
+            req.query.yearStart,
+            req.query.yearEnd
         ]
 
         // check if the req.query has a filter
         // if so, add WHERE text to the pg query text and add parameters to pool.query
-        switch (req.query.year) {
-            // NEED TO UPDATE IF THEY CAN SELECT MULTIPLE YEARS
-            case 'all':
-                break;
-            default:
-                counter++;
-                year = `AND "assessmentBatches"."fiscalYear" = $${counter} `;
-                qryArguments.push(req.query.year);
-                break;
-        }
-
-        switch (req.query.term) {
-            // NEED TO UPDATE IF THEY CAN SELECT MULTIPLE SEMESTERS
-            case 'all':
-                break;
-            default:
-                counter++;
-                semester = `AND "assessmentBatches"."semesterNumber" = $${counter} `;
-                qryArguments.push(req.query.term);
-                break;
-        }
-
-        switch (req.query.batch) {
-            case 'all':
-                break;
-            default:
-                counter++;
-                batch = `AND "assessmentBatches"."batchNumber" = $${counter} `;
-                qryArguments.push(req.query.batch);
-                console.log('batch is', batch);
-                break;
-        }
 
         switch (req.query.grade) {
             case 'all':
@@ -143,9 +110,10 @@ router.get("/", (req, res) => {
         JOIN "students" ON "scores"."userId" = "students"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
-        WHERE "students"."schoolId" = $1`;
+        WHERE "students"."schoolId" = $1
+        AND "assessmentBatches"."fiscalYear" BETWEEN $2 AND $3`;
 
-        const qryTextTwo = year + semester + batch + grade + race + eip + gender + lunchStatus;
+        const qryTextTwo = grade + race + eip + gender + lunchStatus;
 
         const qryTextThree = `
         AND "questions"."measureName" <> 'Qualitative'
