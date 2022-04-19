@@ -26,7 +26,7 @@ function StudentDetails(){
   const history = useHistory ();
   const dispatch = useDispatch();
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
-  const [userId, setUserId] = useState (studentDetails.details.id)
+  // const [userId, setUserId] = useState (studentDetails.details.id)
   const scores = useSelector((store) => store.scores.indScoresReducer);
   console.log(scores)
   ChartJS.register(
@@ -37,12 +37,6 @@ function StudentDetails(){
     Tooltip,
     Legend
   );
-
-  useEffect(() => {
-    dispatch({ type: "FETCH_IND_SCORES",
-               payload: userId
-});
-  }, []);
 
   const data = {
     labels: [
@@ -57,16 +51,15 @@ function StudentDetails(){
     ],
     datasets: [
       {
-        label: [scores[0].year],
-        data: [scores[0].avgScore, scores[2].avgScore, scores[4].avgScore, scores[6].avgScore, scores[10].avgScore, scores[12].avgScore, scores[14].avgScore,scores[16].avgScore],
+        label: [`${scores[0]?.year}-Test#${scores[0]?.assessmentBatchId}`],
+        data: [scores[0]?.avgScore, scores[2]?.avgScore, scores[4]?.avgScore, scores[6]?.avgScore, scores[10]?.avgScore, scores[12]?.avgScore, scores[14]?.avgScore, scores[16]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
-      // {scores[0].assessmentBatchId}
       {
-        label: 2,
-        data: [scores[1].avgScore, scores[3].avgScore, scores[5].avgScore, scores[7].avgScore, scores[11].avgScore, scores[13].avgScore, scores[15].avgScore,scores[17].avgScore],
+        label: [`${scores[1]?.year}-Test#${scores[1]?.assessmentBatchId}`],
+        data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore, scores[17]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
@@ -87,7 +80,7 @@ function StudentDetails(){
           <div className="detailsContainer">
           <br></br>
           <br></br>
-          <h3>{studentDetails.details.firstName}<span> </span>{studentDetails.details.lastName}</h3>
+          <h2>{studentDetails.details.firstName}<span> </span>{studentDetails.details.lastName}</h2>
           <h3>{studentDetails.details.name}</h3>
           <h4>Class of {studentDetails.details.graduationYear}</h4>
           <FormControl sx={{minWidth: 100}} size="small">
