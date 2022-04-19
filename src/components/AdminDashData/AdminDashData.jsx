@@ -48,18 +48,25 @@ function AdminDashData() {
   const getData = () => {
     if (report != []) {
       let labels = report?.map((item) => item.measureName);
-      let dataSets = report?.map((values) => values.averageScore);
+      let dataSets = report?.map((measure) => measure.measureName);
       let data = {
         labels: labels,
         datasets: [
           {
-            label: "All Students",
+            label: "2022",
             data: dataSets,
             backgroundColor: "rgba(255, 99, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
           },
-        ],
+          {
+            label: "2021",
+            data: dataSets,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ], 
       };
       return data;
     } else {
