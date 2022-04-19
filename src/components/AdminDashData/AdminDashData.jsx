@@ -7,7 +7,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Radar } from "react-chartjs-2";
+import { Radar, getElementAtEvent } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -18,8 +18,11 @@ import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
 import { Select } from "@mui/material";
+import schoolsReducer from "../../redux/reducers/schools.reducer";
+import DateSelector from "../DateSelector/DateSelector";
 
 function AdminDashData() {
+
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -29,36 +32,57 @@ function AdminDashData() {
     Legend
   );
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch({ type: "FETCH_STUDENT_SCORES" });
     dispatch({ type: "FETCH_ALL_SCORES" });
+    dispatch({ type: "FETCH_ALL_SCHOOLS" });
   }, []);
 
-  const scores = useSelector((store) => store.scores.adminAllScores);
+  const dispatch = useDispatch();
 
-  let data = {
-    labels: [
-      "Balance",
-      "Confidence",
-      "Adaptability",
-      "Connection",
-      "Contribution",
-      "Empathy",
-      "Expression",
-      "Self Control",
-    ],
-    datasets: [
-      {
-        label: "All Students",
-        data: [2, 4.3, 3, 4, 2, 3, 1, 3],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
-    ],
+  
+
+  const [dataSet, setDataSet] = useState('year')
+  const [dateRange, setDateRange] = useState([2021,2022]);
+  const scores = useSelector((store) => store.scores.adminAllScores);
+  const schools = useSelector((store) => store.schools);
+  const report = useSelector((store) => store.report);
+
+
+  const getData = () => {
+    if (report != []) {
+      let labels = report?.map((item) => item.measureName);
+      let dataSets = report?.map((values) => values.averageScore);
+      let data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "All Students",
+            data: dataSets,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+      return data;
+    } else {
+      let data = {
+        labels: [],
+        datasets: [
+          {
+            label: "No Data Available",
+            data: [0],
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+      return data;
+    }
   };
+
 
   const [year, setYear] = useState(0);
   const [schoolId, setSchoolId] = useState(1);
@@ -75,22 +99,30 @@ function AdminDashData() {
       type: "GENERATE_REPORT",
       payload: {
         schoolId: schoolId,
-        year: year,
-        term: term,
+        yearStart: dateRange[0],
+        yearEnd: dateRange[1],
+        timeFrames: dataSet,
         grade: grade,
         ethnicity: ethnicity,
         gender: gender,
         eip: eip,
         lunchStatus: lunchStatus,
-        batch: batch,
       },
     });
   };
 
-  console.log("Admin all scores", scores);
+
   return (
     <>
       <div className="dash-filter-data-container">
+        <DateSelector 
+        dateRange={dateRange} 
+        setDateRange={setDateRange}
+        dataSet={dataSet}
+        setDataSet={setDataSet}
+        />
+        </div>
+        <div className="dash-filter-data-container">
         <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="schoolLabel">School</InputLabel>
           <Select
@@ -100,10 +132,12 @@ function AdminDashData() {
             label="School"
             onChange={(e) => setSchoolId(e.target.value)}
           >
-            <MenuItem value={1}>1</MenuItem>
+            {schools.map((school) => {
+              return <MenuItem value={school.id}>{school.name}</MenuItem>;
+            })}
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 100 }} size="small">
+        {/* <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="yearLabel">Year</InputLabel>
           <Select
             labelId="yearLabel"
@@ -117,8 +151,8 @@ function AdminDashData() {
             <MenuItem value={2021}>2021</MenuItem>
             <MenuItem value={2020}>2020</MenuItem>
           </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 100 }} size="small">
+        </FormControl> */}
+        {/* <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="termLabel">Term</InputLabel>
           <Select
             labelId="termLabel"
@@ -131,7 +165,7 @@ function AdminDashData() {
             <MenuItem value={1}>Fall</MenuItem>
             <MenuItem value={2}>Spring</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
         <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="gradeLabel">Grade</InputLabel>
           <Select
@@ -213,7 +247,7 @@ function AdminDashData() {
             <MenuItem value="reduced">Reduced</MenuItem>
           </Select>
         </FormControl>
-        <FormControl sx={{ minWidth: 100 }} size="small">
+        {/* <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="batch">Batch</InputLabel>
           <Select
             labelId="batch"
@@ -226,7 +260,7 @@ function AdminDashData() {
             <MenuItem value={1}>1</MenuItem>
             <MenuItem value={2}>2</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
         <Button variant="contained" onClick={generateReport}>
           Generate Report
         </Button>
@@ -234,7 +268,7 @@ function AdminDashData() {
       </div>
       <div className="dash-graph-container">
         <Radar
-          data={data}
+          data={getData()}
           options={{
             events: ["click"],
             scales: {
@@ -252,7 +286,6 @@ function AdminDashData() {
           }}
         />
       </div>
-      <div></div>
     </>
   );
 }

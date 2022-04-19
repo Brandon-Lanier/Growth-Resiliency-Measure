@@ -16,12 +16,15 @@ import AdminDashData from "../AdminDashData/AdminDashData";
 import { CardActionArea } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 
+
 function Dashboard() {
 
   
   const students = useSelector((store) => store.studentReducer.studentReducer);
   const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
-
+  const schools = useSelector((store) => store.schools);
+ 
+ 
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,15 +33,16 @@ function Dashboard() {
     dispatch({ type: "GET_STUDENTS" });
     dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"});
     dispatch({type: 'FETCH_ADMIN_BATCH'});
+    dispatch({type: 'FETCH_ALL_SCHOOLS'}) // get list of all schools
   }, []);
 
   let batchComplete = () => {
     let percent = (batch.length / students.length) * 100;
     console.log(percent);
-    return percent
+    return percent.toFixed(2)
   }
 
-
+console.log('schools', schools);
   return (
     <Container sx={{ flexGrow: 1, mt: 10 }}>
       <Grid container spacing={2}>
