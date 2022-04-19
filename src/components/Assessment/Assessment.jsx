@@ -14,6 +14,7 @@ import "./Assessment.css";
 import userSaga from "../../redux/sagas/user.saga";
 
 import Question from "./question.jsx";
+import Assessment9 from "./Assessment9.jsx";
 
 function Assessment() {
   const history = useHistory();
@@ -27,7 +28,7 @@ function Assessment() {
     dispatch({ type: "FETCH_BATCH" }); // get batch number from DB.
   }, []);
 
-  const [value, setValue] = useState("");
+
 
   const defaultValues = {
     1: 0,
@@ -60,6 +61,7 @@ function Assessment() {
   };
 
   const [formValues, setFormValues] = useState(defaultValues);
+  const [value, setValue] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,35 +71,51 @@ function Assessment() {
       ...formValues,
       [name]: value,
     });
+    setValue(value); 
   };
 
 
   const handleNext = () => {
     setIndex(index + 1);
-
-    // if (value1 && value2 && value3) {
-    //   dispatch({
-    //     type: "SET_BALANCE",
-    //     payload: { 1: Number(value1), 2: Number(value2), 3: Number(value3) },
-    //   });
-    //   history.push("/assessment2");
-    // } else {
-    //   alert("Please enter a value for each statement.");
-    // }
+    setValue();
   };
+
+  // if (value1 && value2 && value3) {
+  //   dispatch({
+  //     type: "SET_BALANCE",
+  //     payload: { 1: Number(value1), 2: Number(value2), 3: Number(value3) },
+  //   });
+  //   history.push("/assessment2");
+  // } else {
+  //   alert("Please enter a value for each statement.");
+  // }
 
   return (
     <>
       <div id="progress-bar">
         <ProgressBar progress={0} />
       </div>
+      { (questions.length > 0 && questions.length < 26 ) && 
       <Question
-        questions={questions}
-        index={index}
-        handleChange={handleChange}
-        setIndex={setIndex}
-        value={value}
-      />
+      questions={questions}
+      index={index}
+      handleChange={handleChange}
+      setIndex={setIndex}
+      value={value}
+      setValue={setValue}
+      /> 
+    }
+    { index == 26 && 
+      <Assessment9
+      questions={questions}
+      index={index}
+      handleChange={handleChange}
+      setIndex={setIndex}
+      value={value}
+      setValue={setValue}
+      /> 
+    }
+    
     </>
   );
 }

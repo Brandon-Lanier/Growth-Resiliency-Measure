@@ -14,18 +14,24 @@ import "./Assessment.css";
 import userSaga from "../../redux/sagas/user.saga";
 
 
-function Question({questions , index, setIndex , handleChange}) {
+function Question({questions , index, setIndex , handleChange, value, setValue}) {
 
-    const [value, setValue] = useState();
+    
+    
+   
     
     const handleNext = () => {
+        if(value == ''){
+          alert('MUST ANSWER QUESTION');
+          return;
+        }
+        setValue('');
         setIndex(index + 1);
-        setValue();
     }
 
     const handleBack = () => {
         setIndex(index - 1);
-        setValue();
+        setValue('');
     }
 
     return (
@@ -39,14 +45,14 @@ function Question({questions , index, setIndex , handleChange}) {
           }}
         >
           <div className="question-container">
-            <Typography variant="b1" className="question-text">
+            <Typography variant="h5" className="question-text">
               {questions[index].name}
             </Typography>
             <FormControl className="form-control">
               <RadioGroup
                 row
                 aria-labelledby="radio-buttons"
-                name={questions[index].id}
+                
                 value={value}
                 onChange={handleChange}
               >
@@ -58,41 +64,49 @@ function Question({questions , index, setIndex , handleChange}) {
                   control={<Radio />}
                   label="1"
                   labelPlacement="bottom"
+                  name={questions[index].id}
                 />
                 <FormControlLabel
                   value={2}
                   control={<Radio />}
                   label="2"
                   labelPlacement="bottom"
+                  name={questions[index].id}
                 />
                 <FormControlLabel
                   value={3}
                   control={<Radio />}
                   label="3"
                   labelPlacement="bottom"
+                  name={questions[index].id}
                 />
                 <FormControlLabel
                   value={4}
                   control={<Radio />}
                   label="4"
                   labelPlacement="bottom"
+                  name={questions[index].id}
                 />
                 <FormControlLabel
                   value={5}
                   control={<Radio />}
                   label="5"
                   labelPlacement="bottom"
+                  name={questions[index].id}
                 />
               </RadioGroup>
               <div className="agree-cont">
               <Typography variant="b2">Disagree</Typography>
               <Typography variant="b2">Agree</Typography>
             </div>
-            </FormControl>
-           
-          </div>
-          
           <div className="assess-buttons-container">
+            <Button
+              variant="contained"
+              className="assess-buttons"
+              onClick={handleBack}
+            >
+              Back
+            </Button>
             <Button
               variant="contained"
               className="assess-buttons"
@@ -101,6 +115,10 @@ function Question({questions , index, setIndex , handleChange}) {
               Next
             </Button>
           </div>
+            </FormControl>
+           
+          </div>
+          
         </Container>
         </Slide>
       );

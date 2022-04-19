@@ -8,27 +8,23 @@ import { Slide } from "@mui/material";
 import ProgressBar from "./ProgressBar";
 import "./Assessment.css";
 
-function Assessment9() {
+function Assessment9({questions , index, setIndex , handleChange, value, setValue}) {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const questions = useSelector((store) => store.questions);
   
-
-  const [value27, setValue27] = useState('');
-  
-
-  const handleChange27 = (e) => {
-    setValue27(e.target.value);
-  };
 
   const handleNext = () => {
-      dispatch({ type: "SET_QUALITATIVE", payload: {qualitative: value27}});
-      history.push('/review');
-  };
+    if(value == ''){
+      alert('MUST ANSWER QUESTION');
+      return;
+    }
+    setValue('');
+    setIndex(index + 1);
+}
 
 const handleBack = () => {
-    history.goBack();
+    setIndex(index -1);
 }
 
   return (
@@ -41,20 +37,17 @@ const handleBack = () => {
         mt: 10
       }}
     >
-      <div id="progress-bar">
-      <ProgressBar progress={88.88}/>
-      </div>
       <div className="question-container">
-        <Typography variant="b1" className="question-text">
-          {questions[26]?.name}
-        </Typography>
+      <Typography variant="h5" className="question-text">
+              {questions[index].name}
+            </Typography>
         <TextField
           id="qualitative"
           label="Let Us Know"
           multiline
           rows={4}
-          value={value27}
-          onChange={handleChange27}
+          value={value}
+          onChange={handleChange}
           inputProps={{ maxLength: 255 }}
           sx={{mt: 3}}
         />
