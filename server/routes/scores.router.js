@@ -72,7 +72,7 @@ router.get("/adminStudent/:id", (req, res) => {
   if (req.isAuthenticated()) {
     
     const qryTxt = `
-    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", "scores"."date", "scores"."assessmentBatchId" FROM "scores"
+    SELECT "questions"."measureName" AS "measure", avg("scores"."score") AS "avgScore", to_char("date",'YYYY') AS "year", "scores"."assessmentBatchId" FROM "scores"
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
     WHERE "scores"."userId" = $1 AND "questions"."measureName" <> 'Qualitative'
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId", "scores"."date"
@@ -94,7 +94,7 @@ router.get("/testdates/:id", (req, res) => {
   console.log('req.params.id is', req.params.id)
   if (req.isAuthenticated()) {
     const qryTxt = `
-    SELECT min(to_char("date", 'MM-YYYY'))AS "First Test Date", max(to_char("date",'MM-YYYY'))AS "Last Test Date" FROM "scores"
+    SELECT min(to_char("date", 'YYYY'))AS "firstTestDate", max(to_char("date",'MM/YYYY'))AS "lastTestDate" FROM "scores"
     WHERE "userId" = $1;
     `
     pool.query(qryTxt, [req.params.id])
