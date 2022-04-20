@@ -35,10 +35,33 @@ function* fetchIndScores(studentId) {
     }
 }
 
+function* fetchTestDates(studentId) {
+    try {
+        const id = studentId.payload
+        console.log ('in fetchTestDates, payload is', id)
+        const dates = yield axios.get(`/scores/testdates/${id}`);
+        yield put({type: 'SET_TEST_DATES', payload: dates.data})
+    } catch(error) {
+        console.log('ADMIN Error getting a single student scores in postScoresSaga', error);  
+    }
+}
+
+function* fetchTotal(studentId) {
+    try {
+        const id = studentId.payload
+        console.log ('in fetchTestDates, payload is', id)
+        const totalTests = yield axios.get(`/scores/testtotal/${id}`);
+        yield put({type: 'SET_TEST_TOTAL', payload: totalTests.data})
+    } catch(error) {
+        console.log('ADMIN Error getting a single student test total in ScoresSaga', error);  
+    }
+}
 function* postScoresSaga() {
     yield takeLatest('POST_SCORES', postScores);
     yield takeLatest('FETCH_STUDENT_SCORES', fetchStudentScores);
     yield takeLatest('FETCH_IND_SCORES', fetchIndScores);
+    yield takeLatest('FETCH_TEST_DATES', fetchTestDates);
+    yield takeLatest('FETCH_TEST_TOTAL', fetchTotal)
 };
 
 export default postScoresSaga;

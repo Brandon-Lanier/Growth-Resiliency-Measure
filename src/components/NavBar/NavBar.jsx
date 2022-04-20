@@ -195,6 +195,10 @@ function ResponsiveDrawer(props) {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
+          paperProps={{
+            color: 'black',
+            backgroundColor: 'black'
+          }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -211,10 +215,10 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#000" }}>
+                  <ListItemIcon sx={{ color: "#D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={item.text}/>
                 </ListItem>
               );
             })}
@@ -222,19 +226,15 @@ function ResponsiveDrawer(props) {
         </Drawer>
         <Drawer
           variant="permanent"
-          PaperProps={{
-            sx: {
-              backgroundColor: "rgba(255, 255, 255, 0.08)",
-              color: "fff",
-            }
-          }}
           sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backgroundColor: "#111827",
+            color: '#fff',
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "rgba(255, 255, 255, 0.08)"
+              backgroundColor: "#111827",
+
             },
             
           }}
@@ -245,10 +245,10 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#000" }}>
+                  <ListItemIcon sx={{ color: "#D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={item.text} sx={{color: '#D1D5DB'}}/>
                 </ListItem>
               );
             })}

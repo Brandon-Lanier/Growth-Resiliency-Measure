@@ -6,10 +6,7 @@ import Box from "@mui/material/Box";
 import "./StudentList.css";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
-import { getAccordionDetailsUtilityClass } from "@mui/material";
-import { ContactlessOutlined } from "@mui/icons-material";
-import { IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import BackButton from "../BackButton/Backbutton";
 
 function StudentList() {
   const dispatch = useDispatch();
@@ -101,16 +98,14 @@ function StudentList() {
       },
     });
     dispatch({ type: "FETCH_IND_SCORES", payload: details.id });
+    dispatch({ type: "FETCH_TEST_DATES", payload: details.id });
+    dispatch({ type: "FETCH_TEST_TOTAL", payload: details.id });
     history.push("/studentdetails");
   }
   //show datagrid of current students and import csv upload button component for display on this page.
   return (
     <>
-      <div className="arrow-back">
-        <IconButton onClick={() => history.goBack()}>
-          <ArrowBackIosNewIcon />
-        </IconButton>
-      </div>
+      <BackButton history={history} />
       <div className="student-list-container">
         <CsvUpload />
         <div id="grid-container">
