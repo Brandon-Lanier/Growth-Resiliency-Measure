@@ -47,49 +47,51 @@ function AdminDashData() {
 
   const getData = () => {
     if (report != []) {
-      console.log('REPORT NOT EMPTY, REPORT IS', report)
-      let firstDataset = report[0]
+      console.log('REPORT NOT EMPTY, REPORT IS', report);
+      let firstDataset = report[0];
       let labels = firstDataset?.map((item) => item.measureName);
 
 
       // KELSEY WORK HERE //
 
-      let datasets = []
+      let datasetNumbers = []
       function getIndividualDataset(report) {
-        for(let dataset of report) {
-          let array = []
-          for(let object of dataset) {
+        for (let dataset of report) {
+          let array = [];
+          for (let object of dataset) {
             array.push(object.averageScore)
           }
-          datasets.push(array)
+          datasetNumbers.push(array)
         }
       }
-      getIndividualDataset(report)
-      console.log('DATASETS ARE', datasets)
+      getIndividualDataset(report);
+      console.log('DATASETNUMBERS ARE', datasetNumbers);
 
+      let datasets = [];
+      let colorPalette = ['230, 25, 75', '60, 180, 75', '255, 225, 25', '0, 130, 200', '245, 130, 48', '145, 30, 180', '70, 240, 240', '240, 50, 230', '210, 245, 60', '250, 190, 212', '0, 128, 128', '220, 190, 255', '170, 110, 40', '255, 250, 200', '128, 0, 0', '170, 255, 195', '128, 128, 0', '255, 215, 180', '0, 0, 128', '128, 128, 128']
+      function returnIndividualDataset(datasets) {
+        for (let i = 0; i < datasetNumbers.length; i++) {
+          console.log('INSIDE FOR LOOP, datasetsNumbers is', datasetNumbers);
+          datasets.push({
+            label: report[i][0].fiscalYear,
+            data: datasetNumbers[i],
+            backgroundColor: `rgba(${colorPalette[i]}, 0.2)`,
+            borderColor: `rgba(${colorPalette[i]}, 1)`,
+            borderWidth: 1,
+          })
+        }
+        console.log('DATASETS ARE', datasets)
+      }
+      returnIndividualDataset(datasets)
+      
       // KELSEY WORK ENDS //
-
+      
       let data = {
         labels: labels,
-        datasets: [
-          {
-            label: "2022",
-            data: datasets[0],
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
-            borderColor: "rgba(30, 99, 132, 1)",
-            borderWidth: 1,
-          }
-          ,
-          {
-            label: "2021",
-            data: datasets[1],
-            backgroundColor: "rgba(70, 160, 132, 0.2)",
-            borderColor: "rgba(255, 99, 132, 1)",
-            borderWidth: 1,
-          },
-        ],
+        datasets: datasets,
       };
       console.log('DATA IS', data)
+      console.log('DATASETS ARE', datasets)
       return data;
     } else {
       let data = {
