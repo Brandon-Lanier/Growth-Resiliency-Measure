@@ -211,8 +211,12 @@ router.get("/", async (req, res) => {
 
 
         // sends query in correct form
+        
         try {
+            console.log('all years', allYears);
+            
             res.send(allYears);
+        
         } catch (err) {
             res.sendStatus(500);
         }
