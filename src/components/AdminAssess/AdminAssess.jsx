@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,11 +10,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+import { IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import AddBatch from '../AddBatch/AddBatch';
 import './AdminAssess.css';
 
 function AdminAssess() {
+
   const dispatch = useDispatch();
+  const history = useHistory();
   const batch = useSelector((store) => store.adminBatch.adminBatches);
 
   useEffect(() => {
@@ -25,6 +30,13 @@ function AdminAssess() {
 
   return (
       <>
+          <div className="arrow-back">
+            <IconButton
+            onClick={() => history.goBack()}
+            >
+            <ArrowBackIosNewIcon />
+            </IconButton>
+      </div>
     <Box
       sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
     >

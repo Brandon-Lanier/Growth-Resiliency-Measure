@@ -1,22 +1,26 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import CsvUpload from "../CsvUpload/CsvUpload";
 import Box from "@mui/material/Box";
-import './StudentList.css'
+import "./StudentList.css";
 import Button from "@mui/material/Button";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { getAccordionDetailsUtilityClass } from "@mui/material";
 import { ContactlessOutlined } from "@mui/icons-material";
+import { IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 function StudentList() {
-  const dispatch = useDispatch()
-  const history = useHistory ();
+  const dispatch = useDispatch();
+  const history = useHistory();
   //pull student list from student reducer/store
   const students = useSelector((store) => store.studentReducer.studentReducer);
-  const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
+  const studentDetails = useSelector(
+    (store) => store.studentReducer.studentDetailsReducer
+  );
   console.log(students);
-  console.log(studentDetails.details)
+  console.log(studentDetails.details);
   const columns = [
     //create a button for each line.
     {
@@ -27,14 +31,14 @@ function StudentList() {
       disableClickEventBubbling: true,
       renderCell: (params: CellParams) => (
         <Button
-        variant="outlined"
+          variant="outlined"
           onClick={() => {
-            storeDetails(params.row)//send what row was clicked to function storeDetails
+            storeDetails(params.row); //send what row was clicked to function storeDetails
           }}
         >
           Details
         </Button>
-      )
+      ),
     },
     {
       field: "firstName",
@@ -87,38 +91,40 @@ function StudentList() {
       width: 60,
     },
   ];
-  //dispatch selected student and history.push to details page 
-function storeDetails(details){
-  console.log(details)
-  dispatch({
-    type: 'SET_DETAILS',
-    payload: {
-        details
-    }
-})
-dispatch({ type: "FETCH_IND_SCORES",
-payload: details.id
-})
-history.push('/studentdetails')
-}
-//show datagrid of current students and import csv upload button component for display on this page.
+  //dispatch selected student and history.push to details page
+  function storeDetails(details) {
+    console.log(details);
+    dispatch({
+      type: "SET_DETAILS",
+      payload: {
+        details,
+      },
+    });
+    dispatch({ type: "FETCH_IND_SCORES", payload: details.id });
+    history.push("/studentdetails");
+  }
+  //show datagrid of current students and import csv upload button component for display on this page.
   return (
     <>
-    <div className="student-list-container">
-    <CsvUpload />
-      <div id="grid-container">
-      <DataGrid
-        rows={students}
-        columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[20]}
-        disableSelectionOnClick
-        autoHeight={true}
-        autoPageSize={true}
-      />
+      <div className="arrow-back">
+        <IconButton onClick={() => history.goBack()}>
+          <ArrowBackIosNewIcon />
+        </IconButton>
       </div>
-    </div>
-
+      <div className="student-list-container">
+        <CsvUpload />
+        <div id="grid-container">
+          <DataGrid
+            rows={students}
+            columns={columns}
+            pageSize={20}
+            rowsPerPageOptions={[20]}
+            disableSelectionOnClick
+            autoHeight={true}
+            autoPageSize={true}
+          />
+        </div>
+      </div>
     </>
   );
 }

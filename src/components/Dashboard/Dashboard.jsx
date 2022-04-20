@@ -68,7 +68,7 @@ console.log('schools', schools);
                   Active Assessments
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  {batchComplete()}%
+                  {batchComplete()}% Completed.
                 </Typography>
                 <Box sx={{ width: "100%" }}>
                 <LinearProgress variant="determinate" value={batchComplete()} />

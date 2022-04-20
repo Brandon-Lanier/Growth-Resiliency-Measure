@@ -8,11 +8,10 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import SchoolIcon from "@mui/icons-material/School";
-
 import "./NavBar.css";
 import UserPage from "../UserPage/UserPage";
 import { useDispatch, useSelector } from "react-redux";
-
+import { makeStyles } from "@material-ui/core/styles";
 import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -153,7 +152,6 @@ function ResponsiveDrawer(props) {
   }
 
 
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -213,7 +211,7 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#fff" }}>
+                  <ListItemIcon sx={{ color: "#000" }}>
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText primary={item.text} />
@@ -224,6 +222,12 @@ function ResponsiveDrawer(props) {
         </Drawer>
         <Drawer
           variant="permanent"
+          PaperProps={{
+            sx: {
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
+              color: "fff",
+            }
+          }}
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.08)",
             display: { xs: "none", sm: "block" },
@@ -241,7 +245,7 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#fff" }}>
+                  <ListItemIcon sx={{ color: "#000" }}>
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText primary={item.text} />

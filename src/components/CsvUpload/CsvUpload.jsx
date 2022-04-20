@@ -83,7 +83,7 @@ function CsvUpload() {
         getRemoveFileProps,
       }: any) => (
         <>
-            <Button variant="contained"  type='button' endIcon={<SendIcon />}{...getRootProps()}>
+            <Button variant="contained"  sx={{width: "25%", m: 3}} type='button' endIcon={<SendIcon />}{...getRootProps()}>
               Upload CSV
             </Button>
           <ProgressBar />
