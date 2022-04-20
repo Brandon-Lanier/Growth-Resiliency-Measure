@@ -246,9 +246,9 @@ function AdminDashData() {
             onChange={(e) => setLunchStatus(e.target.value)}
           >
             <MenuItem value="all">Select All</MenuItem>
-            <MenuItem value="na">N/A</MenuItem>
-            <MenuItem value="free">Free</MenuItem>
-            <MenuItem value="reduced">Reduced</MenuItem>
+            <MenuItem value={1}>N/A</MenuItem>
+            <MenuItem value={2}>Free</MenuItem>
+            <MenuItem value={3}>Reduced</MenuItem>
           </Select>
         </FormControl>
         {/* <FormControl sx={{ minWidth: 100 }} size="small">
