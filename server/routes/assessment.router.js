@@ -3,6 +3,7 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 let currentDate = new Date();
+let lastDate = new Date(+new Date + 12096e5)
 
 // Pull all assessments for admin
 router.get('/', (req, res) => {
@@ -18,17 +19,19 @@ router.get('/', (req, res) => {
 //Pull all completed assessments for an active admin batch
 router.get("/adminbatch", async (req, res) => {
   if (req.isAuthenticated()) {
-    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate";`;
-    let assessments = await pool.query(checkActiveSql, [currentDate]);
-    // console.log("assesssment id", assessments.rows[0].id);
+    console.log('lastDate', lastDate);
+    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
+    let assessments = await pool.query(checkActiveSql, [currentDate, lastDate]);
+    console.log("assesssment id", assessments.rows[0].id);
 
     // check the scores table to see if a student has taken the test.
     const checkQry = `SELECT "students"."userId", "students"."firstName", "students"."lastName", "scores"."assessmentBatchId", "scores"."date" FROM "students"
         JOIN "scores" ON "students"."userId" = "scores"."userId"
-        WHERE "scores"."assessmentBatchId" = 1
+        JOIN "assessmentBatches" ON "assessmentBatches"."id" = "scores"."assessmentBatchId"
+        WHERE "scores"."assessmentBatchId" = $1 AND "scores"."date" <= "assessmentBatches"."endDate"
         GROUP BY "students"."userId", "students"."firstName", "students"."lastName", "scores"."assessmentBatchId", "scores"."date";
-        ;`;
-    const completedStudents = await pool.query(checkQry);
+        ;`;   
+    const completedStudents = await pool.query(checkQry, [assessments.rows[0].id]);
     try {
       res.send(completedStudents.rows); // This will send back all the students that have completed the active assessment
     } catch (error) {

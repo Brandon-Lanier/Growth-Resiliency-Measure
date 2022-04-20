@@ -8,11 +8,10 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import SchoolIcon from "@mui/icons-material/School";
-
 import "./NavBar.css";
 import UserPage from "../UserPage/UserPage";
 import { useDispatch, useSelector } from "react-redux";
-
+import { makeStyles } from "@material-ui/core/styles";
 import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -27,12 +26,18 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import PageTitle from '../PageTitle/PageTitle';
+import BackButton from "../BackButton/Backbutton";
+
 
 const drawerWidth = 240;
+
 
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const path = useSelector(store => store.path);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -153,7 +158,6 @@ function ResponsiveDrawer(props) {
   }
 
 
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -169,7 +173,6 @@ function ResponsiveDrawer(props) {
         }}
         elevation={1}
       > 
-        
         <Toolbar>
           <IconButton
             color="inherit"
@@ -184,7 +187,12 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap component="div">
             Responsive drawer
           </Typography>*/}
+          <BackButton history={history} />
+           <Typography variant="h5" sx={{ml: 1, mb: 0}}>
+          {path}
+        </Typography>
         </Toolbar>
+       
       </AppBar> 
       <Box
         component="nav"
@@ -197,6 +205,10 @@ function ResponsiveDrawer(props) {
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
+          paperProps={{
+            color: 'black',
+            backgroundColor: 'black'
+          }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -205,6 +217,7 @@ function ResponsiveDrawer(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#111827"
             },
           }}
         >
@@ -213,10 +226,10 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#fff" }}>
+                  <ListItemIcon sx={{ color: "##D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={item.text} sx={{color: '#D1D5DB'}}/>
                 </ListItem>
               );
             })}
@@ -225,12 +238,14 @@ function ResponsiveDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.08)",
+            backgroundColor: "#111827",
+            color: '#fff',
             display: { xs: "none", sm: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: "rgba(255, 255, 255, 0.08)"
+              backgroundColor: "#111827",
+
             },
             
           }}
@@ -241,10 +256,10 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#fff" }}>
+                  <ListItemIcon sx={{ color: "#D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={item.text} sx={{color: '#D1D5DB'}}/>
                 </ListItem>
               );
             })}
