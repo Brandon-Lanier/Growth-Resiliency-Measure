@@ -5,13 +5,13 @@ const router = express.Router();
 
 // -------------------POST to create new school-----------------------
 router.post('/', (req, res) => {
-  console.log('req.body is:', req.body.name);
+  console.log('req.body is:', req.body);
   let queryText = `INSERT INTO "schools" ("name")
   VALUES ($1);`;
 
   let queryInserts = [req.body.name];
 
-    pool.query(queryText, [queryInserts])
+    pool.query(queryText, queryInserts)
     .then((results) => {
       res.sendStatus(200);
     })
