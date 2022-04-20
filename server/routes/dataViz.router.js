@@ -137,7 +137,8 @@ router.get("/", async (req, res) => {
         "assessmentBatches"."fiscalYear"
         ${timeFrameSelector}
         ORDER BY "assessmentBatches"."fiscalYear"
-        ${timeFrameSelector}
+        ${timeFrameSelector},
+        "questions"."measureName";
         `;
 
 
