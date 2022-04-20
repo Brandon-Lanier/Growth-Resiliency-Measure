@@ -136,6 +136,8 @@ router.get("/", async (req, res) => {
         GROUP BY "questions"."measureName",
         "assessmentBatches"."fiscalYear"
         ${timeFrameSelector}
+        ORDER BY "assessmentBatches"."fiscalYear"
+        ${timeFrameSelector}
         `;
 
 
