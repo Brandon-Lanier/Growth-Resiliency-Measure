@@ -121,6 +121,11 @@ input {
   display: flex;
 }
 
+.component-container {
+  width: 100%;
+  margin: 10px;
+}
+
 
 
 

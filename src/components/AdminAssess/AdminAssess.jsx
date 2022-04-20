@@ -10,10 +10,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import { IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import AddBatch from '../AddBatch/AddBatch';
-import './AdminAssess.css';
+import { IconButton } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import AddBatch from "../AddBatch/AddBatch";
+import "./AdminAssess.css";
+import BackButton from "../BackButton/Backbutton";
 
 function AdminAssess() {
 
@@ -25,58 +26,54 @@ function AdminAssess() {
     dispatch({ type: "FETCH_ADMIN_BATCH" });
   }, []);
 
-  console.log(batch);
-  console.log(batch.length);
 
   return (
-      <>
-          <div className="arrow-back">
-            <IconButton
-            onClick={() => history.goBack()}
-            >
-            <ArrowBackIosNewIcon />
-            </IconButton>
-      </div>
-    <Box
-      sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
-    >
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Batch Number</TableCell>
-              <TableCell align="right">Semester Number</TableCell>
-              <TableCell align="right">Year</TableCell>
-              <TableCell align="right">School ID</TableCell>
-              <TableCell align="right">Start Date</TableCell>
-              <TableCell align="right">End Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {batch?.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row?.batchNumber}
-                </TableCell>
-                <TableCell align="right">{row?.semesterNumber}</TableCell>
-                <TableCell align="right">{row?.fiscalYear}</TableCell>
-                <TableCell align="right">{row?.schoolId}</TableCell>
-                <TableCell align="right">{new Date(row?.startDate).toDateString()}</TableCell>
-                <TableCell align="right">{new Date(row?.endDate).toDateString()}</TableCell>
+    <div className="component-container">
+      <BackButton history={history}/>
+      <AddBatch />
+      <Box
+        sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
+      >
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Batch Number</TableCell>
+                <TableCell align="right">Semester Number</TableCell>
+                <TableCell align="right">Year</TableCell>
+                <TableCell align="right">School ID</TableCell>
+                <TableCell align="right">Start Date</TableCell>
+                <TableCell align="right">End Date</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
-    <div className="add-batch">
-    <AddBatch/>
+            </TableHead>
+            <TableBody>
+              {batch?.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row?.batchNumber}
+                  </TableCell>
+                  <TableCell align="right">{row?.semesterNumber}</TableCell>
+                  <TableCell align="right">{row?.fiscalYear}</TableCell>
+                  <TableCell align="right">{row?.schoolId}</TableCell>
+                  <TableCell align="right">
+                    {new Date(row?.startDate).toDateString()}
+                  </TableCell>
+                  <TableCell align="right">
+                    {new Date(row?.endDate).toDateString()}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+      <div className="add-batch">
+        
+      </div>
     </div>
-    </>
-    
   );
 }
 

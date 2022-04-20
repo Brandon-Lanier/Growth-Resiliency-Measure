@@ -26,8 +26,11 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import PageTitle from '../PageTitle/PageTitle';
+
 
 const drawerWidth = 240;
+
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -183,6 +186,7 @@ function ResponsiveDrawer(props) {
             Responsive drawer
           </Typography>*/}
         </Toolbar>
+       
       </AppBar> 
       <Box
         component="nav"
@@ -207,6 +211,7 @@ function ResponsiveDrawer(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#111827"
             },
           }}
         >
@@ -215,10 +220,10 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "#D1D5DB" }}>
+                  <ListItemIcon sx={{ color: "##D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText primary={item.text}/>
+                  <ListItemText primary={item.text} sx={{color: '#D1D5DB'}}/>
                 </ListItem>
               );
             })}

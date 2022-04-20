@@ -1,9 +1,9 @@
 import { useHistory } from "react-router-dom";
 import { IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import './Backbutton.css'
 
 function BackButton({history}) {
-
 
   return (
     <div className="arrow-back">
