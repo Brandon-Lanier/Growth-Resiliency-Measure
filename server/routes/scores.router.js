@@ -29,9 +29,13 @@ let currentDate = new Date();
 // POST scores for individual student after taking test
 router.post("/", async (req, res) => {
   if (req.isAuthenticated()) {
+    console.log('req.body is', req.body);
+    
     const batch = req.body[0]; //Batch id from user
     const answers = req.body[1]; //All answers in an array
-    const qualitative = answers[8].qualitative; //pulling the qualitative answer out of the array
+    console.log('answers are',answers);
+    
+    const qualitative = answers[26]; //pulling the qualitative answer out of the array
     answers.pop();
     const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
     const user = req.user.id;
