@@ -44,7 +44,7 @@ function Dashboard() {
 
 console.log('schools', schools);
   return (
-    <Container sx={{ flexGrow: 1, mt: 10 }}>
+    <Container sx={{ flexGrow: 1}}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Card elevation={4}>

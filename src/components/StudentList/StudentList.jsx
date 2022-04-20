@@ -99,6 +99,12 @@ function storeDetails(details){
 dispatch({ type: "FETCH_IND_SCORES",
 payload: details.id
 })
+dispatch({ type: "FETCH_TEST_DATES",
+payload: details.id
+})
+dispatch({ type: "FETCH_TEST_TOTAL",
+payload: details.id
+})
 history.push('/studentdetails')
 }
 //show datagrid of current students and import csv upload button component for display on this page.
