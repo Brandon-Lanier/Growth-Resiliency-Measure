@@ -19,6 +19,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import BackButton from "../BackButton/Backbutton";
 
 function StudentDetails(){
 //pull first and last assessment date from the DB
@@ -97,6 +98,7 @@ function StudentDetails(){
                 </Typography>
               </CardContent>
           </Card> */}
+          <BackButton history={history}/>
           <div className="detailsContainer">
           <h2>{studentDetails?.details.firstName}<span> </span>{studentDetails?.details.lastName}</h2>
           <h4>{studentDetails?.details.name}</h4>
