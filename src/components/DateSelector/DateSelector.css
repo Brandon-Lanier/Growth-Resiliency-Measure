@@ -1,8 +1,5 @@
 #timeframe-select {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-bottom: 10px;
-    align-items: center;
-    align-content: center;
 }

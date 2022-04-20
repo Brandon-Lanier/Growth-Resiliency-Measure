@@ -17,12 +17,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
-import { Select } from "@mui/material";
+import { Select, Typography } from "@mui/material";
 import schoolsReducer from "../../redux/reducers/schools.reducer";
 import DateSelector from "../DateSelector/DateSelector";
 
 function AdminDashData() {
-
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -40,30 +39,34 @@ function AdminDashData() {
 
   const dispatch = useDispatch();
 
-  
-
-  const [dataSet, setDataSet] = useState('year')
-  const [dateRange, setDateRange] = useState([2021,2022]);
+  const [dataSet, setDataSet] = useState("year");
+  const [dateRange, setDateRange] = useState([2021, 2022]);
   const scores = useSelector((store) => store.scores.adminAllScores);
   const schools = useSelector((store) => store.schools);
   const report = useSelector((store) => store.report);
 
-
   const getData = () => {
     if (report != []) {
       let labels = report?.map((item) => item.measureName);
-      let dataSets = report?.map((values) => values.averageScore);
+      let dataSets = report?.map((measure) => measure.measureName);
       let data = {
         labels: labels,
         datasets: [
           {
-            label: "All Students",
+            label: "2022",
             data: dataSets,
             backgroundColor: "rgba(255, 99, 132, 0.2)",
             borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
           },
-        ],
+          {
+            label: "2021",
+            data: dataSets,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+        ], 
       };
       return data;
     } else {
@@ -82,7 +85,6 @@ function AdminDashData() {
       return data;
     }
   };
-
 
   const [year, setYear] = useState(0);
   const [schoolId, setSchoolId] = useState(1);
@@ -111,18 +113,22 @@ function AdminDashData() {
     });
   };
 
-
   return (
     <>
       <div className="dash-filter-data-container">
-        <DateSelector 
-        dateRange={dateRange} 
-        setDateRange={setDateRange}
-        dataSet={dataSet}
-        setDataSet={setDataSet}
+        <DateSelector
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          dataSet={dataSet}
+          setDataSet={setDataSet}
         />
-        </div>
-        <div className="dash-filter-data-container">
+      </div>
+      <div className="dash-filter-data-container">
+      <Typography variant="h6">
+          Filters:
+        </Typography>
+      </div>
+      <div className="dash-filter-data-container">
         <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="schoolLabel">School</InputLabel>
           <Select
@@ -199,8 +205,6 @@ function AdminDashData() {
             <MenuItem value={5}>Mixed</MenuItem>
           </Select>
         </FormControl>
-      </div>
-      <div className="dash-filter-data-container">
         <FormControl sx={{ minWidth: 100 }} size="small">
           <InputLabel id="genderLabel">Gender</InputLabel>
           <Select
