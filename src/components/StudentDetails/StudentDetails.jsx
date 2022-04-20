@@ -21,12 +21,16 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 function StudentDetails(){
+//pull first and last assessment date from the DB
+  const testDates = useSelector((store) => store.scores.testDates);
+  let firstTest = testDates[0]?.firstTestDate
+  let lastTest = testDates[0]?.lastTestDate
+
   const [year, setYear] = useState('');
   const [term, setTerm] = useState('');
   const history = useHistory ();
   const dispatch = useDispatch();
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
-  // const [userId, setUserId] = useState (studentDetails.details.id)
   const scores = useSelector((store) => store.scores.indScoresReducer);
   console.log(scores)
   ChartJS.register(
@@ -37,6 +41,7 @@ function StudentDetails(){
     Tooltip,
     Legend
   );
+
 
   const data = {
     labels: [
@@ -51,15 +56,29 @@ function StudentDetails(){
     ],
     datasets: [
       {
-        label: [`${scores[0]?.year}-Test#${scores[0]?.assessmentBatchId}`],
-        data: [scores[0]?.avgScore, scores[2]?.avgScore, scores[4]?.avgScore, scores[6]?.avgScore, scores[10]?.avgScore, scores[12]?.avgScore, scores[14]?.avgScore, scores[16]?.avgScore],
+        label: [`${scores[0]?.year}-Assessment#${scores[0]?.assessmentBatchId}`],
+        data: [scores[0]?.avgScore, scores[1]?.avgScore, scores[2]?.avgScore, scores[3]?.avgScore, scores[4]?.avgScore, scores[5]?.avgScore, scores[6]?.avgScore, scores[7]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
-        label: [`${scores[1]?.year}-Test#${scores[1]?.assessmentBatchId}`],
-        data: [scores[1]?.avgScore, scores[3]?.avgScore, scores[5]?.avgScore, scores[7]?.avgScore, scores[11]?.avgScore, scores[13]?.avgScore, scores[15]?.avgScore, scores[17]?.avgScore],
+        label: [`${scores[8]?.year}-Assessment#${scores[8]?.assessmentBatchId}`],
+        data: [scores[8]?.avgScore, scores[9]?.avgScore, scores[10]?.avgScore, scores[11]?.avgScore, scores[12]?.avgScore, scores[13]?.avgScore, scores[14]?.avgScore, scores[15]?.avgScore],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: [`${scores[16]?.year}-Assessment#${scores[16]?.assessmentBatchId}`],
+        data: [scores[16]?.avgScore, scores[17]?.avgScore, scores[18]?.avgScore, scores[19]?.avgScore, scores[20]?.avgScore, scores[21]?.avgScore, scores[22]?.avgScore, scores[23]?.avgScore],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: [`${scores[24]?.year}-Assessment#${scores[24]?.assessmentBatchId}`],
+        data: [scores[24]?.avgScore, scores[25]?.avgScore, scores[26]?.avgScore, scores[27]?.avgScore, scores[28]?.avgScore, scores[29]?.avgScore, scores[30]?.avgScore, scores[31]?.avgScore],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
@@ -80,9 +99,11 @@ function StudentDetails(){
           <div className="detailsContainer">
           <br></br>
           <br></br>
-          <h2>{studentDetails.details.firstName}<span> </span>{studentDetails.details.lastName}</h2>
-          <h3>{studentDetails.details.name}</h3>
-          <h4>Class of {studentDetails.details.graduationYear}</h4>
+          <h2>{studentDetails?.details.firstName}<span> </span>{studentDetails?.details.lastName}</h2>
+          <h4>{studentDetails?.details.name}</h4>
+          <h4>Class of {studentDetails?.details.graduationYear}</h4>
+          <h5>First assessment taken in {firstTest}</h5>
+          <h5>Most recent taken on {lastTest}</h5>
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
