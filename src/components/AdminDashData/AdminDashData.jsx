@@ -47,7 +47,7 @@ function AdminDashData() {
 
   const getData = () => {
     if (report != []) {
-      console.log('REPORT NOT EMPTY, REPORT IS', report);
+      console.log('REPORT IS', report);
       let firstDataset = report[0];
       let labels = firstDataset?.map((item) => item.measureName);
 
@@ -71,7 +71,6 @@ function AdminDashData() {
       let colorPalette = ['230, 25, 75', '60, 180, 75', '255, 225, 25', '0, 130, 200', '245, 130, 48', '145, 30, 180', '70, 240, 240', '240, 50, 230', '210, 245, 60', '250, 190, 212', '0, 128, 128', '220, 190, 255', '170, 110, 40', '255, 250, 200', '128, 0, 0', '170, 255, 195', '128, 128, 0', '255, 215, 180', '0, 0, 128', '128, 128, 128']
       function returnIndividualDataset(datasets) {
         for (let i = 0; i < datasetNumbers.length; i++) {
-          console.log('INSIDE FOR LOOP, datasetsNumbers is', datasetNumbers);
           datasets.push({
             label: report[i][0].fiscalYear,
             data: datasetNumbers[i],
@@ -90,8 +89,6 @@ function AdminDashData() {
         labels: labels,
         datasets: datasets,
       };
-      console.log('DATA IS', data)
-      console.log('DATASETS ARE', datasets)
       return data;
     } else {
       let data = {

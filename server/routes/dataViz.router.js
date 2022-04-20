@@ -124,7 +124,7 @@ router.get("/", async (req, res) => {
         ${timeFrameSelector}
         FROM "scores"
         JOIN "students" ON "scores"."userId" = "students"."userId"
-        JOIN "assessmentBatches" ON "assessmentBatches"."schoolId" = "students"."schoolId"
+        JOIN "assessmentBatches" ON "scores"."assessmentBatchId" = "assessmentBatches"."id"
         JOIN "questions" ON "scores"."questionId" = "questions"."id"
         WHERE "students"."schoolId" = $1
         AND "assessmentBatches"."fiscalYear" BETWEEN $2 AND $3`;
