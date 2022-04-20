@@ -27,6 +27,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PageTitle from '../PageTitle/PageTitle';
+import BackButton from "../BackButton/Backbutton";
 
 
 const drawerWidth = 240;
@@ -35,6 +36,8 @@ const drawerWidth = 240;
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const path = useSelector(store => store.path);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -170,7 +173,6 @@ function ResponsiveDrawer(props) {
         }}
         elevation={1}
       > 
-        
         <Toolbar>
           <IconButton
             color="inherit"
@@ -185,6 +187,10 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap component="div">
             Responsive drawer
           </Typography>*/}
+          <BackButton history={history} />
+           <Typography variant="h5" sx={{ml: 1, mb: 0}}>
+          {path}
+        </Typography>
         </Toolbar>
        
       </AppBar> 

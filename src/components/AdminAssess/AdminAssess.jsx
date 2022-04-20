@@ -26,6 +26,7 @@ function AdminAssess() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_ADMIN_BATCH" });
+    dispatch({ type: 'SET_ASSESS_PATH'})
   }, []);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -50,7 +51,6 @@ function AdminAssess() {
 
   return (
     <div className="component-container">
-      <BackButton history={history}/>
       <AddBatch />
       <Divider sx={{m:5}}/>
       <Typography variant="h5">

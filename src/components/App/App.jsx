@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import '@fontsource/roboto/400.css';
 import {
   HashRouter as Router,
   Redirect,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import CsvUpload from "../CsvUpload/CsvUpload";
@@ -29,6 +29,10 @@ const datagridSx = {
 
 
 function StudentList() {
+
+  useEffect(() => {
+    dispatch({ type: 'SET_STUDENT_PATH'})
+  }, [])
   const dispatch = useDispatch();
   const history = useHistory();
   //pull student list from student reducer/store
