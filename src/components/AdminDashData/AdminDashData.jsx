@@ -286,11 +286,12 @@ function AdminDashData() {
             <MenuItem value={2}>2</MenuItem>
           </Select>
         </FormControl> */}
-        <Button variant="contained" onClick={generateReport}>
-          Generate Report
-        </Button>
+       
         {/* </Stack> */}
       </div>
+      <Button variant="contained" onClick={generateReport}>
+          Generate Report
+        </Button>
       <div className="dash-graph-container">
         <Radar
           data={getData()}

@@ -8,6 +8,10 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { CSVLink } from "react-csv";
 import axios from 'axios';
+import { Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 function CsvExport() {
@@ -18,6 +22,8 @@ function CsvExport() {
   const [gender, setGender] = useState(``);
   const [lunch, setLunch] = useState('');
   const [csvObj, setCsvObj] = useState([]);
+
+  const history = useHistory();
 
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -59,15 +65,27 @@ function CsvExport() {
   }
 
   return (
-    <Box pt={15}
+    <>
+      <div className="arrow-back">
+            <IconButton
+            onClick={() => history.goBack()}
+            >
+            <ArrowBackIosNewIcon />
+            </IconButton>
+      </div>
+    <Box 
       sx={{
           width: "100%",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
           }}>
+            
       <Stack sx={{width: "25%"}}
         spacing={2}
         direction="column">
+          <Typography variant="h5">
+              Export CSV
+          </Typography>
         <FormControl>
           <InputLabel id="select-helper-label">Year</InputLabel>
           <Select labelId="select-helper-label" id="select-helper-label"
@@ -78,7 +96,9 @@ function CsvExport() {
               <em>None</em>
             </MenuItem>
             <MenuItem value={2022}>2022</MenuItem>
-            <MenuItem value={2023}>2023</MenuItem>
+            <MenuItem value={2021}>2021</MenuItem>
+            <MenuItem value={2020}>2020</MenuItem>
+            <MenuItem value={2029}>2019</MenuItem>
           </Select>
         </FormControl>
         <FormControl>
@@ -160,6 +180,7 @@ function CsvExport() {
         <CSVLink data={csvObj}>Download Data</CSVLink>
       </Stack>
     </Box>
+    </>
 
   )
 
