@@ -4,14 +4,17 @@ import {useSelector} from 'react-redux';
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import BackButton from '../BackButton/Backbutton';
 
 function Schools(props) {
 
   const store = useSelector((store) => store);
   const [heading, setHeading] = useState('Schools Component');
   const [schoolName, setSchoolName] = useState()
+
+  const history = useHistory();
 
   const handleSubmit = () => {
     axios.post('/api/schools', {name: schoolName})
@@ -24,6 +27,7 @@ function Schools(props) {
 
   return (
     <div>
+      <BackButton history={history}/>
       <h2>{heading}</h2>
       <Box sx={{
           display: 'flex',        
