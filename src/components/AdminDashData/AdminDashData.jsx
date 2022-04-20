@@ -87,7 +87,7 @@ function AdminDashData() {
           }
           let label = ''
           if (report[i][0].batchNumber) {
-            label = `${semester} ${report[i][0].fiscalYear} - batch ${report[i][0].batchNumber}`
+            label = `${semester} ${report[i][0].fiscalYear} - Batch ${report[i][0].batchNumber}`
           } else if (report[i][0].semesterNumber) {
             label = `${semester} ${report[i][0].fiscalYear}`
           } else {
@@ -292,9 +292,9 @@ function AdminDashData() {
             onChange={(e) => setLunchStatus(e.target.value)}
           >
             <MenuItem value="all">Select All</MenuItem>
-            <MenuItem value="na">N/A</MenuItem>
-            <MenuItem value="free">Free</MenuItem>
-            <MenuItem value="reduced">Reduced</MenuItem>
+            <MenuItem value={1}>N/A</MenuItem>
+            <MenuItem value={2}>Free</MenuItem>
+            <MenuItem value={3}>Reduced</MenuItem>
           </Select>
         </FormControl>
         {/* <FormControl sx={{ minWidth: 100 }} size="small">
