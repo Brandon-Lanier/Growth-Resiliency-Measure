@@ -9,6 +9,7 @@ import {
 } from "chart.js";
 import './StudentDetails.css'
 import { Radar } from "react-chartjs-2";
+import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -43,6 +44,12 @@ function StudentDetails(){
     Legend
   );
 
+  let handleEditClick = () => {
+    //dispatch student info to redux store. 
+    dispatch({type: 'SET_EDIT_STUDENT', payload: "hi" });
+    history.push ('/studentedit');
+    //route to edit form
+  }
 
   const data = {
     labels: [
@@ -99,6 +106,7 @@ function StudentDetails(){
           </Card> */}
           <div className="detailsContainer">
           <h2>{studentDetails?.details.firstName}<span> </span>{studentDetails?.details.lastName}</h2>
+          <Button variant="outlined" onClick={handleEditClick}>EDIT STUDENT</Button>
           <h4>{studentDetails?.details.name}</h4>
           <h4>Class of {studentDetails?.details.graduationYear}</h4>
           <h5>First assessment taken in {firstTest}</h5>
