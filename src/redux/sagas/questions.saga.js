@@ -10,7 +10,8 @@ function* fetchQuestionsSaga() {
 function* fetchQuestions() {
     try {
         const questions = yield axios.get('/questions');
-        yield put({type: 'SET_QUESTIONS', payload: questions.data})
+        // console.log('INSIDE FETCH QUESTIONS');
+        yield put({type: 'SET_QUESTIONS', payload: questions.data});
     } catch(error) {
         console.log('Failed to get questions in questions saga', error);
     }

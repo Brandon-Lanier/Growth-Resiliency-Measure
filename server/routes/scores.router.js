@@ -30,11 +30,15 @@ let currentDate = new Date();
 // POST scores for individual student after taking test
 router.post("/", async (req, res) => {
   if (req.isAuthenticated()) {
+    console.log('req.body is', req.body);
+    
     const batch = req.body[0]; //Batch id from user
     const answers = req.body[1]; //All answers in an array
-    const qualitative = answers[8].qualitative; //pulling the qualitative answer out of the array
+    console.log('answers are',answers);
+    
+    const qualitative = answers[26]; //pulling the qualitative answer out of the array
     answers.pop();
-    const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
+    // const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
     const user = req.user.id;
     const date = currentDate; //grab todays date
     const connection = await pool.connect();
@@ -44,16 +48,27 @@ router.post("/", async (req, res) => {
     INSERT INTO "scores" ("userId", "assessmentBatchId", "questionId", "score", "scoreQualitative", "date")
     VALUES ($1, $2, $3, $4, $5, $6)
     ;`;
-      for (let key in scores) {
+      for (let i = 0; i < 26; i++) {
         await connection.query(qryTxt, [
           user,
           batch,
-          key,
-          scores[key],
-          qualitative,
+          i + 1,
+          answers[i],
+          ,
           date,
         ]);
+        console.log('answer at i is',answers[i]);
+        
       }
+      await connection.query(qryTxt, [
+        user,
+        batch,
+        27,
+        ,
+        qualitative,
+        date,
+      ]);
+
       await connection.query("COMMIT");
       res.sendStatus(200);
     } catch (error) {
