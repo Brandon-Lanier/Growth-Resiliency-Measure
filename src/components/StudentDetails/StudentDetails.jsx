@@ -32,7 +32,8 @@ function StudentDetails(){
   const dispatch = useDispatch();
   const studentDetails = useSelector((store) => store.studentReducer.studentDetailsReducer);
   const scores = useSelector((store) => store.scores.indScoresReducer);
-  console.log(scores)
+  const totalTests = useSelector((store) => store.scores.testTotal);
+  console.log(totalTests[0].count)
   ChartJS.register(
     RadialLinearScale,
     PointElement,
@@ -97,13 +98,12 @@ function StudentDetails(){
               </CardContent>
           </Card> */}
           <div className="detailsContainer">
-          <br></br>
-          <br></br>
           <h2>{studentDetails?.details.firstName}<span> </span>{studentDetails?.details.lastName}</h2>
           <h4>{studentDetails?.details.name}</h4>
           <h4>Class of {studentDetails?.details.graduationYear}</h4>
           <h5>First assessment taken in {firstTest}</h5>
           <h5>Most recent taken on {lastTest}</h5>
+          <h5>Total assessments taken: {totalTests[0].count}</h5>
           <FormControl sx={{minWidth: 100}} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
