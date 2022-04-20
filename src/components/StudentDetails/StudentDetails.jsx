@@ -47,7 +47,7 @@ function StudentDetails(){
 
   let handleEditClick = () => {
     //dispatch student info to redux store. 
-    dispatch({type: 'SET_EDIT_STUDENT', payload: "hi" });
+    dispatch({type: 'SET_EDIT_STUDENT', payload: studentDetails  });
     history.push ('/studentedit');
     //route to edit form
   }

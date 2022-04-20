@@ -25,9 +25,9 @@ router.get('/', (req, res) => {
 );
 
 /**
- * POST route template
+ * PUT route template
  */
-router.post('/', (req, res) => {
+router.post('/editstudent', (req, res) => {
   // POST route code here
 });
 
