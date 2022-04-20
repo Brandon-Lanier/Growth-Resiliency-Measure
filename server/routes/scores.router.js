@@ -110,4 +110,23 @@ router.get("/testdates/:id", (req, res) => {
   }
 });
 
+router.get("/testtotal/:id", (req, res) => {
+  console.log('req.params.id is', req.params.id)
+  if (req.isAuthenticated()) {
+    const qryTxt = `
+    SELECT min(to_char("date", 'YYYY'))AS "firstTestDate", max(to_char("date",'MM/YYYY'))AS "lastTestDate" FROM "scores"
+    WHERE "userId" = $1;
+    `
+    pool.query(qryTxt, [req.params.id])
+      .then((result) => {
+        res.send(result.rows);
+        console.log("result", result.rows);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
 module.exports = router;
