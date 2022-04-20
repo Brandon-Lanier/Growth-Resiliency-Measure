@@ -15,7 +15,7 @@ function Review() {
   const handleSubmit = () => {
     console.log("batch is", batch);
     console.log("answers are", answers);
-    dispatch({ type: "POST_SCORES", payload: [1, answers] });
+    dispatch({ type: "POST_SCORES", payload: [batch, answers] });
     history.push("/confirmation");
   };
 

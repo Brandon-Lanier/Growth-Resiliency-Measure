@@ -13,14 +13,14 @@ function Confirmation() {
   return (
     <Slide direction="left" in="open" mountOnEnter unmountOnExit>
     <div className="result-container">
-      {scores?.map((def, index) => {
+      {/* {scores?.map((def, index) => {
           return (
         <div key={index}>
           <p>{def?.measure}</p>
           <p>{Number(def?.avgScore).toFixed(2)}</p>
         </div>
           )
-      })}
+      })} */}
     </div>
     </Slide>
   );

@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     
     const qualitative = answers[26]; //pulling the qualitative answer out of the array
     answers.pop();
-    const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
+    // const scores = Object.assign({}, ...answers); //create a single object to iterate through all answers
     const user = req.user.id;
     const date = currentDate; //grab todays date
     const connection = await pool.connect();
@@ -47,16 +47,27 @@ router.post("/", async (req, res) => {
     INSERT INTO "scores" ("userId", "assessmentBatchId", "questionId", "score", "scoreQualitative", "date")
     VALUES ($1, $2, $3, $4, $5, $6)
     ;`;
-      for (let key in scores) {
+      for (let i = 0; i < 26; i++) {
         await connection.query(qryTxt, [
           user,
           batch,
-          key,
-          scores[key],
-          qualitative,
+          i + 1,
+          answers[i],
+          ,
           date,
         ]);
+        console.log('answer at i is',answers[i]);
+        
       }
+      await connection.query(qryTxt, [
+        user,
+        batch,
+        27,
+        ,
+        qualitative,
+        date,
+      ]);
+
       await connection.query("COMMIT");
       res.sendStatus(200);
     } catch (error) {
