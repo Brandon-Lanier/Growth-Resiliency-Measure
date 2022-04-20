@@ -75,7 +75,9 @@ function Assessment() {
       console.log(formValues);
       // console.log("name is ", name);
       console.log("value is", value);
-      setFormValues([...formValues,value]);
+      let tempArray = formValues;
+      tempArray[index] = value; 
+      setFormValues(tempArray);
       setValue(value);
       console.log(formValues);
     } else { // This inserts the qualitative at the index of 26 
@@ -161,6 +163,7 @@ function Assessment() {
           setIndex={setIndex}
           value={value}
           setValue={setValue}
+          formValues={formValues}
         />
       )}
 

@@ -9,11 +9,19 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import ProgressBar from "./ProgressBar";
+import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 import "./Assessment.css";
 import userSaga from "../../redux/sagas/user.saga";
 
-function Question({ index, setIndex, handleChange, value, setValue }) {
+function Question({
+  index,
+  setIndex,
+  handleChange,
+  value,
+  setValue,
+  formValues,
+}) {
   // const questions = useSelector((store) => store.questions);
 
   let questions = [
@@ -51,13 +59,21 @@ function Question({ index, setIndex, handleChange, value, setValue }) {
       alert("MUST ANSWER QUESTION");
       return;
     }
-    setValue("");
+    if (formValues[index + 1]) {
+      setValue(formValues[index + 1]);
+    } else {
+      setValue("");
+    }
     setIndex(index + 1);
   };
 
   const handleBack = () => {
+    console.log("index is", index);
+    console.log("formvalues is", formValues);
+    let lastIndex = index - 1;
     setIndex(index - 1);
-    setValue("");
+    console.log("formvalues ar index are", formValues[index]);
+    setValue(formValues[lastIndex]);
   };
 
   return (
@@ -76,7 +92,7 @@ function Question({ index, setIndex, handleChange, value, setValue }) {
           </Typography>
           <FormControl className="form-control">
             <RadioGroup
-              row
+              sx={{ display: { sm: "flex-column", lg: "block" },alignContent:'space-between' }}
               aria-labelledby="radio-buttons"
               value={value}
               onChange={handleChange}
@@ -87,51 +103,59 @@ function Question({ index, setIndex, handleChange, value, setValue }) {
               <FormControlLabel
                 value={1}
                 control={<Radio />}
-                label="1"
+                label="1 - Strongly Disagree"
                 labelPlacement="bottom"
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={2}
                 control={<Radio />}
-                label="2"
+                label="2 - Disagree"
                 labelPlacement="bottom"
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={3}
                 control={<Radio />}
-                label="3"
+                label="3 - Neither Agree or Disagree"
                 labelPlacement="bottom"
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={4}
                 control={<Radio />}
-                label="4"
+                label="4 - Agree"
                 labelPlacement="bottom"
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={5}
                 control={<Radio />}
-                label="5"
+                // labelPlacement='auto'
+                label="5 - Strongly Agree"
                 labelPlacement="bottom"
                 name={questions[index].id}
               />
             </RadioGroup>
-            <div className="agree-cont">
+            {/* <Box
+              className="agree-cont"
+              sx={{ display: { xs: "flex", md: "flex" }, p: 5 }}
+            >
               <Typography variant="b2">Disagree</Typography>
               <Typography variant="b2">Agree</Typography>
-            </div>
+            </Box> */}
             <div className="assess-buttons-container">
-              <Button
-                variant="contained"
-                className="assess-buttons"
-                onClick={handleBack}
-              >
-                Back
-              </Button>
+              {index == 0 ? (
+                <span></span>
+              ) : (
+                <Button
+                  variant="contained"
+                  className="assess-buttons"
+                  onClick={handleBack}
+                >
+                  Back
+                </Button>
+              )}
               <Button
                 variant="contained"
                 className="assess-buttons"

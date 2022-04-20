@@ -3,13 +3,21 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Container, Typography } from "@mui/material";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 import { Slide } from "@mui/material";
 import ProgressBar from "./ProgressBar";
 import "./Assessment.css";
 
-function Assessment9({ index, setIndex , handleChange, value, setValue, submitReview, setFormValues, formValues}) {
-
+function Assessment9({
+  index,
+  setIndex,
+  handleChange,
+  value,
+  setValue,
+  submitReview,
+  setFormValues,
+  formValues,
+}) {
   let questions = [
     { id: 1, name: "There is a purpose to my life." },
     { id: 2, name: "I understand why I do things." },
@@ -40,59 +48,75 @@ function Assessment9({ index, setIndex , handleChange, value, setValue, submitRe
     { id: 27, name: "What would help build your resilience?" },
   ];
 
-
   const history = useHistory();
   const dispatch = useDispatch();
-  
 
   const handleNext = () => {
-    if(value == ''){
-      alert('MUST ANSWER QUESTION');
+    if (value == "") {
+      alert("MUST ANSWER QUESTION");
       return;
     }
-    console.log('inside handleNext', formValues, value);
+    console.log("inside handleNext", formValues, value);
     // handleChange();
     // setFormValues([...formValues, value ]);
     // console.log('form');
     submitReview();
-}
+  };
 
-const handleBack = () => {
-  console.log('questions are',questions);
+  const handleBack = () => {
+    console.log("questions are", questions);
     setIndex(index - 1);
-}
+    setValue(formValues[index]);
+  };
 
   return (
     <Slide direction="left" in="open" mountOnEnter unmountOnExit>
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        mt: 10
-      }}
-    >
-      <div className="question-container">
-      <Typography variant="h5" className="question-text">
-              {questions[index].name}
-            </Typography>
-        <TextField
-          id="qualitative"
-          label="Let Us Know"
-          multiline
-          rows={4}
-          value={value}
-          onChange={handleChange}
-          inputProps={{ maxLength: 255 }}
-          sx={{mt: 3}}
-          name={questions[index].id}
-        />
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          mt: 10,
+        }}
+      >
+        <div className="question-container">
+          <Typography variant="h5" className="question-text">
+            {questions[index].name}
+          </Typography>
+          <TextField
+            id="qualitative"
+            label="Let Us Know"
+            multiline
+            rows={4}
+            value={value}
+            onChange={handleChange}
+            inputProps={{ maxLength: 255 }}
+            sx={{ mt: 3 }}
+            name={questions[index].id}
+          />
         </div>
-      <div className="assess-buttons-container">
-        <Button variant="outlined" sx={{m: 2}} className="assess-buttons" onClick={handleBack}>Back</Button>
-        <Button variant="contained" sx={{m: 2}} className="assess-buttons" type="submit" onClick={handleNext}>Next</Button>
+        <div className="assess-buttons-container">
+          <Button
+          
+            variant="outlined"
+            sx={{ m: 2 }}
+            className="assess-buttons"
+            onClick={handleBack}
+          >
+            Back
+          </Button>
+        
+          <Button
+            variant="contained"
+            sx={{ m: 2 }}
+            className="assess-buttons"
+            type="submit"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
         </div>
-    </Container>
+      </Container>
     </Slide>
   );
 }
