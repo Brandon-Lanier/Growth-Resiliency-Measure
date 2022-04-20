@@ -11,7 +11,8 @@ router.get("/", (req, res) => {
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
     WHERE "scores"."userId" = $1
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId"
-    ORDER BY "measure"`;
+    ORDER BY "measure"
+    `;
     pool.query(qryTxt, [req.user.id])
       .then((result) => {
         res.send(result.rows);
@@ -76,7 +77,9 @@ router.get("/adminStudent/:id", (req, res) => {
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
     WHERE "scores"."userId" = $1 AND "questions"."measureName" <> 'Qualitative'
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId", "scores"."date"
-    ORDER BY "date";`;
+    ORDER BY "date"
+    LIMIT 32;
+    `;
     pool.query(qryTxt, [req.params.id])
       .then((result) => {
         res.send(result.rows);
@@ -114,8 +117,7 @@ router.get("/testtotal/:id", (req, res) => {
   console.log('req.params.id is', req.params.id)
   if (req.isAuthenticated()) {
     const qryTxt = `
-    SELECT min(to_char("date", 'YYYY'))AS "firstTestDate", max(to_char("date",'MM/YYYY'))AS "lastTestDate" FROM "scores"
-    WHERE "userId" = $1;
+    SELECT  "userId", COUNT(DISTINCT(date)) FROM scores WHERE "userId" = $1 GROUP BY "userId";
     `
     pool.query(qryTxt, [req.params.id])
       .then((result) => {
