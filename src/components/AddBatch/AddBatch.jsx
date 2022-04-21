@@ -27,6 +27,7 @@ function AddBatch(props) {
   const [heading, setHeading] = useState("Add Assessment Cohort");
 
   const [term, setTerm] = useState(1);
+  const [batch, setBatch] = useState(1);
   const [value1, setValue1] = useState(new Date());
   const [value2, setValue2] = useState(new Date());
   const [valueYear, setValueYear] = useState(new Date());
@@ -37,6 +38,7 @@ function AddBatch(props) {
       endDate: value2.toISOString().split("T")[0],
       fiscalYear: valueYear.toISOString().substring(0, 4),
       term: term,
+      batch: batch,
     };
     console.log("New batch is", newBatch);
     try {
@@ -76,64 +78,78 @@ function AddBatch(props) {
       >
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box style={style}>
-            <Box sx={{display: 'flex', justifyContent: 'center', p: 5}}>
-            <Stack spacing={2}>
-              <Typography variant="h6">
-                New Assessment
-              </Typography>
-              <FormControl >
-                <InputLabel id="demo-simple-select-label">
-                  Term / Semester
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={term}
-                  label="Term / Semester "
-                  onChange={(event) => setTerm(event.target.value)}
-                >
-                  <MenuItem value={1}>First Term</MenuItem>
-                  <MenuItem value={2}>Second Term</MenuItem>
-                  <MenuItem value={3}>Third Term</MenuItem>
-                  <MenuItem value={4}>Fourth Term</MenuItem>
-                </Select>
-              </FormControl>
-              <DatePicker
-                label="Start"
-                value={value1}
-                margin={2}
-                onChange={(newValue) => {
-                  setValue1(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <DatePicker
-                label="End"
-                value={value2}
-                onChange={(newValue) => {
-                  setValue2(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              <DatePicker
-                views={["year"]}
-                label="School Year"
-                value={valueYear}
-                onChange={(newValue) => {
-                  setValueYear(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
-                )}
-              />
-              <Button variant="contained" onClick={handleSubmit}>
-                Submit
-              </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'center', p: 5 }}>
+              <Stack spacing={2}>
+                <Typography variant="h6">
+                  New Assessment
+                </Typography>
+                <FormControl >
+                  <InputLabel id="demo-simple-select-label">
+                    Term / Semester
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={term}
+                    label="Term / Semester "
+                    onChange={(event) => setTerm(event.target.value)}
+                  >
+                    <MenuItem value={1}>First Term</MenuItem>
+                    <MenuItem value={2}>Second Term</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl >
+                  <InputLabel id="demo-simple-select-label">
+                    Batch
+                  </InputLabel>
+
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={batch}
+                    label="batch "
+                    onChange={(event) => setBatch(event.target.value)}
+                  >
+                    <MenuItem value={1}>Batch 1 for semester</MenuItem>
+                    <MenuItem value={2}>Batch 2 for semester</MenuItem>
+                  </Select>
+                </FormControl>
+                <DatePicker
+                  label="Start"
+                  value={value1}
+                  margin={2}
+                  onChange={(newValue) => {
+                    setValue1(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DatePicker
+                  label="End"
+                  value={value2}
+                  onChange={(newValue) => {
+                    setValue2(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DatePicker
+                  views={["year"]}
+                  label="School Year"
+                  value={valueYear}
+                  onChange={(newValue) => {
+                    setValueYear(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
+                />
+                <Button variant="contained" onClick={handleSubmit}>
+                  Submit
+                </Button>
                 <Button variant="outlined" onClick={handleClose}>
-                Cancel
-              </Button>
-              
-            </Stack>
+                  Cancel
+                </Button>
+
+              </Stack>
             </Box>
           </Box>
         </LocalizationProvider>
