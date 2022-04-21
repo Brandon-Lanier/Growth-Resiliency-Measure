@@ -46,7 +46,7 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
         <Typography variant="h6">
             Select Time Frame
         </Typography>
-      <Box sx={{ width: 400 }}>
+      <Box >
         <Slider
           getAriaLabel={() => "Date Range"}
           value={dateRange}
@@ -59,7 +59,7 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
         />
         
       </Box>
-      <Box sx={{ width: 400, display: 'flex', justifyContent: 'center' }}>
+      <Box >
         <FormControl>
           {/* <FormLabel id="Dataset-select">Datasets</FormLabel> */}
           <RadioGroup
