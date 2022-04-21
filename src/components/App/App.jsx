@@ -29,7 +29,7 @@ import Schools from "../Schools/Schools";
 import Assessment from "../Assessment/Assessment";
 import StudentHomepage from "../StudentHomepage/StudentHomepage";
 import StudentDetails from "../StudentDetails/StudentDetails";
-
+import StudentEdit from "../StudentDetails/StudentEdit";
 import "./App.css";
 import Assessment2 from "../Assessment/Assessment2";
 import Assessment3 from "../Assessment/Assessment3";
@@ -63,10 +63,10 @@ function App() {
   return (
     <Router>
       <div id="appContainer">
-        <NavBar />
-
-        {/* <Nav /> */}
+        {user.id && <NavBar />}
         <Switch>
+         <Redirect exact from="/" to="/login" />
+
           <Route path="/students">
             <StudentList />
           </Route>
@@ -98,7 +98,12 @@ function App() {
           >
             {user.permission < 1 ? <StudentHomepage /> : <Dashboard />}
           </ProtectedRoute>
-
+          <ProtectedRoute
+            path="/studentedit"
+            //Goes straight to an assessment if one is available
+          >
+            <StudentEdit />
+            </ProtectedRoute>
           <ProtectedRoute
             path="/student"
             //Goes straight to an assessment if one is available

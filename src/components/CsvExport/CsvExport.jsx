@@ -12,6 +12,7 @@ import { Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useDispatch } from 'react-redux';
 
 
 function CsvExport() {
@@ -24,6 +25,11 @@ function CsvExport() {
   const [csvObj, setCsvObj] = useState([]);
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({type: 'SET_EXPORT_PATH'});
+  }, [])
 
   const handleYear = (event) => {
     setYear(event.target.value);
@@ -66,13 +72,6 @@ function CsvExport() {
 
   return (
     <>
-      <div className="arrow-back">
-            <IconButton
-            onClick={() => history.goBack()}
-            >
-            <ArrowBackIosNewIcon />
-            </IconButton>
-      </div>
     <Box 
       sx={{
           width: "100%",
