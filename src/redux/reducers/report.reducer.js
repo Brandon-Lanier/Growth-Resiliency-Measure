@@ -13,3 +13,4 @@ const reportReducer = (state = [], action) => {
 };
 
 export default reportReducer;
+  

@@ -12,6 +12,9 @@ function* generateReport(action) {
       .join("&");
     const report = yield axios.get(`/dataviz?${queryString}`);
     yield put({ type: "SET_REPORT", payload: report.data });
+    const reportExport = yield axios.get(`/dataviz/export?${queryString}`);
+    yield put({ type: "SET_REPORT_EXPORT", payload: reportExport.data });
+    console.log('SET_REPORT_EXPORT IS', reportExport)
   } catch (error) {
     console.log("Error in generate report saga", error);
   }

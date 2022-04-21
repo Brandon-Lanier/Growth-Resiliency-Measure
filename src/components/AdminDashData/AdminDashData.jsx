@@ -20,6 +20,7 @@ import FormControl from "@mui/material/FormControl";
 import { Select, Typography } from "@mui/material";
 import schoolsReducer from "../../redux/reducers/schools.reducer";
 import DateSelector from "../DateSelector/DateSelector";
+import { CSVLink } from "react-csv";
 
 function AdminDashData() {
   ChartJS.register(
@@ -44,6 +45,7 @@ function AdminDashData() {
   const scores = useSelector((store) => store.scores.adminAllScores);
   const schools = useSelector((store) => store.schools);
   const report = useSelector((store) => store.report);
+  const reportExport = useSelector((store) => store.report);
 
   // render data from db data
   const getData = () => {
@@ -158,6 +160,8 @@ function AdminDashData() {
       },
     });
   };
+
+  console.log('export report is', reportExport)
 
   return (
     <>
@@ -317,7 +321,7 @@ function AdminDashData() {
       <Button variant="contained" onClick={generateReport}>
         Generate Report
       </Button>
-      <CSVLink data={csvObj}>Download Data</CSVLink>
+      <CSVLink data={reportExport}>Download Data</CSVLink>
       <div className="dash-graph-container">
         <Radar
           data={getData()}
