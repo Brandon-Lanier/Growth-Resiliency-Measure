@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 export default function StudentHomepage() {
-  const user = useSelector((store) => store.user);
+  const student = useSelector((store) => store.studentReducer.studentDetailsReducer[0]);
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
@@ -15,6 +15,8 @@ export default function StudentHomepage() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_BATCH" });
+    dispatch({ type: "GET_STUDENT_DETAILS"})
+    // console.log(payload);
   }, []);
 
   // if assessment is available for student, push to assessment page
@@ -25,7 +27,7 @@ export default function StudentHomepage() {
 
   return (
     <>
-    <h2>Welcome, {user.username}</h2>
+    <h2>Welcome, {student?.firstName}!</h2>
       {/* {!batch && 'no assessments available'} */}
       {batch && (
           <Box
