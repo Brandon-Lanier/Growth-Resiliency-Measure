@@ -23,13 +23,14 @@ function Dashboard() {
   const students = useSelector((store) => store.studentReducer.studentReducer);
   const batch = useSelector((store) => store.adminBatch.activeAdminBatch);
   const schools = useSelector((store) => store.schools);
- 
+  
  
 
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({ type: "SET_DASHBOARD_PATH"})
     dispatch({ type: "GET_STUDENTS" });
     dispatch({type: "FETCH_ADMIN_ACTIVE_BATCH"});
     dispatch({type: 'FETCH_ADMIN_BATCH'});
@@ -44,7 +45,7 @@ function Dashboard() {
 
 console.log('schools', schools);
   return (
-    <Container sx={{ flexGrow: 1, mt: 10 }}>
+    <Container sx={{ flexGrow: 1}}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Card elevation={4}>
@@ -68,7 +69,7 @@ console.log('schools', schools);
                   Active Assessments
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
-                  {batchComplete()}%
+                  {batchComplete()}% Completed.
                 </Typography>
                 <Box sx={{ width: "100%" }}>
                 <LinearProgress variant="determinate" value={batchComplete()} />

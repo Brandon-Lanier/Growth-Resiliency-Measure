@@ -1,70 +1,105 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import AddBatch from '../AddBatch/AddBatch';
-import './AdminAssess.css';
+import { IconButton } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import AddBatch from "../AddBatch/AddBatch";
+import { Divider } from "@mui/material";
+import "./AdminAssess.css";
+import BackButton from "../BackButton/Backbutton";
 
 function AdminAssess() {
+
   const dispatch = useDispatch();
+  const history = useHistory();
   const batch = useSelector((store) => store.adminBatch.adminBatches);
 
   useEffect(() => {
     dispatch({ type: "FETCH_ADMIN_BATCH" });
+    dispatch({ type: 'SET_ASSESS_PATH'})
   }, []);
 
-  console.log(batch);
-  console.log(batch.length);
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#111827',
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
   return (
-      <>
-    <Box
-      sx={{ display: "flex", justifyContent: "center", width: "60%", mt: 10 }}
-    >
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Batch Number</TableCell>
-              <TableCell align="right">Semester Number</TableCell>
-              <TableCell align="right">Year</TableCell>
-              <TableCell align="right">School ID</TableCell>
-              <TableCell align="right">Start Date</TableCell>
-              <TableCell align="right">End Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {batch?.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row?.batchNumber}
-                </TableCell>
-                <TableCell align="right">{row?.semesterNumber}</TableCell>
-                <TableCell align="right">{row?.fiscalYear}</TableCell>
-                <TableCell align="right">{row?.schoolId}</TableCell>
-                <TableCell align="right">{row?.startDate}</TableCell>
-                <TableCell align="right">{row?.endDate}</TableCell>
+    <div className="component-container">
+      <AddBatch />
+      <Divider sx={{m:5}}/>
+      <Typography variant="h5">
+          Past Assessments:
+        </Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", width: "60%" }}
+      >
+       
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="left">Batch Number</StyledTableCell>
+                <StyledTableCell align="left">Semester Number</StyledTableCell>
+                <StyledTableCell align="left">Year</StyledTableCell>
+                <StyledTableCell align="left">School ID</StyledTableCell>
+                <StyledTableCell align="left">Start Date</StyledTableCell>
+                <StyledTableCell align="left">End Date</StyledTableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
-    <div className="add-batch">
-    <AddBatch/>
+            </TableHead>
+            <TableBody>
+              {batch?.map((row) => (
+                <StyledTableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {row?.batchNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{row?.semesterNumber}</StyledTableCell>
+                  <StyledTableCell align="left">{row?.fiscalYear}</StyledTableCell>
+                  <StyledTableCell align="left">{row?.schoolId}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {new Date(row?.startDate).toDateString()}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {new Date(row?.endDate).toDateString()}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+      <div className="add-batch">
+        
+      </div>
     </div>
-    </>
-    
   );
 }
 

@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 const studentReducer = (state = [], action) => {
-    console.log (action.payload)
     switch (action.type) {
         case 'SET_STUDENTS':
             return action.payload;
@@ -11,7 +10,6 @@ const studentReducer = (state = [], action) => {
 }
 
 const studentDetailsReducer = (state = [], action) => {
-    console.log (action.payload)
     switch (action.type) {
         case 'SET_DETAILS':
             return action.payload;

@@ -7,7 +7,7 @@ body,
   display: flex
 }
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
 }
 
@@ -120,4 +120,14 @@ input {
 #app-container {
   display: flex;
 }
+
+.component-container {
+  width: 100%;
+  margin: 10px;
+}
+
+
+
+
+
 

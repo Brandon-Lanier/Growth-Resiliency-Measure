@@ -5,7 +5,7 @@
 //
 
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -33,7 +33,10 @@ function AdminControl(props) {
 
   useEffect(() => {
     fetchAdministrators();
+    dispatch({type: 'SET_SUPERADMIN_PATH'})
   }, []);
+
+  const dispatch = useDispatch();
 
   const fetchAdministrators = () => {
     axios

@@ -7,6 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import "./DateSelector.css";
+import { Typography } from "@mui/material";
 
 function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
   const marks = [
@@ -42,6 +43,9 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
 
   return (
     <div id="timeframe-select">
+        <Typography variant="h6">
+            Select Time Frame
+        </Typography>
       <Box sx={{ width: 400 }}>
         <Slider
           getAriaLabel={() => "Date Range"}
@@ -53,10 +57,11 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
           min={2018}
           max={2022}
         />
+        
       </Box>
-      <Box sx={{ width: 400 }}>
+      <Box sx={{ width: 400, display: 'flex', justifyContent: 'center' }}>
         <FormControl>
-          <FormLabel id="Dataset-select">Datasets</FormLabel>
+          {/* <FormLabel id="Dataset-select">Datasets</FormLabel> */}
           <RadioGroup
             row
             aria-labelledby="dataset"

@@ -29,11 +29,29 @@ const adminAllScores = (state =[], action) => {
     }
 }
 
+const testDates = (state =[], action) => {
+    switch(action.type) {
+        case 'SET_TEST_DATES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+const testTotal = (state =[], action) => {
+    switch(action.type) {
+        case 'SET_TEST_TOTAL':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 const scoresReducer = combineReducers({
     studentScore,
     adminAllScores,
-    indScoresReducer
+    indScoresReducer,
+    testDates,
+    testTotal,
 });
 
 export default scoresReducer;

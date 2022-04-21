@@ -34,24 +34,32 @@ function CsvUpload() {
     handleClose();
   }
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "50%",
+    backgroundColor: '#fff',
+    border: "2px solid #000",
+    boxShadow: 24,
+    borderRadius: 5,
+    p: 4,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center'
+  };
+
   return (
-    <>
+    <div>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <Box sx={{
-        // width: 800,
-        // height: 900,
-        backgroundColor: 'White',
-        }}>
-           <Stack direction="row" spacing={2}>
-        <Button onClick={closeModal} variant="outlined" startIcon={<DeleteIcon />}>
-        Delete</Button>
-        <Button onClick={submitAndClose} variant="contained" endIcon={<SendIcon />}>
-        Submit</Button>
-        </Stack>
+        <Box style={style} sx={{p: 4}}>
         <table>
           <tbody>
             {studentArray.map((item) => (
@@ -63,6 +71,12 @@ function CsvUpload() {
             ))}
           </tbody>
         </table>
+        <Stack direction="row" spacing={2}>
+        <Button onClick={closeModal} variant="outlined" startIcon={<DeleteIcon />}>
+        Cancel</Button>
+        <Button onClick={submitAndClose} variant="contained" endIcon={<SendIcon />}>
+        Submit</Button>
+        </Stack>
         </Box>
       </Modal>
 
@@ -83,14 +97,14 @@ function CsvUpload() {
         getRemoveFileProps,
       }: any) => (
         <>
-            <Button variant="contained"  type='button' endIcon={<SendIcon />}{...getRootProps()}>
+            <Button variant="contained"  sx={{width: "200px", m: 3}} type='button' endIcon={<SendIcon />}{...getRootProps()}>
               Upload CSV
             </Button>
           <ProgressBar />
         </>
       )}
     </CSVReader>
-      </>
+      </div>
     );
   }
 export default CsvUpload;
