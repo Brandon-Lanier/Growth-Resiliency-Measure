@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 export default function Form({ schools, handleClose, admins }) {
   const history = useHistory();
@@ -68,9 +69,10 @@ export default function Form({ schools, handleClose, admins }) {
   };
 
   return (
+    <Box sx={{width: '400px'}}>
     <form onSubmit={handleSubmit}>
-      <Grid container alignItems="center" justify="center" direction="column" spacing={2}>
-        <Grid item>
+      {/* <Grid container alignItems="center" justify="center" direction="column" spacing={2}>
+        <Grid item> */}
           <TextField
             required
             id="first-name-input"
@@ -80,8 +82,8 @@ export default function Form({ schools, handleClose, admins }) {
             value={formValues.firstName}
             onChange={handleInputChange}
           />
-        </Grid>
-        <Grid item>
+        {/* </Grid>
+        <Grid item> */}
           <TextField
             required
             id="last-name-input"
@@ -91,8 +93,8 @@ export default function Form({ schools, handleClose, admins }) {
             value={formValues.lastName}
             onChange={handleInputChange}
           />
-        </Grid>
-        <Grid item>
+        {/* </Grid>
+        <Grid item> */}
           <TextField
             required
             id="email-input"
@@ -102,9 +104,9 @@ export default function Form({ schools, handleClose, admins }) {
             value={formValues.email}
             onChange={handleInputChange}
           />
-        </Grid>
+        {/* </Grid>
 
-        <Grid item>
+        <Grid item> */}
           <FormControl>
             <Select
               name="school"
@@ -118,12 +120,13 @@ export default function Form({ schools, handleClose, admins }) {
               ))}
             </Select>
           </FormControl>
-        </Grid>
+        {/* </Grid> */}
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>
-      </Grid>
+      {/* </Grid> */}
     </form>
+    </Box>
   );
 }
 //   export default Form;

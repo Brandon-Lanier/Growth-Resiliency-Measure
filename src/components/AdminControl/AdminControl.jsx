@@ -63,7 +63,7 @@ function AdminControl(props) {
   };
 
   return (
-    <div>
+    <div className="component-container">
       <Box
         sx={{
           display: "flex",

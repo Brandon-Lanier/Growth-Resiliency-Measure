@@ -28,6 +28,7 @@ export default function FormDialog({schools, get, admins}) {
     left: "50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: '#fff',
+    width: '500px',
     border: "2px solid #000",
     boxShadow: 24,
     borderRadius: 5,
@@ -46,16 +47,8 @@ export default function FormDialog({schools, get, admins}) {
         aria-describedby="modal-modal-description"
       >
         <Box style={style}>
-      {/* <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Administrator</DialogTitle>
-        <DialogContent> */}
         <AddAdminForm schools={schools} admins={admins} handleClose={handleClose}/> 
-        {/* </DialogContent>
-        <DialogActions> */}
-          {/* <Button onClick={handleClose}>Subscribe</Button> */}
-          <Button onClick={handleClose}>Cancel</Button>
-        {/* </DialogActions>
-      </Dialog> */}
+        <Button onClick={handleClose}>Cancel</Button>
       </Box>
       </Modal>
     </div>
