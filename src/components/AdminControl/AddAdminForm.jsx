@@ -20,7 +20,6 @@ export default function Form({ schools, handleClose, admins }) {
 
   for (let school of schools) {
     schoolOptions.push({ label: school.name, value: school.id });
-    console.log("schooolOptions are", schoolOptions);
   }
 
   const defaultValues = {
@@ -70,7 +69,7 @@ export default function Form({ schools, handleClose, admins }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container alignItems="center" justify="center" direction="column">
+      <Grid container alignItems="center" justify="center" direction="column" spacing={2}>
         <Grid item>
           <TextField
             required
