@@ -66,10 +66,6 @@ router.get("/", async (req, res) => {
                 // figure out what graduation years to filter on based on grade in req.query
                 let gradYear = academicYear - req.query.grade + 12;
 
-                console.log('grade is', grade)
-                console.log('academicYear is', academicYear)
-                console.log('gradYear is', gradYear)
-
                 grade = `AND "students"."graduationYear" = $${counter} `;
                 qryArguments.push(gradYear.toString());
                 break;
@@ -140,10 +136,6 @@ router.get("/", async (req, res) => {
         ${timeFrameSelector},
         "questions"."measureName";
         `;
-
-
-        console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
-        console.log('qryArguments is', qryArguments)
 
         // get data from database
         const query = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
@@ -232,7 +224,6 @@ router.get("/", async (req, res) => {
 
 router.get("/export", async (req, res) => {
     if (req.isAuthenticated()) {
-        console.log(req.query);
         let timeFrameSelector = ''
         let grade = '';
         let race = '';
@@ -279,10 +270,6 @@ router.get("/export", async (req, res) => {
 
                 // figure out what graduation years to filter on based on grade in req.query
                 let gradYear = academicYear - req.query.grade + 12;
-
-                console.log('grade is', grade)
-                console.log('academicYear is', academicYear)
-                console.log('gradYear is', gradYear)
 
                 grade = `AND "students"."graduationYear" = $${counter} `;
                 qryArguments.push(gradYear.toString());
@@ -341,6 +328,7 @@ router.get("/export", async (req, res) => {
         "students"."lunchStatus",
         "students"."eip",
         "schools"."name",
+        "assessmentBatches"."id" AS "assessmentBatch",
         avg("scores"."score") AS "averageScore", 
         "questions"."measureName",
         "assessmentBatches"."fiscalYear"
@@ -359,6 +347,7 @@ router.get("/export", async (req, res) => {
         AND "questions"."measureName" <> 'Qualitative'
         GROUP BY "questions"."measureName",
         "assessmentBatches"."fiscalYear",
+        "assessmentBatch",
         "students"."firstName", 
         "students"."lastName", 
         "students"."graduationYear", 
@@ -375,12 +364,73 @@ router.get("/export", async (req, res) => {
         "questions"."measureName";
         `;
 
+        console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
+        console.log('qryArguments is', qryArguments)
+
         // get data from database
         const query = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
         const queryObjects = query.rows;
 
+        // organize data into arrays based off batches
+        // first get a list of all batches in the data
+        let assessmentBatch = queryObjects.map(function (object) {
+            return object.assessmentBatch;
+        });
+        let assessmentBatches = [...new Set(assessmentBatch)];
+
+        // next get a list of all student ids in the data
+        let studentId = queryObjects.map(function (object) {
+            return object.studentId;
+        });
+        let studentIds = [...new Set(studentId)];
+
+        let totalCsvRows = [];
+
+        for (let batch of assessmentBatches) {
+            for (let student of studentIds) {
+                let csvRow = {
+                    firstName: '',
+                    lastName: '',
+                    graduationYear: '',
+                    studentId: '',
+                    race: '',
+                    gender: '',
+                    lunchStatus: '',
+                    eip: '',
+                    name: '',
+                    assessmentBatch: '',
+                    fiscalYear: '',
+                    Balanced: '',
+                    'Self-Confidence ': '',
+                    'Understanding adaptability ': '',
+                    'Connection ': '',
+                    'Contribution ': '',
+                    Empathy: '',
+                    'Self-Expression': '',
+                    'Self-Control': ''
+                }
+                for (let object of queryObjects) {
+                    if (batch == object.assessmentBatch && student == object.studentId) {
+                    csvRow.firstName = object.firstName
+                    csvRow.lastName = object.lastName
+                    csvRow.graduationYear = object.graduationYear
+                    csvRow.studentId = object.studentId
+                    csvRow.race = object.race
+                    csvRow.gender = object.gender
+                    csvRow.lunchStatus = object.lunchStatus
+                    csvRow.eip = object.eip
+                    csvRow.name = object.name
+                    csvRow.assessmentBatch = object.assessmentBatch
+                    csvRow.fiscalYear = object.fiscalYear
+                    csvRow[object.measureName] = object.averageScore;
+                    }
+                }
+                totalCsvRows.push(csvRow)
+            }
+        }
+
         try {
-            res.send(queryObjects);
+            res.send(totalCsvRows);
         } catch (err) {
             res.sendStatus(500);
         }
