@@ -53,7 +53,10 @@ function AddBatch(props) {
 
   //confirmation modal functions
   const [openConfirmation, setOpenConfirmation] = React.useState(false);
-  const handleCloseConfirmation = () => setOpenConfirmation(false);
+  const handleCloseConfirmation = () => {
+    setOpenConfirmation(false);
+    setOpen(false);
+  }
   const styleConfirmation = {
     position: 'absolute',
     top: '50%',
@@ -168,7 +171,7 @@ function AddBatch(props) {
                 {/* confirmation modal */}
                 <Modal
                   open={openConfirmation}
-                  onClose={handleCloseConfirmation, handleClose}
+                  onClose={handleCloseConfirmation}
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
