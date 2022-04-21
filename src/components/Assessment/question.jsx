@@ -92,7 +92,10 @@ function Question({
           </Typography>
           <FormControl className="form-control">
             <RadioGroup
-              sx={{ display: { sm: "flex-column", lg: "block" },alignContent:'space-between' }}
+              sx={{
+                display: { sm: "flex-column", lg: "block" },
+                alignContent: "space-between",
+              }}
               aria-labelledby="radio-buttons"
               value={value}
               onChange={handleChange}
@@ -146,10 +149,18 @@ function Question({
             </Box> */}
             <div className="assess-buttons-container">
               {index == 0 ? (
-                <span></span>
+                <Button
+                  variant="disabled"
+                  sx={{ m: 2 }}
+                  className="assess-buttons"
+                  onClick={handleBack}
+                >
+                  Back
+                </Button>
               ) : (
                 <Button
-                  variant="contained"
+                  variant="outlined"
+                  sx={{ m: 2 }}
                   className="assess-buttons"
                   onClick={handleBack}
                 >
@@ -158,6 +169,7 @@ function Question({
               )}
               <Button
                 variant="contained"
+                sx={{ m: 2 }}
                 className="assess-buttons"
                 onClick={handleNext}
               >

@@ -9,6 +9,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import ProgressBar from "./ProgressBar";
+import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 import "./Assessment.css";
 import userSaga from "../../redux/sagas/user.saga";
@@ -139,9 +140,20 @@ function Assessment() {
 
   return (
     <>
-      <div id="progress-bar">
-        <ProgressBar progress={0} />
-      </div>
+    <Box
+    sx={{
+      display: 'flex',
+      flexDirection: ' column',
+      alignItems: 'center',
+      width:'100%',
+    }}>
+
+      <Box id="progress-bar"
+      sx={{
+        width: '100%'
+      }}>
+        <ProgressBar progress={(index/27)*100} />
+      </Box>
 
       {index > 25 ? (
         <Assessment9
@@ -154,9 +166,9 @@ function Assessment() {
         submitReview={submitReview}
         setFormValues={setFormValues}
         formValues={formValues}
-      />
-      ) : (
-        <Question
+        />
+        ) : (
+          <Question
           
           index={index}
           handleChange={handleChange}
@@ -164,11 +176,14 @@ function Assessment() {
           value={value}
           setValue={setValue}
           formValues={formValues}
-        />
-      )}
+          />
+          )}
 
 
-      <Button onClick={() => autofill()}>AUTOFILL</Button>
+      <Button sx={{
+        m:10
+      }} onClick={() => autofill()}>AUTOFILL</Button>
+          </Box>
     </>
   );
 }
