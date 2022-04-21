@@ -63,9 +63,7 @@ function App() {
   return (
     <Router>
       <div id="appContainer">
-        <NavBar />
-
-        {/* <Nav /> */}
+        {user.d &&<NavBar />}
         <Switch>
           <Route path="/students">
             <StudentList />

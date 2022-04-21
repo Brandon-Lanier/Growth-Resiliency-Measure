@@ -1,0 +1,13 @@
+.login-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#loginLogo {
+    width: 200px;
+    
+}
