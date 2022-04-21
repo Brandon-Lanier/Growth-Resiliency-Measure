@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
+import DoneIcon from '@mui/icons-material/Done';
 
 import axios from "axios";
 
@@ -46,6 +47,23 @@ function AddBatch(props) {
     } catch (error) {
       console.log("error on batch post", error);
     }
+    //open confirmation modal
+    setOpenConfirmation(true);
+  };
+
+  //confirmation modal functions
+  const [openConfirmation, setOpenConfirmation] = React.useState(false);
+  const handleCloseConfirmation = () => setOpenConfirmation(false);
+  const styleConfirmation = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
 
   const [open, setOpen] = React.useState(false);
@@ -142,9 +160,26 @@ function AddBatch(props) {
                     <TextField {...params} helperText={null} />
                   )}
                 />
+
                 <Button variant="contained" onClick={handleSubmit}>
                   Submit
                 </Button>
+
+                {/* confirmation modal */}
+                <Modal
+                  open={openConfirmation}
+                  onClose={handleCloseConfirmation, handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={styleConfirmation}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                      <DoneIcon color="primary" sx={{ mr: 4, fontSize: 30 }} />
+                      New Assessment Added
+                    </Typography>
+                  </Box>
+                </Modal>
+
                 <Button variant="outlined" onClick={handleClose}>
                   Cancel
                 </Button>
