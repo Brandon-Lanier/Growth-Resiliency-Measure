@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 export default function StudentHomepage() {
+  const user = useSelector((store) => store.user);
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
@@ -24,6 +25,7 @@ export default function StudentHomepage() {
 
   return (
     <>
+    <h2>Welcome, {user.username}</h2>
       {/* {!batch && 'no assessments available'} */}
       {batch && (
           <Box

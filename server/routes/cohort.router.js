@@ -82,6 +82,12 @@ router.get('/studentbatch', async (req, res) => {
     }  
 })
 
+router.get('/studentDetails', (req, res) => {
+    queryStudent= `SELECT "userId" FROM students
+    JOIN "user" ON "user".id = students."userId"
+    WHERE "user".id = $1;`
+})
+
 
 module.exports = router;
 
