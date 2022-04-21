@@ -394,56 +394,61 @@ router.get("/export", async (req, res) => {
         let allYears = [];
         let terms = [1, 2];
         let batches = [1, 2];
-        switch (req.query.timeFrames) {
-            case 'year':
-                // create new arrays of data based on year
-                for (let year of uniqueYears) {
-                    let array = []
-                    for (let object of queryObjects) {
-                        if (object.fiscalYear == year) {
-                            array.push(object)
-                        }
-                    }
-                    // push new array of data into allYears
-                    allYears.push(array)
-                }
-                break;
-            case 'term':
-                // create new arrays of data based on year and term
-                for (let year of uniqueYears) {
-                    for (let term of terms) {
-                        let array = []
-                        for (let object of queryObjects) {
-                            if (object.fiscalYear == year && object.semesterNumber == term) {
-                                array.push(object)
-                            }
-                        }
-                        allYears.push(array)
-                    }
-                    // push new array of data into allYears
-                }
-                break;
-            case 'batch':
-                // create new arrays of data based on year, term, and batch
-                for (let year of uniqueYears) {
-                    for (let term of terms) {
-                        for (let batch of batches) {
-                            let array = []
-                            for (let object of queryObjects) {
-                                if (object.fiscalYear == year && object.semesterNumber == term && object.batchNumber == batch) {
-                                    array.push(object)
-                                }
-                            }
-                            allYears.push(array)
-                        }
-                    }
-                    // push new array of data into allYears
-                }
-                break;
-        }
+        // switch (req.query.timeFrames) {
+        //     case 'year':
+        //         // create new arrays of data based on year
+        //         for (let year of uniqueYears) {
+        //             let array = []
+        //             for (let object of queryObjects) {
+        //                 if (object.fiscalYear == year) {
+        //                     array.push(object)
+        //                 }
+        //             }
+        //             // push new array of data into allYears
+        //             allYears.push(array)
+        //         }
+        //         break;
+        //     case 'term':
+        //         // create new arrays of data based on year and term
+        //         for (let year of uniqueYears) {
+        //             for (let term of terms) {
+        //                 let array = []
+        //                 for (let object of queryObjects) {
+        //                     if (object.fiscalYear == year && object.semesterNumber == term) {
+        //                         array.push(object)
+        //                     }
+        //                 }
+        //                 allYears.push(array)
+        //             }
+        //             // push new array of data into allYears
+        //         }
+        //         break;
+        //     case 'batch':
+        //         // create new arrays of data based on year, term, and batch
+        //         for (let year of uniqueYears) {
+        //             for (let term of terms) {
+        //                 for (let batch of batches) {
+        //                     let array = []
+        //                     for (let object of queryObjects) {
+        //                         if (object.fiscalYear == year && object.semesterNumber == term && object.batchNumber == batch) {
+        //                             array.push(object)
+        //                         }
+        //                     }
+        //                     allYears.push(array)
+        //                 }
+        //             }
+        //             // push new array of data into allYears
+        //         }
+        //         break;
+        // }
+
+        console.log('QUERY OBJECTS ARE', queryObjects)
+        // for (let object of queryObjects) {
+
+        // }
         // sends query in correct form
         try {
-            res.send(allYears);
+            res.send(queryObjects);
         } catch (err) {
             res.sendStatus(500);
         }

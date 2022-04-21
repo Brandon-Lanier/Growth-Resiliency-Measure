@@ -12,4 +12,4 @@ const reportExportReducer = (state = [], action) => {
     }
 };
 
-export default reportExportReducer
+export default reportExportReducer;

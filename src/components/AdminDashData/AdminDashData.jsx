@@ -45,7 +45,7 @@ function AdminDashData() {
   const scores = useSelector((store) => store.scores.adminAllScores);
   const schools = useSelector((store) => store.schools);
   const report = useSelector((store) => store.report);
-  const reportExport = useSelector((store) => store.report);
+  const reportExport = useSelector((store) => store.reportExport);
 
   // render data from db data
   const getData = () => {
