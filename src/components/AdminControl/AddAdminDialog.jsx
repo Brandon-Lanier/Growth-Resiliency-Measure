@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import { Modal, Box } from '@mui/material';
 import AddAdminForm from './AddAdminForm';
 
 
@@ -22,21 +22,35 @@ export default function FormDialog({schools, get, admins}) {
     get();
   };
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: '#fff',
+    width: '500px',
+    border: "2px solid #000",
+    boxShadow: 24,
+    borderRadius: 5,
+    p: 2,
+  };
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen}>
         Add School Administrator
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Adminstrator</DialogTitle>
-        <DialogContent>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box style={style}>
         <AddAdminForm schools={schools} admins={admins} handleClose={handleClose}/> 
-        </DialogContent>
-        <DialogActions>
-          {/* <Button onClick={handleClose}>Subscribe</Button> */}
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
+        <Button onClick={handleClose}>Cancel</Button>
+      </Box>
+      </Modal>
     </div>
   );
 }

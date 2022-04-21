@@ -28,6 +28,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PageTitle from '../PageTitle/PageTitle';
 import BackButton from "../BackButton/Backbutton";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import grm from './grm.png'
 
 
 const drawerWidth = 240;
@@ -57,8 +59,8 @@ function ResponsiveDrawer(props) {
         onClick: () => history.push("/dashboard"),
       },
       {
-        text: "SUPER ADMIN",
-        icon: <DashboardIcon />,
+        text: "Administrative",
+        icon: <AdminPanelSettingsIcon />,
         onClick: () => history.push("/superadmin"),
       },
       {
@@ -221,7 +223,7 @@ function ResponsiveDrawer(props) {
             },
           }}
         >
-          <img src={logo} id="logo-bar" />
+          <img src={grm} id="logo-bar" />
           <List>
             {navLinks.map((item, index) => {
               return (
@@ -251,7 +253,7 @@ function ResponsiveDrawer(props) {
           }}
           open
         >
-          <img src={logo} id="logo-bar" />
+          <img src={grm} id="logo-bar" />
           <List>
             {navLinks.map((item, index) => {
               return (
