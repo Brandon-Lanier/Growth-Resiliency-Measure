@@ -358,7 +358,8 @@ router.get("/export", async (req, res) => {
         "students"."eip",
         "schools"."name"
         ${timeFrameSelector}
-        ORDER BY "assessmentBatches"."fiscalYear"
+        ORDER BY "assessmentBatches"."id",
+        "assessmentBatches"."fiscalYear"
         ${timeFrameSelector},
         "students"."studentId", 
         "questions"."measureName";
