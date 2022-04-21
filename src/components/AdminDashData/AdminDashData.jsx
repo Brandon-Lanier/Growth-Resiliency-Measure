@@ -317,6 +317,7 @@ function AdminDashData() {
       <Button variant="contained" onClick={generateReport}>
         Generate Report
       </Button>
+      <CSVLink data={csvObj}>Download Data</CSVLink>
       <div className="dash-graph-container">
         <Radar
           data={getData()}
