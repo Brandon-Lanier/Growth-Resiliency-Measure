@@ -9,6 +9,7 @@ function LoginPage() {
   const history = useHistory();
 
   return (
+    <>
     <div className="login-container">
       <img src={logo} id="loginLogo" />
       <LoginForm />
@@ -23,6 +24,7 @@ function LoginPage() {
           Register
         </button> */}
     </div>
+    </>
   );
 }
 

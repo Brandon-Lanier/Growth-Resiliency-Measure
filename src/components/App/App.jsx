@@ -63,8 +63,10 @@ function App() {
   return (
     <Router>
       <div id="appContainer">
-        {user.d &&<NavBar />}
+        {user.id && <NavBar />}
         <Switch>
+         <Redirect exact from="/" to="/login" />
+
           <Route path="/students">
             <StudentList />
           </Route>

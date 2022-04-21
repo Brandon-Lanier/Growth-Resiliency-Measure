@@ -51,24 +51,25 @@ function LoginForm() {
           label="Email Address"
           value={username}
           fullWidth
-          autoComplete={false}
+          utoComplete="off"
           auto
           onChange={(event) => setUsername(event.target.value)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <AccountCircle />
+                <MailOutlineIcon />
               </InputAdornment>
             ),
           }}
           variant="standard"
         />
         <TextField
+          sx={{mt: 2}}
           id="password"
           label="Password"
           type="password"
           fullWidth
-          autoComplete={false}
+          utoComplete="off"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           InputProps={{
