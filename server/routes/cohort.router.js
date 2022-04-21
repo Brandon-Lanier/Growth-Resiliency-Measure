@@ -19,9 +19,9 @@ router.post('/', async (req, res) => {
 
     // This creates two rows, both identical, except for batchNumber which is coded to 1 and 2 consecutively 
     const sqlText = `INSERT INTO "assessmentBatches" ("batchNumber","semesterNumber","fiscalYear","schoolId","startDate","endDate")
-    VALUES ( 1, $1,$2,$3,$4,$5 ), ( 2, $1,$2,$3,$4,$5 );`;
+    VALUES ( $6, $1,$2,$3,$4,$5 ), ( $6, $1,$2,$3,$4,$5 );`;
 
-    pool.query(sqlText, [req.body.term, req.body.fiscalYear, schoolId.rows[0].schoolId, req.body.startDate, req.body.endDate])
+    pool.query(sqlText, [req.body.term, req.body.fiscalYear, schoolId.rows[0].schoolId, req.body.startDate, req.body.endDate, req.body.batch])
         .then((result) => {
             console.log('success, result is', result);
             res.sendStatus(200);

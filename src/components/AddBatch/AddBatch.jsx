@@ -94,8 +94,8 @@ function AddBatch(props) {
                     label="Term / Semester "
                     onChange={(event) => setTerm(event.target.value)}
                   >
-                    <MenuItem value={1}>First Term</MenuItem>
-                    <MenuItem value={2}>Second Term</MenuItem>
+                    <MenuItem value={1}>Fall</MenuItem>
+                    <MenuItem value={2}>Spring</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl >
@@ -110,8 +110,8 @@ function AddBatch(props) {
                     label="batch "
                     onChange={(event) => setBatch(event.target.value)}
                   >
-                    <MenuItem value={1}>Batch 1 for semester</MenuItem>
-                    <MenuItem value={2}>Batch 2 for semester</MenuItem>
+                    <MenuItem value={1}>Batch 1</MenuItem>
+                    <MenuItem value={2}>Batch 2</MenuItem>
                   </Select>
                 </FormControl>
                 <DatePicker
