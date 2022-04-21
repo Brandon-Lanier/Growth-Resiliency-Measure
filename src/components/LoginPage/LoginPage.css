@@ -9,5 +9,12 @@
 
 #loginLogo {
     width: 200px;
-    
+}
+
+#foot-image {
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    opacity: .3;
+    bottom: 0;
 }

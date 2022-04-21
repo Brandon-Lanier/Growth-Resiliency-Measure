@@ -3,6 +3,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
 import logo from '../NavBar/grmlogo.png';
 import Footer from '../Footer/Footer';
+import image from '../StudentHomepage/login.png';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -23,6 +24,7 @@ function LoginPage() {
         >
           Register
         </button> */}
+        <img src={image} id="foot-image" />
     </div>
     </>
   );
