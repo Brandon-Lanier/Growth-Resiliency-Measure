@@ -142,16 +142,12 @@ router.get("/", async (req, res) => {
         `;
 
 
-        // console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
-        // console.log('qryArguments is', qryArguments)
+        console.log('qryText', qryTextOne + qryTextTwo + qryTextThree)
+        console.log('qryArguments is', qryArguments)
 
         // get data from database
         const query = await pool.query(qryTextOne + qryTextTwo + qryTextThree, qryArguments);
-        console.log('query is', query);
-        
         const queryObjects = query.rows;
-        console.log('queryObjects is', queryObjects);
-        
 
         // organize data into arrays based off time frames
         // first get a list of all academic years in the data
@@ -164,7 +160,7 @@ router.get("/", async (req, res) => {
         let allYears = [];
         let terms = [1, 2];
         let batches = [1, 2];
-        function hello() { switch (req.query.timeFrames) {
+        switch (req.query.timeFrames) {
             case 'year':
                 // create new arrays of data based on year
                 for (let year of uniqueYears) {
@@ -201,26 +197,22 @@ router.get("/", async (req, res) => {
                             let array = []
                             for (let object of queryObjects) {
                                 if (object.fiscalYear == year && object.semesterNumber == term && object.batchNumber == batch) {
-                                     array.push(object)
+                                    array.push(object)
                                 }
                             }
-                             allYears.push(array)
+                            allYears.push(array)
                         }
                     }
                     // push new array of data into allYears
                 }
-    
                 break;
         }
-    }
-    await hello();
-    
+
+
 
         // sends query in correct form
-        
         try {
-            console.log('all years', allYears);
-             res.send(allYears);
+            res.send(allYears);
         } catch (err) {
             res.sendStatus(500);
         }
