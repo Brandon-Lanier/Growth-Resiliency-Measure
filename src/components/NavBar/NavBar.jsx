@@ -78,11 +78,11 @@ function ResponsiveDrawer(props) {
       //   icon: <DownloadIcon />,
       //   onClick: () => history.push("/csvExport"),
       // },
-      {
-        text: "Schools",
-        icon: <LocationCityIcon />,
-        onClick: () => history.push("/schools"),
-      },
+      // {
+      //   text: "Schools",
+      //   icon: <LocationCityIcon />,
+      //   onClick: () => history.push("/schools"),
+      // },
       {
         text: "Logout",
         icon: <LogoutIcon />,
@@ -114,11 +114,11 @@ function ResponsiveDrawer(props) {
       //   icon: <DownloadIcon />,
       //   onClick: () => history.push("/csvExport"),
       // },
-      {
-        text: "Schools",
-        icon: <LocationCityIcon />,
-        onClick: () => history.push("/schools"),
-      },
+      // {
+      //   text: "Schools",
+      //   icon: <LocationCityIcon />,
+      //   onClick: () => history.push("/schools"),
+      // },
       {
         text: "Logout",
         icon: <LogoutIcon />,
