@@ -106,14 +106,16 @@ function Question({
 
 
   console.log('size is', size);
+
   const [labelProp, setLabelProp] = useState("bottom");
   
   window.addEventListener("resize", handleLabel);
 
   const handleLabel = () => {
-
-    if (size < 1000){
-      setLabelProp("right");
+    if (size.width < 1000){
+      return "right"
+    } else {
+      return "bottom"
     }
   }
 
@@ -148,28 +150,28 @@ function Question({
                 value={1}
                 control={<Radio />}
                 label="1 - Strongly Disagree"
-                labelPlacement={labelProp}
+                labelPlacement={handleLabel()}
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={2}
                 control={<Radio />}
                 label="2 - Disagree"
-                labelPlacement="bottom"
+                labelPlacement={handleLabel()}
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={3}
                 control={<Radio />}
                 label="3 - Neither Agree or Disagree"
-                labelPlacement="bottom"
+                labelPlacement={handleLabel()}
                 name={questions[index].id}
               />
               <FormControlLabel
                 value={4}
                 control={<Radio />}
                 label="4 - Agree"
-                labelPlacement="bottom"
+                labelPlacement={handleLabel()}
                 name={questions[index].id}
               />
               <FormControlLabel
@@ -177,7 +179,7 @@ function Question({
                 control={<Radio />}
                 // labelPlacement='auto'
                 label="5 - Strongly Agree"
-                labelPlacement="bottom"
+                labelPlacement={handleLabel()}
                 name={questions[index].id}
               />
             </RadioGroup>
