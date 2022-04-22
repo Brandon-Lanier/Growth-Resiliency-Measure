@@ -2,13 +2,16 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import flower from './flower.png'
+import Flower from "./flower.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import './StudentHomePage.css';
+import "./StudentHomePage.css";
+import { Typography } from "@mui/material";
 
 export default function StudentHomepage() {
-  const student = useSelector((store) => store.studentReducer.studentDetailsReducer[0]);
+  const student = useSelector(
+    (store) => store.studentReducer.studentDetailsReducer[0]
+  );
   const history = useHistory();
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.questions);
@@ -16,7 +19,7 @@ export default function StudentHomepage() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_BATCH" });
-    dispatch({ type: "GET_STUDENT_DETAILS"})
+    dispatch({ type: "GET_STUDENT_DETAILS" });
   }, []);
 
   // if assessment is available for student, push to assessment page
@@ -26,36 +29,36 @@ export default function StudentHomepage() {
   // }
 
   return (
-    <>
-    <div className="welcome-message">
-    <h2>Welcome, {student?.firstName}!</h2>
-    </div>
-    <div className="batch-not-available">
-      <h3>{!batch && 'no assessments available'}</h3>
-      </div>
-      {batch && (
-          <Box
-          sx={{
-              pt: 10,
-              pl: 10,
-          }}>
-            <img src={flower} alt="flower" />
-        <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            boxShadow: 1,
-            p: 5,
-            
-        }}>
-          <h1>Assessment Available</h1>
-          <Button onClick={() => history.push("/assessment")}>
-            Take it here!
-          </Button>
-          
+    <div className="student-landing">
+      <Typography variant="h4">Welcome, {student?.firstName}!</Typography>
+      {!batch === "none" ? (
+        <Box>
+          <Typography variant="b1">No Assessment Available</Typography>
         </Box>
-      </Box>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            boxShadow: 2,
+            backgroundColor: '#d7f5db',
+            p: 2,
+            m: 2,
+            width: "85%",
+            borderRadius: 3
+          }}
+        >
+          <Typography variant="h6" sx={{mb: 3}}>Assessment Available</Typography>
+          <Button
+            onClick={() => history.push("/assessment")}
+            variant="contained"
+          >
+            Begin Assessment!
+          </Button>
+        </Box>
       )}
-    </>
+        <img src={Flower} alt="flower" id="flower" className="rotate" />
+    </div>
   );
 }

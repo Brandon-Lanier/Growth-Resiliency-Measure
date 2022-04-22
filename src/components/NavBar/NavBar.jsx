@@ -125,6 +125,7 @@ function ResponsiveDrawer(props) {
         onClick: () => {
           history.push("/home");
           dispatch({ type: "LOGOUT" });
+          dispatch({type: 'CLEAR_PATh'})
         },
       },
     ];
@@ -159,6 +160,13 @@ function ResponsiveDrawer(props) {
     ];
   }
 
+  const colorChange = () => {
+    if (user.permission === 2) {
+      return '#fff'
+    } else {
+      return '#111827'
+    }
+  }
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -171,7 +179,7 @@ function ResponsiveDrawer(props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          backgroundColor: '#fff'
+          backgroundColor: colorChange
         }}
         elevation={1}
       > 
@@ -183,23 +191,25 @@ function ResponsiveDrawer(props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{color: '#fff'}}/>
           </IconButton>
-          {/* 
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>*/}
+          {user.permission === 2 
+          ?
+          <>
           <BackButton history={history} />
            <Typography variant="h5" sx={{ml: 1, mb: 0}}>
           {path}
-        </Typography>
+          </Typography>
+          </>
+          :
+         <></> }
         </Toolbar>
        
       </AppBar> 
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        aria-label="nav folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
@@ -228,7 +238,7 @@ function ResponsiveDrawer(props) {
             {navLinks.map((item, index) => {
               return (
                 <ListItem button key={index} onClick={item.onClick}>
-                  <ListItemIcon sx={{ color: "##D1D5DB" }}>
+                  <ListItemIcon sx={{ color: "#D1D5DB" }}>
                     {item.icon}
                   </ListItemIcon>
                   <ListItemText primary={item.text} sx={{color: '#D1D5DB'}}/>
