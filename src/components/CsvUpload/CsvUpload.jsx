@@ -109,13 +109,13 @@ function CsvUpload() {
         ProgressBar,
         getRemoveFileProps,
       }: any) => (
-        <>
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Button variant="contained"  sx={{width: "200px", m: 3}} type='button' endIcon={<SendIcon />}{...getRootProps()}>
               Upload CSV
             </Button>
-            <CSVLink data={csvTemplate}>Download Template</CSVLink>
+            <CSVLink data={csvTemplate} className="data-link">Download Template</CSVLink>
           <ProgressBar />
-        </>
+        </Box>
       )}
     </CSVReader>
       </div>

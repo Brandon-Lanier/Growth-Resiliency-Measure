@@ -21,6 +21,9 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import BackButton from "../BackButton/Backbutton";
+import { Grid, Box, Stack } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from '@mui/material/IconButton';
 
 function StudentDetails() {
   //pull first and last assessment date from the DB
@@ -141,83 +144,93 @@ function StudentDetails() {
     ],
   };
 
-
-
   return (
-    <>
-      {/* <Card elevation={4}>
+    <div className="component-container">
+      <Grid container spacing={1}>
+        {/* <Card elevation={4}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                  Hello 
                 </Typography>
               </CardContent>
           </Card> */}
-      <div className="detailsContainer">
-        <h2>
-          {studentDetails?.details.firstName}
-          <span> </span>
-          {studentDetails?.details.lastName}
-        </h2>
-        <Button variant="outlined" onClick={handleEditClick}>
-          EDIT STUDENT
-        </Button>
-        <h4>{studentDetails?.details.name}</h4>
-        <h4>Class of {studentDetails?.details.graduationYear}</h4>
-        <h5>First assessment taken in {firstTest}</h5>
-        <h5>Most recent taken on {lastTest}</h5>
-        <h5>Total assessments taken: {totalTests[0]?.count}</h5>
-        <FormControl sx={{ minWidth: 100 }} size="small">
-          <InputLabel id="yearLabel">Year</InputLabel>
-          <Select
-            labelId="yearLabel"
-            id="year"
-            value={year}
-            label="Year"
-            onChange={(e) => setYear(e.target.value)}
-          >
-            <MenuItem value="all">Select All</MenuItem>
-            <MenuItem value={2022}>2022</MenuItem>
-            <MenuItem value={2021}>2021</MenuItem>
-            <MenuItem value={2020}>2020</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl sx={{ minWidth: 100 }} size="small">
-          <InputLabel id="termLabel">Term</InputLabel>
-          <Select
-            labelId="termLabel"
-            id="term"
-            value={term}
-            label="Term"
-            onChange={(e) => setTerm(e.target.value)}
-          >
-            <MenuItem value="all">Select All</MenuItem>
-            <MenuItem value="fall">Fall</MenuItem>
-            <MenuItem value="spring">Spring</MenuItem>
-          </Select>
-        </FormControl>
-        <br></br>
-        <div className="dash-filter-graph-container">
-          <Radar
-            data={data}
-            options={{
-              events: ["click"],
-              scales: {
-                r: {
-                  angleLines: {
-                    display: true,
-                  },
-                  max: 5,
-                  beginAtZero: true,
-                  ticks: {
-                    stepSize: 1,
+        <Grid item xs={5}>
+          <Box xs={{ boxShadow: 2, pl: 5 }}>
+            <Typography variant="h3">
+              {studentDetails?.details?.firstName}
+              <span> </span>
+              {studentDetails?.details?.lastName}
+              <span> </span>
+              <IconButton onClick={handleEditClick}>
+              <EditIcon />
+              </IconButton>
+            </Typography>
+            {/* <Button variant="contained" onClick={handleEditClick}>
+              Edit Student 
+            </Button> */}
+            <Stack spacing={2} sx={{mt: 2}}>
+            <Typography variant="h6">{studentDetails?.details.name}</Typography>
+            <Typography variant="b1">Class of {studentDetails?.details.graduationYear}</Typography>
+            <Typography variant="b1">First assessment: {firstTest}</Typography>
+            <Typography variant="b1">Most recent assessment: {lastTest}</Typography>
+            <Typography variant="b1">Total assessments taken: {totalTests[0]?.count}</Typography>
+            </Stack>
+          </Box>
+        </Grid>
+        <Grid item xs={7}>
+          <FormControl sx={{ minWidth: 100 }} size="small">
+            <InputLabel id="yearLabel">Year</InputLabel>
+            <Select
+              labelId="yearLabel"
+              id="year"
+              value={year}
+              label="Year"
+              onChange={(e) => setYear(e.target.value)}
+            >
+              <MenuItem value="all">Select All</MenuItem>
+              <MenuItem value={2022}>2022</MenuItem>
+              <MenuItem value={2021}>2021</MenuItem>
+              <MenuItem value={2020}>2020</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ minWidth: 100 }} size="small">
+            <InputLabel id="termLabel">Term</InputLabel>
+            <Select
+              labelId="termLabel"
+              id="term"
+              value={term}
+              label="Term"
+              onChange={(e) => setTerm(e.target.value)}
+            >
+              <MenuItem value="all">Select All</MenuItem>
+              <MenuItem value="fall">Fall</MenuItem>
+              <MenuItem value="spring">Spring</MenuItem>
+            </Select>
+          </FormControl>
+          <br></br>
+          <div className="dash-filter-graph-container">
+            <Radar
+              data={data}
+              options={{
+                events: ["click"],
+                scales: {
+                  r: {
+                    angleLines: {
+                      display: true,
+                    },
+                    max: 5,
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
                   },
                 },
-              },
-            }}
-          />
-        </div>
-      </div>
-    </>
+              }}
+            />
+          </div>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 
