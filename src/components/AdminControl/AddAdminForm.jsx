@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import Radio from "@mui/material/Radio";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { InputLabel } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -45,14 +42,11 @@ export default function Form({ schools, handleClose, admins }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    
-    // Checks if username is already taken. THis prevents admins from covering multiple schools at this point. 
-    if (
-      admins.filter((admin) => admin.email === formValues.email).length > 0
-    ) {
+    // Checks if username is already taken. THis prevents admins from covering multiple schools at this point.
+    if (admins.filter((admin) => admin.email === formValues.email).length > 0) {
       console.log("MATCHING ADMIN USERNAME!!!");
-      alert("Username already taken!")
-      return; 
+      alert("Username already taken!");
+      return;
     }
 
     console.log(formValues);
@@ -69,63 +63,60 @@ export default function Form({ schools, handleClose, admins }) {
   };
 
   return (
-    <Box sx={{width: '400px'}}>
-    <form onSubmit={handleSubmit}>
-      {/* <Grid container alignItems="center" justify="center" direction="column" spacing={2}>
-        <Grid item> */}
-          <TextField
-            required
-            id="first-name-input"
-            name="firstName"
-            label="First Name"
-            type="text"
-            value={formValues.firstName}
-            onChange={handleInputChange}
-          />
-        {/* </Grid>
-        <Grid item> */}
-          <TextField
-            required
-            id="last-name-input"
-            name="lastName"
-            label="Last Name"
-            type="text"
-            value={formValues.lastName}
-            onChange={handleInputChange}
-          />
-        {/* </Grid>
-        <Grid item> */}
-          <TextField
-            required
-            id="email-input"
-            name="email"
-            label="Email"
-            type="text"
-            value={formValues.email}
-            onChange={handleInputChange}
-          />
-        {/* </Grid>
+    <Box sx={{ display: "flex", flexDirection: "column", p: 5, gap: 2, borderRadius: 10 }}>
+      <TextField
+        required
+        id="first-name-input"
+        name="firstName"
+        label="First Name"
+        type="text"
+        value={formValues.firstName}
+        onChange={handleInputChange}
+      />
 
-        <Grid item> */}
-          <FormControl>
-            <Select
-              name="school"
-              value={formValues.school}
-              onChange={handleInputChange}
-            >
-              {schoolOptions.map((school) => (
-                <MenuItem key={school.value} value={school.value}>
-                  {school.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        {/* </Grid> */}
-        <Button variant="contained" color="primary" type="submit">
-          Submit
-        </Button>
-      {/* </Grid> */}
-    </form>
+      <TextField
+        required
+        id="last-name-input"
+        name="lastName"
+        label="Last Name"
+        type="text"
+        value={formValues.lastName}
+        onChange={handleInputChange}
+      />
+
+      <TextField
+        required
+        id="email-input"
+        name="email"
+        label="Email"
+        type="text"
+        value={formValues.email}
+        onChange={handleInputChange}
+      />
+
+      <FormControl>
+            <InputLabel id="schoolLabel">School</InputLabel>
+        <Select
+          labelId="schoolLabel"
+          name="school"
+          value={formValues.school}
+          onChange={handleInputChange}
+          label="School"
+        >
+          {schoolOptions.map((school) => (
+            <MenuItem key={school.value} value={school.value}>
+              {school.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Submit
+      </Button>
+      <Button variant="outlined" onClick={handleClose}>
+        Cancel
+      </Button>
     </Box>
   );
 }

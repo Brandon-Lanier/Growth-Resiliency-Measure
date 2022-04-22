@@ -51,7 +51,7 @@ function LoginForm() {
           label="Email Address"
           value={username}
           fullWidth
-          utoComplete="off"
+          autoComplete="off"
           auto
           onChange={(event) => setUsername(event.target.value)}
           InputProps={{
@@ -69,7 +69,7 @@ function LoginForm() {
           label="Password"
           type="password"
           fullWidth
-          utoComplete="off"
+          autoComplete="off"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           InputProps={{

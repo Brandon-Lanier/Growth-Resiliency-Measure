@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./AdminDashData.css";
-import { Button, Grid, Stack } from "@mui/material";
+import { Button, Divider, Grid, Stack } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
@@ -180,12 +180,13 @@ function AdminDashData() {
     });
   };
 
-  console.log('export report is', reportExport)
+  // console.log('export report is', reportExport)
 
   return (
     <>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} sx={{mt: 1, pl: 0}}>
         <Grid item xs={4}>
+          <Box sx={{boxShadow: 2, p: 1, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <div className="dash-filter-data-container">
             <DateSelector
               dateRange={dateRange}
@@ -297,14 +298,16 @@ function AdminDashData() {
             </FormControl>
           </div>
           <Stack spacing={2}>
-          <Button variant="contained" onClick={generateReport} sx={{width: '50%'}}>
+          <Button variant="contained" onClick={generateReport} sx={{width: '200px'}}>
             Generate Report
           </Button>
-          <CSVLink data={reportExport}>Download Data</CSVLink>
+          <CSVLink data={reportExport} className="data-link">Download Data</CSVLink>
           </Stack>
+          </Box>
         </Grid>
-        <Grid item xs={8} sx={{ justifyContent: "center" }}>
-          <Box sx={{boxShadow: 2, height: '100%', width: '100%'}}>
+        
+        <Grid item xs={8}>
+          {/* <Box sx={{boxShadow: 2, height: '95%', width: '95%', display: 'flex', justifyContent: 'center', p: 1}}> */}
             {report.length > 0 ? (
               <Radar
                 data={getData()}
@@ -326,11 +329,10 @@ function AdminDashData() {
               />
             ) : (
               <div>
-                <Typography variant="h6">Data Graphs:</Typography>
                 <Typography variant="b2">No Data Available</Typography>
               </div>
             )}
-          </Box>
+          {/* </Box> */}
         </Grid>
       </Grid>
     </>

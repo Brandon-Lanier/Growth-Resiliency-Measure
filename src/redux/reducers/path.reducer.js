@@ -11,10 +11,12 @@ const pathReducer = (state = '', action) => {
             return "Assessments";
         case 'SET_EXPORT_PATH':
             return "Data Export";
-        case 'SET_EXPORT_PATH':
-            return "Data Export";
+        case 'SET_SCHOOL_PATH':
+            return "Schools";
         case 'SET_SUPERADMIN_PATH':
             return "Administrative";
+        case 'CLEAR_PATH':
+            return '';
         default:
             return state;
     }

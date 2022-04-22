@@ -1,4 +1,4 @@
-#welcome-message{
+/* #welcome-message{
   text-align: center;
   display: flex;
   align-items: center
@@ -9,6 +9,31 @@
   text-align: center;
   display: flex;
   align-items: center
+}; */
 
+.student-landing {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
-};
+.rotate {
+  animation: rotation 15s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+#flower {
+  width: 100%;
+  opacity: .7;
+}

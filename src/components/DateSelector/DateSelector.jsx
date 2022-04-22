@@ -10,11 +10,8 @@ import "./DateSelector.css";
 import { Typography } from "@mui/material";
 
 function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
+  
   const marks = [
-    {
-      value: 2018,
-      label: "2018",
-    },
     {
       value: 2019,
       label: "2019",
@@ -46,7 +43,7 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
         <Typography variant="h6">
             Select Time Frame
         </Typography>
-      <Box >
+      <Box sx={{width: '90%'}}>
         <Slider
           getAriaLabel={() => "Date Range"}
           value={dateRange}
@@ -54,7 +51,7 @@ function DateSelector({ dateRange, setDateRange, dataSet, setDataSet }) {
           valueLabelDisplay="auto"
           step={1}
           marks={marks}
-          min={2018}
+          min={2019}
           max={2022}
         />
         

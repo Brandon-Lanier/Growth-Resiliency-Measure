@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import BackButton from '../BackButton/Backbutton';
 import DoneIcon from '@mui/icons-material/Done';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -14,9 +13,13 @@ import Modal from '@mui/material/Modal';
 function Schools(props) {
 
   const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Schools Component');
   const [schoolName, setSchoolName] = useState()
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({type: 'SET_SCHOOL_PATH'});
+  }, [])
 
   //confirmation modal functions
   const [open, setOpen] = React.useState(false);
@@ -47,8 +50,6 @@ function Schools(props) {
 
   return (
     <div>
-      <BackButton history={history} />
-      <h2>{heading}</h2>
       <Box sx={{
         display: 'flex',
         justifyContent: 'center'
