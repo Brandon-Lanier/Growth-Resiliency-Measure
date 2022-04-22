@@ -1,6 +1,11 @@
-.dash-graph-container {
-    width: 400px;
-}
+/* .dash-graph-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 3px rgb(99, 99, 99);
+} */
 
 .dash-filter-data-container {
     display: flex;

@@ -32,7 +32,8 @@ function StudentList() {
 
   useEffect(() => {
     dispatch({ type: 'SET_STUDENT_PATH'})
-  }, [])
+  }, []);
+
   const dispatch = useDispatch();
   const history = useHistory();
   //pull student list from student reducer/store
@@ -127,7 +128,6 @@ function StudentList() {
   //show datagrid of current students and import csv upload button component for display on this page.
   return (
     <div className="component-container">
-      <BackButton history={history} />
       <div className="student-list-container">
         <Box sx={{
           boxShadow: 3, 

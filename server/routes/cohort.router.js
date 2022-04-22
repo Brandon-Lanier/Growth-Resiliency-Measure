@@ -82,6 +82,20 @@ router.get('/studentbatch', async (req, res) => {
     }  
 })
 
+router.get('/studentDetails', (req, res) => {
+    queryStudent= `SELECT * FROM students
+    JOIN "user" ON "user".id = students."userId"
+    WHERE "user".id = $1;`
+
+    pool.query(queryStudent, [req.user.id])
+    .then((result) => {
+        res.send(result.rows)
+    })
+    .catch((error) => {
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = router;
 

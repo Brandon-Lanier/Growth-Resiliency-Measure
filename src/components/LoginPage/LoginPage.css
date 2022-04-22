@@ -1,0 +1,20 @@
+.login-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#loginLogo {
+    width: 200px;
+}
+
+#foot-image {
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    opacity: .3;
+    bottom: 0;
+}

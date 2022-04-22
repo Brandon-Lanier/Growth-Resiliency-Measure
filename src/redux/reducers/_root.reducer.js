@@ -10,6 +10,7 @@ import adminBatch from './adminBatch.reducer';
 import report from './report.reducer';
 import schools from './schools.reducer';
 import path from './path.reducer';
+import reportExport from './reportExport.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   adminBatch,
   report,
   schools,
-  path
+  path,
+  reportExport
 });
 
 export default rootReducer;
