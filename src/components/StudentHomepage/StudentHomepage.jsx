@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import flower from './flower.png'
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
@@ -31,7 +31,7 @@ export default function StudentHomepage() {
               pt: 10,
               pl: 10,
           }}>
-
+            <img src={flower} alt="flower" />
         <Box
         sx={{
             display: 'flex',
@@ -44,6 +44,7 @@ export default function StudentHomepage() {
           <Button onClick={() => history.push("/assessment")}>
             Take it here!
           </Button>
+          
         </Box>
       </Box>
       )}
