@@ -10,6 +10,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { CSVLink } from "react-csv";
 
 function CsvUpload() {
   const { CSVReader } = useCSVReader();
@@ -18,6 +19,18 @@ function CsvUpload() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const csvTemplate = [{
+    studentId: 'number',
+    firstName: 'text',
+    lastName: 'text',
+    graduationYear: 'number',
+    email: 'text',
+    race: 'number (1-5)',
+    eip: 'true or false',
+    schoolId: 'number',
+    gender: 'number (1-5)',
+    lunchStatus: 'number (1-3)'
+  }]
 
   function closeModal() {
     handleClose();
@@ -100,6 +113,7 @@ function CsvUpload() {
             <Button variant="contained"  sx={{width: "200px", m: 3}} type='button' endIcon={<SendIcon />}{...getRootProps()}>
               Upload CSV
             </Button>
+            <CSVLink data={csvTemplate}>Download Template</CSVLink>
           <ProgressBar />
         </>
       )}
