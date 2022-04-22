@@ -176,7 +176,7 @@ function CsvExport() {
             <MenuItem value={2}>No</MenuItem>
           </Select>
         </FormControl>
-        <CSVLink data={csvObj}>Download Data</CSVLink>
+        <CSVLink data={csvObj} className="data-link">Download Data</CSVLink>
       </Stack>
     </Box>
     </>

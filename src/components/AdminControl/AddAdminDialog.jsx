@@ -28,11 +28,11 @@ export default function FormDialog({schools, get, admins}) {
     left: "50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: '#fff',
-    width: '500px',
-    border: "2px solid #000",
+    width: '50%',
+    border: "2px solid #303030",
     boxShadow: 24,
-    borderRadius: 5,
-    p: 2,
+    borderRadius: 10,
+    p: 5,
   };
 
   return (
@@ -48,7 +48,6 @@ export default function FormDialog({schools, get, admins}) {
       >
         <Box style={style}>
         <AddAdminForm schools={schools} admins={admins} handleClose={handleClose}/> 
-        <Button onClick={handleClose}>Cancel</Button>
       </Box>
       </Modal>
     </div>

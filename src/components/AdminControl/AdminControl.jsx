@@ -1,28 +1,10 @@
-//
-// Controls Admins from the super Admin
-//
-//
-//
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
 import axios from "axios";
-
 import AddAdminDialog from "./AddAdminDialog";
 import AdminTable from "./AdminTable";
+import { Divider, Typography } from "@mui/material";
 
 function AdminControl(props) {
   //   const school = useSelector((store) => store);
@@ -70,25 +52,22 @@ function AdminControl(props) {
           flexDirection: "column",
           justifyContent: "center",
           alignContent: "center",
-          color: "black",
-          pt: 10,
         }}
       >
-        <h1>Super Admin</h1>
-
         <AddAdminDialog schools={schools} admins={admins} get={fetchAdministrators}/>
-        
+        <Divider sx={{mt:2}}/>
         {schools.map((school) => (
-          <>
-            <h1>{school.name}</h1>
+          <div className="school-container">
+            <Typography variant="h5">
+              {school.name}
+            </Typography>
             <AdminTable
               key={school.id}
               admins={admins}
               school={school}
               removeAdmin={removeAdmin}
             />
-            
-          </>
+           </div>
         ))}
       </Box>
     </div>

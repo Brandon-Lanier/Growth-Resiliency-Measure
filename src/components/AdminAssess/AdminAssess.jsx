@@ -10,13 +10,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import { IconButton } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddBatch from "../AddBatch/AddBatch";
 import { Divider } from "@mui/material";
 import "./AdminAssess.css";
-import BackButton from "../BackButton/Backbutton";
+
 
 function AdminAssess() {
 
@@ -31,7 +29,7 @@ function AdminAssess() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#111827',
+      backgroundColor: 'rgba(17, 24, 39, 0.7)',
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
