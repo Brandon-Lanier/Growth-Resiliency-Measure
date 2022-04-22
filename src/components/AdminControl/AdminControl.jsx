@@ -5,17 +5,17 @@ import axios from "axios";
 import AddAdminDialog from "./AddAdminDialog";
 import AdminTable from "./AdminTable";
 import { Divider, Typography } from "@mui/material";
+import Schools from "../Schools/Schools";
 
 function AdminControl(props) {
   //   const school = useSelector((store) => store);
   //   const admins = useSelector((store) => store.admins)
-  const [heading, setHeading] = useState("Add Assessment Cohort");
   const [admins, setAdmins] = useState([]);
   const [schools, setSchools] = useState([]);
 
   useEffect(() => {
     fetchAdministrators();
-    dispatch({type: 'SET_SUPERADMIN_PATH'})
+    dispatch({ type: "SET_SUPERADMIN_PATH" });
   }, []);
 
   const dispatch = useDispatch();
@@ -34,14 +34,15 @@ function AdminControl(props) {
   };
 
   const removeAdmin = (id) => {
-    axios.delete(`/api/admincsv/${id}`)
-    .then((res) => {
-        console.log('Deleted administrator row');
+    axios
+      .delete(`/api/admincsv/${id}`)
+      .then((res) => {
+        console.log("Deleted administrator row");
         fetchAdministrators();
-    })
-    .catch((err) => {
-        console.log('Error on delete admin');
-    });
+      })
+      .catch((err) => {
+        console.log("Error on delete admin");
+      });
   };
 
   return (
@@ -54,20 +55,33 @@ function AdminControl(props) {
           alignContent: "center",
         }}
       >
-        <AddAdminDialog schools={schools} admins={admins} get={fetchAdministrators}/>
-        <Divider sx={{mt:2}}/>
+        <Box
+          sx={{
+            width: 500,
+            boxShadow: 1,
+            p: 5,
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <AddAdminDialog
+            schools={schools}
+            admins={admins}
+            get={fetchAdministrators}
+          />
+          <Schools fetchAdministrators={fetchAdministrators}/>
+        </Box>
+        <Divider sx={{ mt: 2 }} />
         {schools.map((school) => (
           <div className="school-container">
-            <Typography variant="h5">
-              {school.name}
-            </Typography>
+            <Typography variant="h5">{school.name}</Typography>
             <AdminTable
               key={school.id}
               admins={admins}
               school={school}
               removeAdmin={removeAdmin}
             />
-           </div>
+          </div>
         ))}
       </Box>
     </div>

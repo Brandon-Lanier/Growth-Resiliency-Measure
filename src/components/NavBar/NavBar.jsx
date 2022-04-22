@@ -73,16 +73,16 @@ function ResponsiveDrawer(props) {
         icon: <QuizIcon />,
         onClick: () => history.push("/assessmentoverview"),
       },
-      {
-        text: "Data Export",
-        icon: <DownloadIcon />,
-        onClick: () => history.push("/csvExport"),
-      },
-      {
-        text: "Schools",
-        icon: <LocationCityIcon />,
-        onClick: () => history.push("/schools"),
-      },
+      // {
+      //   text: "Data Export",
+      //   icon: <DownloadIcon />,
+      //   onClick: () => history.push("/csvExport"),
+      // },
+      // {
+      //   text: "Schools",
+      //   icon: <LocationCityIcon />,
+      //   onClick: () => history.push("/schools"),
+      // },
       {
         text: "Logout",
         icon: <LogoutIcon />,
@@ -109,16 +109,16 @@ function ResponsiveDrawer(props) {
         icon: <QuizIcon />,
         onClick: () => history.push("/assessmentoverview"),
       },
-      {
-        text: "Data Export",
-        icon: <DownloadIcon />,
-        onClick: () => history.push("/csvExport"),
-      },
-      {
-        text: "Schools",
-        icon: <LocationCityIcon />,
-        onClick: () => history.push("/schools"),
-      },
+      // {
+      //   text: "Data Export",
+      //   icon: <DownloadIcon />,
+      //   onClick: () => history.push("/csvExport"),
+      // },
+      // {
+      //   text: "Schools",
+      //   icon: <LocationCityIcon />,
+      //   onClick: () => history.push("/schools"),
+      // },
       {
         text: "Logout",
         icon: <LogoutIcon />,
