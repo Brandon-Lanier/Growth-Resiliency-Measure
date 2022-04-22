@@ -69,42 +69,42 @@ function StudentDetails() {
       "Adaptability",
     ],
     datasets: [
-      {
-        label: [
-          `${scores[0]?.year}-Assessment#${scores[0]?.assessmentBatchId}`,
-        ],
-        data: [
-          scores[0]?.avgScore,
-          scores[1]?.avgScore,
-          scores[2]?.avgScore,
-          scores[3]?.avgScore,
-          scores[4]?.avgScore,
-          scores[5]?.avgScore,
-          scores[6]?.avgScore,
-          scores[7]?.avgScore,
-        ],
-        backgroundColor: "rgba(100, 176, 88 ,0.2)",
-        borderColor: "rgba(100, 176, 88,1)",
-        borderWidth: 1,
-      },
-      {
-        label: [
-          `${scores[8]?.year}-Assessment#${scores[8]?.assessmentBatchId}`,
-        ],
-        data: [
-          scores[8]?.avgScore,
-          scores[9]?.avgScore,
-          scores[10]?.avgScore,
-          scores[11]?.avgScore,
-          scores[12]?.avgScore,
-          scores[13]?.avgScore,
-          scores[14]?.avgScore,
-          scores[15]?.avgScore,
-        ],
-        backgroundColor: "rgba(176, 86, 171, 0.2)",
-        borderColor: "rgba(176, 86, 171, 1)",
-        borderWidth: 1,
-      },
+      // {
+      //   label: [
+      //     `${scores[0]?.year}-Assessment#${scores[0]?.assessmentBatchId}`,
+      //   ],
+      //   data: [
+      //     scores[0]?.avgScore,
+      //     scores[1]?.avgScore,
+      //     scores[2]?.avgScore,
+      //     scores[3]?.avgScore,
+      //     scores[4]?.avgScore,
+      //     scores[5]?.avgScore,
+      //     scores[6]?.avgScore,
+      //     scores[7]?.avgScore,
+      //   ],
+      //   backgroundColor: "rgba(100, 176, 88 ,0.2)",
+      //   borderColor: "rgba(100, 176, 88,1)",
+      //   borderWidth: 1,
+      // },
+      // {
+      //   label: [
+      //     `${scores[8]?.year}-Assessment#${scores[8]?.assessmentBatchId}`,
+      //   ],
+      //   data: [
+      //     scores[8]?.avgScore,
+      //     scores[9]?.avgScore,
+      //     scores[10]?.avgScore,
+      //     scores[11]?.avgScore,
+      //     scores[12]?.avgScore,
+      //     scores[13]?.avgScore,
+      //     scores[14]?.avgScore,
+      //     scores[15]?.avgScore,
+      //   ],
+      //   backgroundColor: "rgba(176, 86, 171, 0.2)",
+      //   borderColor: "rgba(176, 86, 171, 1)",
+      //   borderWidth: 1,
+      // },
       {
         label: [
           `${scores[16]?.year}-Assessment#${scores[16]?.assessmentBatchId}`,
@@ -178,6 +178,7 @@ function StudentDetails() {
           </Box>
         </Grid>
         <Grid item xs={7}>
+          <Box sx={{display: 'flex', justifyContent: 'center'}}>
           <FormControl sx={{ minWidth: 100 }} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
@@ -207,6 +208,7 @@ function StudentDetails() {
               <MenuItem value="spring">Spring</MenuItem>
             </Select>
           </FormControl>
+          </Box>
           <br></br>
           <div className="dash-filter-graph-container">
             <Radar

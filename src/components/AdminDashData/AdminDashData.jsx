@@ -199,7 +199,7 @@ function AdminDashData() {
             <Typography variant="h6">Filters:</Typography>
           </div>
           <div className="dash-filter-data-container">
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ maxWidth: 150 }} size="small">
               <InputLabel id="schoolLabel">School</InputLabel>
               <Select
                 labelId="schoolLabel"
@@ -213,7 +213,7 @@ function AdminDashData() {
                 })}
               </Select>
             </FormControl>
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="gradeLabel">Grade</InputLabel>
               <Select
                 labelId="gradeLabel"
@@ -231,7 +231,7 @@ function AdminDashData() {
             </FormControl>
           </div>
           <div className="dash-filter-data-container">
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="ethnicityLabel">Ethnicity</InputLabel>
               <Select
                 labelId="ethnicityLabel"
@@ -248,7 +248,7 @@ function AdminDashData() {
                 <MenuItem value={5}>Mixed</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="genderLabel">Gender</InputLabel>
               <Select
                 labelId="ethnicityLabel"
@@ -267,7 +267,7 @@ function AdminDashData() {
             </FormControl>
           </div>
           <div className="dash-filter-data-container">
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="eip">EIP</InputLabel>
               <Select
                 labelId="eip"
@@ -281,7 +281,7 @@ function AdminDashData() {
                 <MenuItem value={true}>True</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ maxWidth: 100 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="lunchStatus">Lunch Status</InputLabel>
               <Select
                 labelId="lunchStatus"
@@ -307,11 +307,12 @@ function AdminDashData() {
         </Grid>
         
         <Grid item xs={8}>
-          {/* <Box sx={{boxShadow: 2, height: '95%', width: '95%', display: 'flex', justifyContent: 'center', p: 1}}> */}
+          <Box sx={{width: '90%', display: 'flex', justifyContent: 'center', p: 1}}>
             {report.length > 0 ? (
               <Radar
                 data={getData()}
                 options={{
+                  maintainAspectRatio: true,
                   events: ["click"],
                   scales: {
                     r: {
@@ -332,7 +333,7 @@ function AdminDashData() {
                 <Typography variant="b2">No Data Available</Typography>
               </div>
             )}
-          {/* </Box> */}
+          </Box>
         </Grid>
       </Grid>
     </>
