@@ -122,6 +122,7 @@ router.get('/', async (req, res) => {
 
 }); // end Get student Csv export NESTED OBJECTS---
 
+
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post("/", async (req, res) => {
   const connection = await pool.connect();
@@ -139,7 +140,7 @@ router.post("/", async (req, res) => {
     for (let student of req.body.studentArray) {
 
       // Username is email
-      const username = student.email;
+      const username = student.lastName + student.graduationYear;
 
       // gets a simple password from the dino pass api 
       
