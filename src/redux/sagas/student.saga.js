@@ -24,10 +24,21 @@ function* getStudents() {
     }
   }
 
+  function* studentDetails(){
+    try {
+      const studentDetails = yield axios.get('/api/admin/cohort/studentDetails');
+      yield put({ type: 'SET_DETAILS', payload: studentDetails.data });
+    } catch (error) {
+      alert('Error getting student name:', error);
+  
+    }
+  }
+
 
   function* studentSaga() {
     yield takeLatest('GET_STUDENTS', getStudents)
     yield takeLatest('CSV_STUDENTS', csvStudents)
+    yield takeLatest('GET_STUDENT_DETAILS', studentDetails)
   }
   
   export default studentSaga;
