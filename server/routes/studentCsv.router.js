@@ -122,6 +122,7 @@ router.get('/', async (req, res) => {
 
 }); // end Get student Csv export NESTED OBJECTS---
 
+
 // ------------------------------Post Route for student CSV import/upload---------------------------
 router.post("/", async (req, res) => {
   const connection = await pool.connect();
@@ -139,7 +140,7 @@ router.post("/", async (req, res) => {
     for (let student of req.body.studentArray) {
 
       // Username is email
-      const username = student.email;
+      const username = student.lastName + student.graduationYear;
 
       // gets a simple password from the dino pass api 
       
@@ -188,7 +189,7 @@ router.post("/", async (req, res) => {
       ];
       await connection.query(sqlAddStudent, queryInserts);
 
-      passwordArray.push({email:student.email, password:password.data})
+      passwordArray.push({email:student.email, username:username, password:password.data})
     }
     await connection.query('COMMIT');
 
@@ -199,7 +200,7 @@ router.post("/", async (req, res) => {
         from: 'growthresiliencymeasure@gmail.com',
         to: user.email,
         subject: 'Nodemailer Project',
-        text: `Hi from your nodemailer project. Your password is: ${user.password}`
+        text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}`
       };
       
       transporter.sendMail(mailOptions, function(err, data) {

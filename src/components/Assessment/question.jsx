@@ -14,6 +14,33 @@ import Slide from "@mui/material/Slide";
 import "./Assessment.css";
 import userSaga from "../../redux/sagas/user.saga";
 
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+  return windowSize;
+}
+
+
 function Question({
   index,
   setIndex,
@@ -23,6 +50,7 @@ function Question({
   formValues,
 }) {
   // const questions = useSelector((store) => store.questions);
+  const size = useWindowSize();
 
   let questions = [
     { id: 1, name: "There is a purpose to my life." },
@@ -76,6 +104,19 @@ function Question({
     setValue(formValues[lastIndex]);
   };
 
+
+  console.log('size is', size);
+  const [labelProp, setLabelProp] = useState("bottom");
+  
+  window.addEventListener("resize", handleLabel);
+
+  const handleLabel = () => {
+
+    if (size < 1000){
+      setLabelProp("right");
+    }
+  }
+
   return (
     <Slide direction="left" in="open" mountOnEnter unmountOnExit>
       <Container
@@ -107,7 +148,7 @@ function Question({
                 value={1}
                 control={<Radio />}
                 label="1 - Strongly Disagree"
-                labelPlacement="bottom"
+                labelPlacement={labelProp}
                 name={questions[index].id}
               />
               <FormControlLabel
