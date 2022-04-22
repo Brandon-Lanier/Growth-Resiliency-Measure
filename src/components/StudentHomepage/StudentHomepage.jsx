@@ -31,7 +31,7 @@ export default function StudentHomepage() {
     <h2>Welcome, {student?.firstName}!</h2>
     </div>
     <div className="batch-not-available">
-      <h3>{!batch && 'no assessments available'}</h3>
+      <h3>{!batch && 'No assessments available'}</h3>
       </div>
       {batch && (
           <Box
