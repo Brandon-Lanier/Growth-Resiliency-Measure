@@ -24,6 +24,12 @@ import BackButton from "../BackButton/Backbutton";
 import { Grid, Box, Stack } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
 function StudentDetails() {
   //pull first and last assessment date from the DB
@@ -165,16 +171,70 @@ function StudentDetails() {
               <EditIcon />
               </IconButton>
             </Typography>
+            <Typography variant="h6">
+              {studentDetails?.details.name}
+            </Typography>
             {/* <Button variant="contained" onClick={handleEditClick}>
               Edit Student 
             </Button> */}
-            <Stack spacing={2} sx={{mt: 2}}>
-            <Typography variant="h6">{studentDetails?.details.name}</Typography>
+            {/* <Stack spacing={2} sx={{mt: 2}}> */}
+            <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText>
+              Class of: {studentDetails?.details.graduationYear}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+              Ethnicity: {studentDetails?.details.race}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                Gender: {studentDetails?.details.gender}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                Lunch Status: {studentDetails?.details.status}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                EIP: {studentDetails?.details.eip.toString()}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+          <ListItemButton component="a">
+              <ListItemText>
+              Total assessments taken: {totalTests[0]?.count}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </List>
+
+        
+            {/* <Typography variant="h6">{studentDetails?.details.name}</Typography>
             <Typography variant="b1">Class of {studentDetails?.details.graduationYear}</Typography>
             <Typography variant="b1">First assessment: {firstTest}</Typography>
             <Typography variant="b1">Most recent assessment: {lastTest}</Typography>
-            <Typography variant="b1">Total assessments taken: {totalTests[0]?.count}</Typography>
-            </Stack>
+            <Typography variant="b1">Total assessments taken: {totalTests[0]?.count}</Typography> */}
+            {/* </Stack> */}
           </Box>
         </Grid>
         <Grid item xs={7}>
