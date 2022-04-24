@@ -38,11 +38,26 @@ function* fetchAdminActiveBatch() {
     }
 }
 
+function* fetchActiveAssessmentDetails() {
+    try {
+        const batch = yield axios.get(`/assessment/activeassessment`)
+        if (batch !== []) {
+            yield put({type: 'SET_ACTIVE_BATCH', payload: batch.data})
+        }
+    } catch (error) {
+        console.log('Failed to grab the active batch ins fetchBatch saga', error);
+    }
+}
+
+
+
+
 
 function* fetchBatchSaga() {
     yield takeLatest('FETCH_BATCH', fetchBatch);
     yield takeLatest('FETCH_ADMIN_ACTIVE_BATCH', fetchAdminActiveBatch);
-    yield takeLatest('FETCH_ADMIN_BATCH', fetchAdminBatch)
+    yield takeLatest('FETCH_ADMIN_BATCH', fetchAdminBatch);
+    yield takeLatest('FETCH_ACTIVE_BATCH', fetchActiveAssessmentDetails );
 };
 
 export default fetchBatchSaga;

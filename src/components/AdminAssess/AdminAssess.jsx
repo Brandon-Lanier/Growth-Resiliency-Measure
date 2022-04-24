@@ -10,39 +10,43 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import AddBatch from "../AddBatch/AddBatch";
 import { Divider } from "@mui/material";
 import "./AdminAssess.css";
 
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 
 function AdminAssess() {
-
   const dispatch = useDispatch();
   const history = useHistory();
   const batch = useSelector((store) => store.adminBatch.adminBatches);
+  const activeBatch = useSelector((store) => store.adminBatch.activeBatch);
 
   useEffect(() => {
     dispatch({ type: "FETCH_ADMIN_BATCH" });
-    dispatch({ type: 'SET_ASSESS_PATH'})
+    dispatch({ type: "SET_ASSESS_PATH" });
+    dispatch({ type: "FETCH_ACTIVE_BATCH" });
   }, []);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: 'rgba(17, 24, 39, 0.7)',
+      backgroundColor: "rgba(17, 24, 39, 0.7)",
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
   }));
-  
+
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
     // hide last border
-    '&:last-child td, &:last-child th': {
+    "&:last-child td, &:last-child th": {
       border: 0,
     },
   }));
@@ -50,14 +54,50 @@ function AdminAssess() {
   return (
     <div className="component-container">
       <AddBatch />
-      <Divider sx={{m:5}}/>
-      <Typography variant="h5">
-          Past Assessments:
-        </Typography>
-      <Box
-        sx={{ display: "flex", justifyContent: "center", width: "60%" }}
-      >
-       
+      <Divider sx={{ m: 5 }} />
+      <Typography variant="h5">Active Assessments:</Typography>
+      <Box sx={{ display: "flex", p: 1, flexWrap: 'wrap', m: 2 }}>
+        {activeBatch?.map((batch) => (
+          <>
+            <Card sx={{ minWidth: 275, p: 1, m: 1 }}>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  {batch.fiscalYear}
+                </Typography>
+                <Typography variant="body2" component="div">
+                  <b>Batch Number:</b> {batch.batchNumber}
+                </Typography>
+                <Typography variant="body2" component="div">
+                  <b>Semester Number:</b> {batch.semesterNumber}
+                </Typography>
+                
+                <Typography  variant="body2">
+                  <b>Start Date:</b> {new Date(batch?.startDate).toDateString()}
+                </Typography>
+                <Typography sx={{ mb: 1 }} variant="body2">
+                  <b>End Date:</b> {new Date(batch?.endDate).toDateString()}
+                </Typography>
+                <Typography variant="body2"></Typography>
+              </CardContent>
+            </Card>
+
+            {/* <p>School Year: </p>
+        <p>Batch Number: </p>
+        <p>Semester Number: {batch.semesterNumber}</p>
+        <Box>
+        <p>Start Date: </p>
+        <p></p>
+        </Box> */}
+          </>
+        ))}
+      </Box>
+      <Divider sx={{ m: 5 }} />
+      <Typography variant="h5">Past Assessments:</Typography>
+      <Box sx={{ display: "flex", justifyContent: "center", width: "60%" }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -79,9 +119,15 @@ function AdminAssess() {
                   <StyledTableCell component="th" scope="row">
                     {row?.batchNumber}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row?.semesterNumber}</StyledTableCell>
-                  <StyledTableCell align="left">{row?.fiscalYear}</StyledTableCell>
-                  <StyledTableCell align="left">{row?.schoolId}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row?.semesterNumber}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row?.fiscalYear}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {row?.schoolId}
+                  </StyledTableCell>
                   <StyledTableCell align="left">
                     {new Date(row?.startDate).toDateString()}
                   </StyledTableCell>
@@ -94,9 +140,7 @@ function AdminAssess() {
           </Table>
         </TableContainer>
       </Box>
-      <div className="add-batch">
-        
-      </div>
+      <div className="add-batch"></div>
     </div>
   );
 }
