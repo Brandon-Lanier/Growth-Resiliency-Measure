@@ -90,6 +90,7 @@ function Schools( { fetchAdministrators}) {
             label="School Name"
             id="school-name"
             size="normal"
+            autoComplete="off"
             sx={{ p: 1 }}
             onChange={(event) => setSchoolName(event.target.value)}
           />
