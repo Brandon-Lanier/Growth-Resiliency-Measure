@@ -3,25 +3,50 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 let currentDate = new Date();
-let lastDate = new Date(+new Date + 12096e5)
+let lastDate = new Date(+new Date() + 12096e5);
 
 // Pull all assessments for admin
-router.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
-        const qryTxt = `SELECT * FROM "assessmentBatches";`;
-        pool.query(qryTxt).then(result => {res.send(result.rows)}).catch(error => {res.sendStatus(500)})
-    } else {
-        res.sendStatus(403);
-    }
-})
+router.get("/", (req, res) => {
+  if (req.isAuthenticated()) {
+    const qryTxt = `SELECT * FROM "assessmentBatches";`;
+    pool
+      .query(qryTxt)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
 
+// Pulls the active assessment details
+router.get("/activeassessment", (req, res) => {
+  if (req.isAuthenticated()) {
+    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
+    console.log('inside active assessment');
+    
+    pool
+      .query(checkActiveSql, [currentDate, lastDate])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((error) => {
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
 
 //Pull all completed assessments for an active admin batch
 router.get("/adminbatch", async (req, res) => {
   let completedStudents = []
   if (req.isAuthenticated()) {
-    console.log('lastDate', lastDate);
-    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 >= "startDate" AND $2 <= "endDate";`;
+    console.log("lastDate", lastDate);
+    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
     let assessments = await pool.query(checkActiveSql, [currentDate, lastDate]);
     // console.log("assesssment id", assessments.rows[0].id);
 
