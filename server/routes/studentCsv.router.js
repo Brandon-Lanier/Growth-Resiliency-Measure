@@ -201,7 +201,10 @@ router.post("/", async (req, res) => {
         to: user.email,
         subject: 'Nodemailer Project',
         text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}. Click here to take the assessment`,
-        html: `<p>Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}.</p><p>Click <a href="http://localhost:3000">here</a> to take the assessment.</p>`
+        html: `<img src="https://t3.ftcdn.net/jpg/03/67/35/72/360_F_367357209_BG07SVnnB4HSHSaMiHajfZhrZZAE859A.jpg" alt="welcome-sign">
+              <p style="font-family:verdana;font-size:14px">Hello from Growth Resiliency Measure. Your username is: <mark>${user.username}</mark> Your password is: <mark>${user.password}.</mark></p>
+              <p style="font-family:verdana;font-size:14px">Click <a href="http://localhost:3000">here</a> to take the assessment.</p>
+        `
       };
 
       
