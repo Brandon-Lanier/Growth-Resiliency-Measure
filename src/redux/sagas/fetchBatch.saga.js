@@ -40,6 +40,8 @@ function* fetchAdminActiveBatch() {
 
 function* fetchActiveAssessmentDetails() {
     try {
+        console.log('inside fetchActiveAssessmentDetails');
+        
         const batch = yield axios.get(`/assessment/activeassessment`)
         if (batch !== []) {
             yield put({type: 'SET_ACTIVE_BATCH', payload: batch.data})

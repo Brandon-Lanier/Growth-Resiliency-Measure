@@ -85,13 +85,6 @@ function AdminAssess() {
               </CardContent>
             </Card>
 
-            {/* <p>School Year: </p>
-        <p>Batch Number: </p>
-        <p>Semester Number: {batch.semesterNumber}</p>
-        <Box>
-        <p>Start Date: </p>
-        <p></p>
-        </Box> */}
           </>
         ))}
       </Box>

@@ -26,6 +26,8 @@ router.get("/", (req, res) => {
 router.get("/activeassessment", (req, res) => {
   if (req.isAuthenticated()) {
     const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
+    console.log('inside active assessment');
+    
     pool
       .query(checkActiveSql, [currentDate, lastDate])
       .then((result) => {
