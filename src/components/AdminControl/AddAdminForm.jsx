@@ -10,6 +10,7 @@ import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Box } from "@mui/material";
+import "./AdminControl.css"
 
 export default function Form({ schools, handleClose, admins }) {
   const history = useHistory();
@@ -38,6 +39,15 @@ export default function Form({ schools, handleClose, admins }) {
       [name]: value,
     });
   };
+
+  const handleAutofill = () => {
+    setFormValues({
+      firstName: "Liz",
+      lastName: "Kerber",
+      email: "LizKerber@primedigitalacademy.io",
+      school: 2,
+    })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -120,6 +130,7 @@ export default function Form({ schools, handleClose, admins }) {
       <Button variant="outlined" onClick={handleClose}>
         Cancel
       </Button>
+      <div className="autofillDiv" onClick={handleAutofill}></div>
     </Box>
   );
 }
