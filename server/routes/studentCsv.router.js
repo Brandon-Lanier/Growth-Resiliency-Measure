@@ -200,14 +200,18 @@ router.post("/", async (req, res) => {
         from: 'growthresiliencymeasure@gmail.com',
         to: user.email,
         subject: 'Nodemailer Project',
-        text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}
-        <a href="localhost:3000">Take Assessment</a>`
+        text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}. Click here to take the assessment`,
+        html: `<img src="https://t3.ftcdn.net/jpg/03/67/35/72/360_F_367357209_BG07SVnnB4HSHSaMiHajfZhrZZAE859A.jpg" alt="welcome-sign">
+              <p style="font-family:verdana;font-size:14px">Hello from Growth Resiliency Measure. Your username is: <mark>${user.username}</mark> Your password is: <mark>${user.password}.</mark></p>
+              <p style="font-family:verdana;font-size:14px">Click <a href="http://localhost:3000">here</a> to take the assessment.</p>
+        `
       };
 
       
       transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
           console.log("Error " + err);
+          return;
         } else {
           console.log("Email sent successfully");
         }
@@ -219,9 +223,11 @@ router.post("/", async (req, res) => {
     await connection.query("ROLLBACK");
     console.log("Rolling Back", error);
     res.sendStatus(500);
+    return;
   } finally {
     connection.release();
     res.sendStatus(200);
+    return;
   }
 }); // End Post route
 
