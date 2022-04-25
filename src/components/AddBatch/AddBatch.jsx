@@ -5,7 +5,7 @@
 //
 //
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -33,6 +33,9 @@ function AddBatch(props) {
   const [value2, setValue2] = useState(new Date());
   const [valueYear, setValueYear] = useState(new Date());
 
+  const dispatch = useDispatch();
+
+
   const handleSubmit = () => {
     const newBatch = {
       startDate: value1.toISOString().split("T")[0],
@@ -47,8 +50,10 @@ function AddBatch(props) {
     } catch (error) {
       console.log("error on batch post", error);
     }
+    dispatch({ type: "FETCH_ACTIVE_BATCH" });
     //open confirmation modal
     setOpenConfirmation(true);
+    // add timeout
   };
 
   //confirmation modal functions

@@ -26,10 +26,10 @@ function AdminAssess() {
   const activeBatch = useSelector((store) => store.adminBatch.activeBatch);
 
   useEffect(() => {
+    dispatch({ type: "FETCH_ACTIVE_BATCH" });
     dispatch({ type: "FETCH_ADMIN_BATCH" });
     dispatch({ type: "SET_ASSESS_PATH" });
-    dispatch({ type: "FETCH_ACTIVE_BATCH" });
-  }, []);
+  }, [dispatch]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
