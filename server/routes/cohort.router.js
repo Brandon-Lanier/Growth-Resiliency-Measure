@@ -56,6 +56,7 @@ router.get('/studentbatch', async (req, res) => {
     // const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     const schoolIdObject = await pool.query(schoolIdquery, [req.user.id]);
     console.log('schoolId is', schoolIdObject);
+    // this crashes server
     const schoolId = schoolIdObject.rows[0].schoolId;
     
     // This grabs all batches for the school
