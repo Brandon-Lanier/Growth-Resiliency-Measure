@@ -55,7 +55,7 @@ function AdminAssess() {
           Past Assessments:
         </Typography>
       <Box
-        sx={{ display: "flex", justifyContent: "center", width: "60%" }}
+        sx={{ display: "flex", justifyContent: "center"}}
       >
        
         <TableContainer component={Paper}>

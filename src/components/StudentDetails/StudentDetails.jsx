@@ -13,8 +13,6 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,6 +22,13 @@ import BackButton from "../BackButton/Backbutton";
 import { Grid, Box, Stack } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import { forwardRef } from "react";
 
 function StudentDetails() {
   //pull first and last assessment date from the DB
@@ -50,6 +55,7 @@ function StudentDetails() {
     Legend
   );
 
+  
   let handleEditClick = () => {
     //dispatch student info to redux store.
     dispatch({ type: "SET_EDIT_STUDENT", payload: studentDetails });
@@ -69,42 +75,42 @@ function StudentDetails() {
       "Adaptability",
     ],
     datasets: [
-      {
-        label: [
-          `${scores[0]?.year}-Assessment#${scores[0]?.assessmentBatchId}`,
-        ],
-        data: [
-          scores[0]?.avgScore,
-          scores[1]?.avgScore,
-          scores[2]?.avgScore,
-          scores[3]?.avgScore,
-          scores[4]?.avgScore,
-          scores[5]?.avgScore,
-          scores[6]?.avgScore,
-          scores[7]?.avgScore,
-        ],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: [
-          `${scores[8]?.year}-Assessment#${scores[8]?.assessmentBatchId}`,
-        ],
-        data: [
-          scores[8]?.avgScore,
-          scores[9]?.avgScore,
-          scores[10]?.avgScore,
-          scores[11]?.avgScore,
-          scores[12]?.avgScore,
-          scores[13]?.avgScore,
-          scores[14]?.avgScore,
-          scores[15]?.avgScore,
-        ],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
+      // {
+      //   label: [
+      //     `${scores[0]?.year}-Assessment#${scores[0]?.assessmentBatchId}`,
+      //   ],
+      //   data: [
+      //     scores[0]?.avgScore,
+      //     scores[1]?.avgScore,
+      //     scores[2]?.avgScore,
+      //     scores[3]?.avgScore,
+      //     scores[4]?.avgScore,
+      //     scores[5]?.avgScore,
+      //     scores[6]?.avgScore,
+      //     scores[7]?.avgScore,
+      //   ],
+      //   backgroundColor: "rgba(100, 176, 88 ,0.2)",
+      //   borderColor: "rgba(100, 176, 88,1)",
+      //   borderWidth: 1,
+      // },
+      // {
+      //   label: [
+      //     `${scores[8]?.year}-Assessment#${scores[8]?.assessmentBatchId}`,
+      //   ],
+      //   data: [
+      //     scores[8]?.avgScore,
+      //     scores[9]?.avgScore,
+      //     scores[10]?.avgScore,
+      //     scores[11]?.avgScore,
+      //     scores[12]?.avgScore,
+      //     scores[13]?.avgScore,
+      //     scores[14]?.avgScore,
+      //     scores[15]?.avgScore,
+      //   ],
+      //   backgroundColor: "rgba(176, 86, 171, 0.2)",
+      //   borderColor: "rgba(176, 86, 171, 1)",
+      //   borderWidth: 1,
+      // },
       {
         label: [
           `${scores[16]?.year}-Assessment#${scores[16]?.assessmentBatchId}`,
@@ -119,8 +125,8 @@ function StudentDetails() {
           scores[22]?.avgScore,
           scores[23]?.avgScore,
         ],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(200,0,0,0.2)",
+        borderColor: "rgba(200,0,0,1)",
         borderWidth: 1,
       },
       {
@@ -137,8 +143,8 @@ function StudentDetails() {
           scores[30]?.avgScore,
           scores[31]?.avgScore,
         ],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(88, 122, 176, .2)",
+        borderColor: "rgba(88, 122, 176, 1)",
         borderWidth: 1,
       },
     ],
@@ -165,19 +171,73 @@ function StudentDetails() {
               <EditIcon />
               </IconButton>
             </Typography>
+            <Typography variant="h6">
+              {studentDetails?.details.name}
+            </Typography>
             {/* <Button variant="contained" onClick={handleEditClick}>
               Edit Student 
             </Button> */}
-            <Stack spacing={2} sx={{mt: 2}}>
-            <Typography variant="h6">{studentDetails?.details.name}</Typography>
+            {/* <Stack spacing={2} sx={{mt: 2}}> */}
+            <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText>
+              Class of: {studentDetails?.details.graduationYear}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+              Ethnicity: {studentDetails?.details.race}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                Gender: {studentDetails?.details.gender}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                Lunch Status: {studentDetails?.details.status}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton component="a">
+              <ListItemText>
+                EIP: {studentDetails?.details.eip.toString()}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+          <ListItemButton component="a">
+              <ListItemText>
+              Total assessments taken: {totalTests[0]?.count}
+              </ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </List>
+        
+            {/* <Typography variant="h6">{studentDetails?.details.name}</Typography>
             <Typography variant="b1">Class of {studentDetails?.details.graduationYear}</Typography>
             <Typography variant="b1">First assessment: {firstTest}</Typography>
             <Typography variant="b1">Most recent assessment: {lastTest}</Typography>
-            <Typography variant="b1">Total assessments taken: {totalTests[0]?.count}</Typography>
-            </Stack>
+            <Typography variant="b1">Total assessments taken: {totalTests[0]?.count}</Typography> */}
+            {/* </Stack> */}
           </Box>
         </Grid>
         <Grid item xs={7}>
+          <Box sx={{display: 'flex', justifyContent: 'center'}}>
           <FormControl sx={{ minWidth: 100 }} size="small">
             <InputLabel id="yearLabel">Year</InputLabel>
             <Select
@@ -207,6 +267,7 @@ function StudentDetails() {
               <MenuItem value="spring">Spring</MenuItem>
             </Select>
           </FormControl>
+          </Box>
           <br></br>
           <div className="dash-filter-graph-container">
             <Radar

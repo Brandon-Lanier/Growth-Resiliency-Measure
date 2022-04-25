@@ -40,6 +40,7 @@ import AdminAssess from "../AdminAssess/AdminAssess";
 import { useLocation } from "react-router-dom";
 
 import Box from "@mui/material/Box";
+import AdminLanding from "../AdminLanding/AdminLanding";
 
 
 function App() {
@@ -87,9 +88,9 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/dashboard"
+            path="/landing"
           >
-            {user.permission < 1 ? <StudentHomepage /> : <Dashboard />}
+            {user.permission < 1 ? <StudentHomepage /> : <AdminLanding />}
           </ProtectedRoute>
           <ProtectedRoute
             path="/studentedit"
@@ -103,6 +104,7 @@ function App() {
           >
             <StudentHomepage />
           </ProtectedRoute>
+  
           {/* 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -154,7 +156,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to="/dashboard" />
+              <Redirect to="/landing" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -165,7 +167,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/dashboard" />
+              <Redirect to="/landing" />
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
@@ -176,7 +178,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/dashboard" />
+              <Redirect to="/landing" />
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />

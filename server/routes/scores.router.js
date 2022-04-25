@@ -92,7 +92,7 @@ router.get("/adminStudent/:id", (req, res) => {
     JOIN "questions" ON "questions"."id" = "scores"."questionId"
     WHERE "scores"."userId" = $1 AND "questions"."measureName" <> 'Qualitative'
     GROUP BY "questions"."measureName", "scores"."assessmentBatchId", "scores"."date"
-    ORDER BY "date"
+    ORDER BY "date" DESC
     LIMIT 32;
     `;
     pool.query(qryTxt, [req.params.id])
