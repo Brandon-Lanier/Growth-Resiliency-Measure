@@ -13,8 +13,6 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -30,6 +28,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import { forwardRef } from "react";
 
 function StudentDetails() {
   //pull first and last assessment date from the DB
@@ -56,6 +55,7 @@ function StudentDetails() {
     Legend
   );
 
+  
   let handleEditClick = () => {
     //dispatch student info to redux store.
     dispatch({ type: "SET_EDIT_STUDENT", payload: studentDetails });
@@ -227,7 +227,6 @@ function StudentDetails() {
             </ListItemButton>
           </ListItem>
         </List>
-
         
             {/* <Typography variant="h6">{studentDetails?.details.name}</Typography>
             <Typography variant="b1">Class of {studentDetails?.details.graduationYear}</Typography>
