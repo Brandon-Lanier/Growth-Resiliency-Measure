@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { CSVLink } from "react-csv";
+import './CsvUpload.css';
 
 function CsvUpload() {
   const { CSVReader } = useCSVReader();
@@ -52,7 +53,7 @@ function CsvUpload() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "50%",
+    width: "75%",
     backgroundColor: '#fff',
     border: "2px solid #000",
     boxShadow: 24,
@@ -73,7 +74,7 @@ function CsvUpload() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box style={style} sx={{p: 4}}>
-        <table>
+        <table className="styled-table">
           <tbody>
             {studentArray.map((item) => (
               <tr key={item.id}>
