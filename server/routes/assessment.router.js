@@ -41,22 +41,23 @@ router.get("/activeassessment", (req, res) => {
 
 //Pull all completed assessments for an active admin batch
 router.get("/adminbatch", async (req, res) => {
+  let completedStudents = []
   if (req.isAuthenticated()) {
     console.log("lastDate", lastDate);
     const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
     let assessments = await pool.query(checkActiveSql, [currentDate, lastDate]);
-    console.log("assesssment id", assessments.rows[0].id);
+    // console.log("assesssment id", assessments.rows[0].id);
 
     // check the scores table to see if a student has taken the test.
+    if (assessments.rows.length !== 0) {
     const checkQry = `SELECT "students"."userId", "students"."firstName", "students"."lastName", "scores"."assessmentBatchId", "scores"."date" FROM "students"
         JOIN "scores" ON "students"."userId" = "scores"."userId"
         JOIN "assessmentBatches" ON "assessmentBatches"."id" = "scores"."assessmentBatchId"
         WHERE "scores"."assessmentBatchId" = $1 AND "scores"."date" <= "assessmentBatches"."endDate"
         GROUP BY "students"."userId", "students"."firstName", "students"."lastName", "scores"."assessmentBatchId", "scores"."date";
-        ;`;
-    const completedStudents = await pool.query(checkQry, [
-      assessments.rows[0].id,
-    ]);
+        ;`;   
+     completedStudents = await pool.query(checkQry, [assessments.rows[0].id]);
+    } else  completedStudents = []
     try {
       res.send(completedStudents.rows); // This will send back all the students that have completed the active assessment
     } catch (error) {

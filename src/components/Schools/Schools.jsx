@@ -9,6 +9,7 @@ import axios from "axios";
 import DoneIcon from "@mui/icons-material/Done";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { Stack } from "@mui/material";
 
 function Schools( { fetchAdministrators}) {
   const store = useSelector((store) => store);
@@ -32,6 +33,9 @@ function Schools( { fetchAdministrators}) {
 
   const style = {
     position: "absolute",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -40,6 +44,7 @@ function Schools( { fetchAdministrators}) {
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
+    borderRadius: 5,
     p: 4,
   };
 
@@ -88,9 +93,15 @@ function Schools( { fetchAdministrators}) {
             sx={{ p: 1 }}
             onChange={(event) => setSchoolName(event.target.value)}
           />
+          <Stack spacing={2} direction="row">
+          <Button variant="outlined" onClick={handleClose}>
+            Cancel
+          </Button>
           <Button variant="contained" onClick={handleSubmit}>
             Submit
           </Button>
+          
+          </Stack>
         </Box>
       </Modal>
       <Modal

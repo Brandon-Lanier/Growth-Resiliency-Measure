@@ -97,7 +97,9 @@ function AdminAssess() {
       </Box>
       <Divider sx={{ m: 5 }} />
       <Typography variant="h5">Past Assessments:</Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", width: "60%" }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center"}}
+      >
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
