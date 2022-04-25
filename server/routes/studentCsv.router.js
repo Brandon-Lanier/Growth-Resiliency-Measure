@@ -200,8 +200,10 @@ router.post("/", async (req, res) => {
         from: 'growthresiliencymeasure@gmail.com',
         to: user.email,
         subject: 'Nodemailer Project',
-        text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}`
+        text: `Hello from Growth Resiliency Measure. Your username is: ${user.username} Your password is: ${user.password}
+        <a href="localhost:3000">Take Assessment</a>`
       };
+
       
       transporter.sendMail(mailOptions, function(err, data) {
         if (err) {
