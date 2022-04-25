@@ -24,7 +24,7 @@ export default function Form({ schools, handleClose, admins }) {
     firstName: "",
     lastName: "",
     email: "",
-    schoolId: 1,
+    school:"",
   };
 
   const [formValues, setFormValues] = useState(defaultValues);
