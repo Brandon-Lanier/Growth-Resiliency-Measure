@@ -25,12 +25,16 @@ router.get("/", (req, res) => {
 // Pulls the active assessment details
 router.get("/activeassessment", (req, res) => {
   if (req.isAuthenticated()) {
-    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $2 >= "startDate";`;
-    console.log('inside active assessment');
+    const checkActiveSql = `SELECT * FROM "assessmentBatches" WHERE $1 <= "endDate" AND $1 >= "startDate";`;
+    // console.log('inside active assessment', currentDate);
+    // console.log('inside active assessment', lastDate);
+
     
     pool
-      .query(checkActiveSql, [currentDate, lastDate])
+      .query(checkActiveSql, [currentDate])
       .then((result) => {
+        // console.log('result is', result);
+        
         res.send(result.rows);
       })
       .catch((error) => {

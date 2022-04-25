@@ -24,7 +24,7 @@ export default function Form({ schools, handleClose, admins }) {
     firstName: "",
     lastName: "",
     email: "",
-    schoolId: 1,
+    school:"",
   };
 
   const [formValues, setFormValues] = useState(defaultValues);
@@ -69,6 +69,7 @@ export default function Form({ schools, handleClose, admins }) {
         id="first-name-input"
         name="firstName"
         label="First Name"
+        autoComplete="off"
         type="text"
         value={formValues.firstName}
         onChange={handleInputChange}
@@ -80,6 +81,7 @@ export default function Form({ schools, handleClose, admins }) {
         name="lastName"
         label="Last Name"
         type="text"
+        autoComplete="off"
         value={formValues.lastName}
         onChange={handleInputChange}
       />
@@ -90,6 +92,7 @@ export default function Form({ schools, handleClose, admins }) {
         name="email"
         label="Email"
         type="text"
+        autoComplete="off"
         value={formValues.email}
         onChange={handleInputChange}
       />

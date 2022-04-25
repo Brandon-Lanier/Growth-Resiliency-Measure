@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
       req.body.firstName,
       req.body.lastName,
       req.body.email,
-      req.body.schoolId,
+      req.body.school,
     ];
 
     await connection.query(sqlAddAdmin, queryInserts);

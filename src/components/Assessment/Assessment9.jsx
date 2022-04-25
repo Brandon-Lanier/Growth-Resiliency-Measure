@@ -88,6 +88,7 @@ function Assessment9({
             label="Let Us Know"
             multiline
             rows={4}
+            autoComplete="off"
             value={value}
             onChange={handleChange}
             inputProps={{ maxLength: 255 }}
