@@ -44,6 +44,8 @@ function* fetchActiveAssessmentDetails() {
         
         const batch = yield axios.get(`/assessment/activeassessment`)
         if (batch !== []) {
+            console.log('batch is ', batch);
+            
             yield put({type: 'SET_ACTIVE_BATCH', payload: batch.data})
         }
     } catch (error) {

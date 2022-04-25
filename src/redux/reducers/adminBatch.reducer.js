@@ -38,8 +38,8 @@ const activeBatch = (state = [], action) => {
 
 const adminBatch = combineReducers({
   activeAdminBatch,
-  adminBatches,
   activeBatch,
+  adminBatches,
 });
 
 export default adminBatch;
