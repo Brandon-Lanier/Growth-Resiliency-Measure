@@ -131,11 +131,11 @@ function ResponsiveDrawer(props) {
     ];
   } else if (user.permission === 0){
     navLinks = [
-      {
-        text: "Dashboard",
-        icon: <DashboardIcon />,
-        onClick: () => history.push("/dashboard"),
-      },
+      // {
+      //   text: "Dashboard",
+      //   icon: <DashboardIcon />,
+      //   onClick: () => history.push("/dashboard"),
+      // },
       {
         text: "Assessment",
         icon: <QuizIcon />,

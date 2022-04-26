@@ -18,7 +18,6 @@ import Question from "./question.jsx";
 import Assessment9 from "./Assessment9.jsx";
 
 function Assessment() {
-
   useEffect(() => {
     dispatch({ type: "FETCH_QUESTIONS" }); // get all questions from DB
     dispatch({ type: "FETCH_BATCH" }); // get batch number from DB.
@@ -60,39 +59,35 @@ function Assessment() {
     27: "",
   };
 
-  
-
   // console.log(questions);
   // const [formValues, setFormValues] = useState([]);
   // let formValues = Array(27);
 
   const [value, setValue] = useState("");
-  const [formValues, setFormValues] = useState([...Array(0)])
+  const [formValues, setFormValues] = useState([...Array(0)]);
 
   const handleChange = (e) => {
-    
-    if(index < 26){
+    if (index < 26) {
       const { name, value } = e.target;
       console.log(formValues);
       // console.log("name is ", name);
       console.log("value is", value);
       let tempArray = formValues;
-      tempArray[index] = value; 
+      tempArray[index] = value;
       setFormValues(tempArray);
       setValue(value);
       console.log(formValues);
-    } else { // This inserts the qualitative at the index of 26 
+    } else {
+      // This inserts the qualitative at the index of 26
       const { name, value } = e.target;
       console.log("value is", value);
       setValue(value);
       let tempArray = formValues;
-      tempArray[26] = value; 
+      tempArray[26] = value;
       setFormValues(tempArray);
       // console.log(formValues);
     }
-
   };
-
 
   // ['5', '3', '3', '3', '1', '2', '1', '1', '4', '4', '5', '1', '1', '2', '4', '4', '2', '2', '2', '5', '4', '3', '3', '1', '3', '4']
 
@@ -101,9 +96,9 @@ function Assessment() {
     console.log("inside autofill");
     let randomArray = [];
     for (let i = 1; i < 27; i++) {
-      console.log('inside for loop',i);
-      let score = Math.floor(Math.random() * 5) + 1
-      console.log('score is', score);
+      console.log("inside for loop", i);
+      let score = Math.floor(Math.random() * 5) + 1;
+      console.log("score is", score);
       randomArray.push(String(score));
     }
     setIndex(26);
@@ -115,13 +110,13 @@ function Assessment() {
     console.log("inside submit,", formValues);
     // console.log('value is', value);
     // setFormValues(formValues => [...formValues,value]);
-    // formValues.push(value); 
+    // formValues.push(value);
     if (index === 26) {
       dispatch({
         type: "SET_ANSWERS",
         payload: formValues,
       });
-      history.push('/review');
+      history.push("/review");
     }
 
     // setIndex(index + 1);
@@ -140,50 +135,54 @@ function Assessment() {
 
   return (
     <>
-    <Box
-    sx={{
-      display: 'flex',
-      flexDirection: ' column',
-      alignItems: 'center',
-      width:'100%',
-    }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: " column",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Box
+          id="progress-bar"
+          sx={{
+            width: "100%",
+          }}
+        >
+          <ProgressBar progress={(index / 27) * 100} />
+        </Box>
 
-      <Box id="progress-bar"
-      sx={{
-        width: '100%'
-      }}>
-        <ProgressBar progress={(index/27)*100} />
-      </Box>
-
-      {index > 25 ? (
-        <Assessment9
-        
-        index={index}
-        handleChange={handleChange}
-        setIndex={setIndex}
-        value={value}
-        setValue={setValue}
-        submitReview={submitReview}
-        setFormValues={setFormValues}
-        formValues={formValues}
-        />
+        {index > 25 ? (
+          <Assessment9
+            index={index}
+            handleChange={handleChange}
+            setIndex={setIndex}
+            value={value}
+            setValue={setValue}
+            submitReview={submitReview}
+            setFormValues={setFormValues}
+            formValues={formValues}
+          />
         ) : (
           <Question
-          
-          index={index}
-          handleChange={handleChange}
-          setIndex={setIndex}
-          value={value}
-          setValue={setValue}
-          formValues={formValues}
+            index={index}
+            handleChange={handleChange}
+            setIndex={setIndex}
+            value={value}
+            setValue={setValue}
+            formValues={formValues}
           />
-          )}
+        )}
 
-
-      <Button sx={{
-        m:10
-      }} onClick={() => autofill()}>AUTOFILL</Button>
-          </Box>
+        <Box
+          sx={{
+            m: 10,
+            width: 200,
+            height: 200,
+          }}
+          onClick={() => autofill()}
+        ></Box>
+      </Box>
     </>
   );
 }
