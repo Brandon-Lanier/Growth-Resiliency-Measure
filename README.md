@@ -1,13 +1,14 @@
 ![logo](./public/images/logo.png)
 # Growth Resiliency Measure
 
+_Duration: 2 Week Sprint_
+
 Growth Resiliency Measure is a full stack web application designed to administer resiliency assessments to students and collect those results for analysis on an administrative level.
 
-GRM uses resiliency assessments have been proven to be a better indicator of life success than grades. The areas that the assessment tracks form the acronym B-SUCCESS.
+The assessments that GRM provides are 27 questions in length and scale from strongly agree to strongly disagree. GRM was looking for an application to provide students easy access to the assessments as this would help take the workload off teacher’s plates.
 
-B-SUCCESS includes measures in balance, self-confidence, understanding, connection, contribution, empathy, self expression, and self control.
-
-The assessments that GRM provides are 27 questions long and scale from strongly agree to strongly disagree. GRM was looking for an application to provide students easy access to the assessments as this would help take the workload off teacher’s plates. 
+GRM believes that resiliency is a better indicator of life long success over grades. The areas that the assessment tracks form the acronym B-SUCCESS.
+B-SUCCESS includes measures in balance, self-confidence, understanding, connection, contribution, empathy, self expression, and self control. 
 
 The objective of the project was to create an easy and intuitive application for students to take the assessments, and for administrators to visualize the data collected from students.  The data visualizations can then be used to measure changes of the different measures of the B-Success method over time.  Admins can use this data to target specific needs of an entire school, or address individual students if they see concerning trends in measures.
 
@@ -57,6 +58,10 @@ Please reference the databaseseed.sql file for database setup.
 - Run `npm run client`
 - Navigate to `localhost:3000`
 
+## Screen Capture
+
+![AdminDashboard](./public/images/adminview.png)
+![StudentView](./public/images/studentview.png)
 ## Authors
 
 * [Brandon Lanier](https://github.com/brandon-lanier)
@@ -66,4 +71,3 @@ Please reference the databaseseed.sql file for database setup.
 * [Kelsey Peterson](https://github.com/kelseypeterson1)
 
 See also the list of [contributors](https://github.com/Leah-Atkins84/GRM/graphs/contributors) who participated in this project.
-
