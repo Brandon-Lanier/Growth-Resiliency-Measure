@@ -31,6 +31,19 @@ Please reference the databaseseed.sql file for database setup.
 - Run npm install in terminal to install all necessary dependencies.
 - To setup the database locally, please see the databaseseed.sql file for instructions.
 
+## Development Setup Instructions
+
+- Run `npm install`
+- Create a `.env` file at the root of the project and paste this line into the file:
+  ```
+  SERVER_SESSION_SECRET=superDuperSecret
+  ```
+  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+- Start postgres if not running already by using `brew services start postgresql`
+- Run `npm run server`
+- Run `npm run client`
+- Navigate to `localhost:3000`
+
 ## Built With
 
 ><a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" height="40px" width="40px" /></a><a href="https://material-ui.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" height="40px" width="40px" /></a><a href="https://nodejs.org/en/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" height="40px" width="40px" /></a><a href="https://www.postgresql.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" height="40px" width="40px" /></a><a href="https://reactjs.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" height="40px" width="40px" /></a><a href="https://redux.js.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" height="40px" width="40px" /></a>
@@ -45,19 +58,6 @@ Please reference the databaseseed.sql file for database setup.
 - Material UI
 - HTML
 - CSS
-## Development Setup Instructions
-
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
-
 ## Screen Capture
 
 ![AdminDashboard](./public/images/adminview.png)
